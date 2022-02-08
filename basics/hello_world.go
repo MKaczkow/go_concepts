@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 
-func main () {
+// of course, to run this file 'not_main' needs to become 'main' again
+func not_main () {
 	fmt.Println("Hello World")
 }
