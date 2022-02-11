@@ -5,6 +5,13 @@ import (
 	"strings"
 )
 
+type user_data_struct struct {
+	first_name string
+	last_name string
+	email string
+	number_of_tickets uint
+}
+
 
 func GreetUsers(conference_name string, conference_tickets uint, remaining_tickets uint) {
 	fmt.Printf("Welcome to %v booking application\n", conference_name)
@@ -13,12 +20,11 @@ func GreetUsers(conference_name string, conference_tickets uint, remaining_ticke
 }
 
 
-func GetFirstNames(bookings []string) []string{
+func GetFirstNames(bookings []user_data_struct) []string{
 	first_names := []string{}
 
 	for _, booking := range bookings {
-		var names = strings.Fields(booking)
-		first_names = append(first_names, names[0])
+		first_names = append(first_names, booking.first_name)
 	}
 
 	return first_names
@@ -57,10 +63,19 @@ func IsUserInputValid(user_first_name string, user_last_name string, email strin
 
 
 func BookTicket(user_tickets uint, user_first_name string, user_last_name string, 
-	email string, remaining_tickets uint, bookings []string, conference_name string) {
+	email string, remaining_tickets uint, bookings []user_data_struct, conference_name string) {
 
 	remaining_tickets = remaining_tickets - user_tickets
-	bookings = append(bookings, user_first_name + " " + user_last_name)
+
+	
+	var user_data = user_data_struct {
+		first_name: user_first_name,
+		last_name: user_last_name,
+		email: email,
+		number_of_tickets: user_tickets,
+	}
+
+	bookings = append(bookings, user_data)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. \nYou will receive confirmation via email at %v\n", user_first_name, user_last_name, user_tickets, email)
 	fmt.Printf("%v tickets remainig for %v\n", remaining_tickets, conference_name)

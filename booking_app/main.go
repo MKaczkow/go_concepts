@@ -5,6 +5,12 @@ import (
 	"booking_app/utils"
 )
 
+type user_data_struct struct {
+	first_name string
+	last_name string
+	email string
+	number_of_tickets uint
+}
 
 func main () {
 	conference_name := "Go Conference"
@@ -14,8 +20,15 @@ func main () {
 	var remaining_tickets uint = 50
 	
 	// use Slice (abstraction of array) insted of Array datatype for dynamic memory allocation
-	var bookings [] string   // <-- Slice
+	// var bookings [] string   // <-- Slice
 	// var bookings [50] string <-- Array
+
+	// actually, we use map
+	// var bookings = make([]map[string]string, 1)
+	// actually not - we use custom data type
+	var bookings = make([]user_data_struct, 0)
+
+
 
 	fmt.Printf("conference_tickets is %T, remaining_tickets is %T, conference_name is %T\n", conference_tickets, remaining_tickets, conference_name)
 
