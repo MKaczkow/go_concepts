@@ -5,12 +5,6 @@ import (
 	"booking_app/utils"
 )
 
-type user_data_struct struct {
-	first_name string
-	last_name string
-	email string
-	number_of_tickets uint
-}
 
 func main () {
 	conference_name := "Go Conference"
@@ -26,7 +20,7 @@ func main () {
 	// actually, we use map
 	// var bookings = make([]map[string]string, 1)
 	// actually not - we use custom data type
-	var bookings = make([]user_data_struct, 0)
+	var bookings = make([]utils.User_data_struct, 0)
 
 
 
@@ -44,6 +38,10 @@ func main () {
 
 			utils.BookTicket(user_tickets, user_first_name, user_last_name, email, 
 				       remaining_tickets, bookings, conference_name)
+			// "go" in Golang is ridiculously simple way of creating new thread 
+			// and passing current line execution to it
+			utils.Wait_group.Add(1)
+			go utils.SendTicket(user_tickets, user_first_name, user_last_name, email)
 			
 			if remaining_tickets == 0 {
 				fmt.Println("Our conference is booked out. Come back next year")
@@ -62,4 +60,5 @@ func main () {
 			continue
 		}
 	}
+	utils.Wait_group.Wait()
 }

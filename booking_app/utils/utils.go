@@ -3,14 +3,19 @@ package utils
 import (
 	"fmt"
 	"strings"
+	"time"
+	"sync"
 )
 
-type user_data_struct struct {
+
+type User_data_struct struct {
 	first_name string
 	last_name string
 	email string
 	number_of_tickets uint
 }
+
+var Wait_group = sync.WaitGroup{}
 
 
 func GreetUsers(conference_name string, conference_tickets uint, remaining_tickets uint) {
@@ -20,7 +25,7 @@ func GreetUsers(conference_name string, conference_tickets uint, remaining_ticke
 }
 
 
-func GetFirstNames(bookings []user_data_struct) []string{
+func GetFirstNames(bookings []User_data_struct) []string{
 	first_names := []string{}
 
 	for _, booking := range bookings {
@@ -63,12 +68,12 @@ func IsUserInputValid(user_first_name string, user_last_name string, email strin
 
 
 func BookTicket(user_tickets uint, user_first_name string, user_last_name string, 
-	email string, remaining_tickets uint, bookings []user_data_struct, conference_name string) {
+	email string, remaining_tickets uint, bookings []User_data_struct, conference_name string) {
 
 	remaining_tickets = remaining_tickets - user_tickets
 
 	
-	var user_data = user_data_struct {
+	var user_data = User_data_struct {
 		first_name: user_first_name,
 		last_name: user_last_name,
 		email: email,
@@ -81,4 +86,13 @@ func BookTicket(user_tickets uint, user_first_name string, user_last_name string
 	fmt.Printf("%v tickets remainig for %v\n", remaining_tickets, conference_name)
 	
 	fmt.Printf("These are all our bookings: %v\n", GetFirstNames(bookings))
+}
+
+
+// simulate sending tickets
+func SendTicket(user_tickets uint, user_first_name string, user_last_name string, email string) {
+	var ticket = fmt.Sprintf("%v tickets for %v %v", user_tickets, user_first_name, user_last_name)
+	time.Sleep(10 * time.Second)
+	fmt.Printf("Sending ticket %v to email address %v\n", ticket, email)
+	Wait_group.Done()
 }
