@@ -1,6 +1,7 @@
 # go_concepts
 repo for basic tutorial-based Golang study  
 
-based on:  
-https://bit.ly/3oUbozZ (booking app + some basics)  
-https://bit.ly/3HEk1pr (most basics)  
+### based on
+[booking app tutorial](https://www.youtube.com/watch?v=yyUHQIec83I&t=3693s&ab_channel=TechWorldwithNana) (booking app + some basics)  
+[basics tutorial](https://www.youtube.com/watch?v=YS4e4q9oBaU&ab_channel=freeCodeCamp.org) (most basics)  
+[web app tutorial](https://www.youtube.com/watch?v=LOn1GUsjOF4&ab_channel=DavidAlsh) (web app + Gin)
