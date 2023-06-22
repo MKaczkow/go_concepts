@@ -13,3 +13,13 @@ repo for basic tutorial-based Golang study
 * `if err := ctx.ShouldBindJSON(&user); err != nil {` What about ShouldBindJSON?
 * `query := bson.D{bson.E{Key: "name", Value: name}}` What is bson.D or bson.E? (Encode / Decode??)
 * add tests -> web_app_bis??
+* ```
+  update := bson.D{primitive.E{Key: "$set", Value: bson.D{
+		primitive.E{Key: "name", Value: user.Name}, 
+		primitive.E{Key: "age", Value: user.Age}, 
+		primitive.E{Key: "address", Value: user.Address},
+	}}}
+    ```
+    Why changging Bson.E -> primitive.E fixed erorrs??
+* difference betwen `=` and `:=` in Golang?
+* can you return empty values in Golang?

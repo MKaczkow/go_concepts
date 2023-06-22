@@ -1,3 +1,49 @@
 package main
 
-func main() {}
+import (
+  "fmt"
+  "context"
+  "log"
+
+  "github.com/gin-gonic/gin"
+  "go.mongodb.org/mongo-driver/mongo"
+
+  "web_app_bis/controllers"
+  "web_app_bis/services"
+)
+
+var (
+	ctx context.Context
+	server *gin.Engine
+	userservice services.UserServiceInterface
+	usercontroller controllers.UserControllerInterface
+	usercollection *mongo.Collection
+	mongoclient *mongo.Client
+	err error
+)
+
+func init() {
+	ctx = context.TODO()
+	mongoconn := options.Client().ApplyURI("mongodb://localhost:27017")
+	mongoclient, err = mongo.Connect(ctx, mongoconn)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = mongoclient.Ping(ctx, readpref.Primary())
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Connected to MongoDB!")
+	usercollection = mongoclient.Database("userdb").Collection("users")
+	userservice = services.NewUserService(usercollection, ctx)
+	usercontroller = controllers.NewUserController(userservice)
+	server = gin.Default()
+}
+
+func main() {
+	defer mongoclient.Disconnect(ctx)
+
+	basepath := server.Group("/api")
+	usercontroller.RegisterRoutes(basepath)
+	log.Fatal(server.Run(":8080"))
+}

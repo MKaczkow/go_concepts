@@ -1,14 +1,22 @@
 package services
 
-import "go.mongodb.org/mongo-driver/mongo"
-import "web_app_bis/models"
+import (
+  "context"
+  "errors"
+
+  "go.mongodb.org/mongo-driver/mongo"
+  "go.mongodb.org/mongo-driver/bson"
+  "go.mongodb.org/mongo-driver/bson/primitive"
+
+  "web_app_bis/models"
+)
 
 type UserService struct {
 	usercollection *mongo.Collection
 	ctx context.Context
 }
 
-func NewUserService(collection *mongo.Collection, ctx context.Context) UserService {
+func NewUserService(collection *mongo.Collection, ctx context.Context) UserServiceInterface {
 	return &UserService{
 		usercollection: collection,
 		ctx: ctx,
@@ -24,22 +32,43 @@ func (u *UserService) GetUser(name *string) (*models.User, error) {
 	var user *models.User
 	query := bson.D{bson.E{Key: "name", Value: name}}
 	err := u.usercollection.FindOne(u.ctx, query).Decode(&user) 
-	return nil, nil
+	return user, err
 }
 
 func (u *UserService) GetAll() ([]*models.User, error) {
-	users, 
+	var users []*models.User
+	cursor, err := u.usercollection.Find(u.ctx, bson.D{})
+	if err != nil {
+		return nil, err
+	}
+	for cursor.Next(u.ctx) {
+		var user *models.User
+		err := cursor.Decode(&user)
+		if err != nil {
+			return nil, err
+		}
+		users = append(users, user)
+	}
+	if err := cursor.Err(); err != nil {
+		return nil, err
+	}
+	cursor.Close(u.ctx)
+	if len(users) == 0 {
+		return nil, errors.New("no users found")
+	}
 	return nil, nil
 }
 
-func (u *UserService) UpdateUser(*models.User) error {
-	filter := bson.D{bson.E{Key: "user_name", Value: user.Name}}
-	update := bson.D{bson.E{Key: "$set", Value: bson.D{
-		bson.E{Key: "user_name", Value: user.Name}, 
-		bson.E{Key: "user_age", Value: user.Age}, 
-		bson.E{Key: "user_address", Value: user.Address}
+func (u *UserService) UpdateUser(user *models.User) error {
+	filter := bson.D{primitive.E{Key: "user_name", Value: user.Name}}
+	update := bson.D{primitive.E{Key: "$set", Value: bson.D{
+		primitive.E{Key: "name", Value: user.Name}, 
+		primitive.E{Key: "age", Value: user.Age}, 
+		primitive.E{Key: "address", Value: user.Address},
 	}}}
-	result, _ = u.usercollection.UpdateOne(u.ctx, filter, update)
+
+	result, _ := u.usercollection.UpdateOne(u.ctx, filter, update)
+
 	if result.ModifiedCount != 1 {
 		return errors.New("failed to update user")
 	}
@@ -47,8 +76,8 @@ func (u *UserService) UpdateUser(*models.User) error {
 }
 
 func (u *UserService) DeleteUser(name *string) error {
-	filter := bson.D{bson.E{Key: "user_name", Value: user.Name}}
-	result, _ = u.usercollection.DeleteOne(u.ctx, filter)
+	filter := bson.D{primitive.E{Key: "name", Value: name}}
+	result, _ := u.usercollection.DeleteOne(u.ctx, filter)
 	if result.DeletedCount != 1 {
 		return errors.New("failed to delete user")
 	}
