@@ -21,5 +21,5 @@ repo for basic tutorial-based Golang study
 	}}}
     ```
     Why changging Bson.E -> primitive.E fixed erorrs??
-* difference betwen `=` and `:=` in Golang?
-* can you return empty values in Golang?
+* (DONE) difference between `=` and `:=` in Golang? (`:=` means 'declare and assign', while `=` means 'assign')
+* (DONE) can you return empty values in Golang? (yes, you can return empty values in Golang, in fact it's quite often a prefered way of doing things - so `return nil` or just `return` and don't bother)
