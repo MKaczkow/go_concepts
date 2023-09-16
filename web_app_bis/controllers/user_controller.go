@@ -19,68 +19,68 @@ func New(service services.UserServiceInterface) UserController {
 	}
 }
 
-func (uc *UserController) CreateUser(ctx *gin.Context) error {
-	var user models.User 
+func (uc *UserController) CreateUser(ctx *gin.Context) {
+	var user models.User
 	if err := ctx.ShouldBindJSON(&user); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
+		return // Exit the function
 	}
 	err := uc.UserService.CreateUser(&user)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+		return // Exit the function
 	}
 	ctx.JSON(http.StatusOK, gin.H{"message": "success"})
 }
 
-func (uc *UserController) GetUser(ctx *gin.Context) (*models.User, error) {
+func (uc *UserController) GetUser(ctx *gin.Context) {
 	username := ctx.Param("name")
 	user, err := uc.UserService.GetUser(&username)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+		return // Exit the function
 	}
 	ctx.JSON(http.StatusOK, user)
 }
 
-func (uc *UserController) GetAll(ctx *gin.Context) ([]*models.User, error) {
+func (uc *UserController) GetAll(ctx *gin.Context) {
 	users, err := uc.UserService.GetAll()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+		return // Exit the function
 	}
 	ctx.JSON(http.StatusOK, users)
 }
 
-func (uc *UserController) UpdateUser(ctx *gin.Context) error {
+func (uc *UserController) UpdateUser(ctx *gin.Context) {
 	var user models.User
 	if err := ctx.ShouldBindJSON(&user); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
+		return // Exit the function
 	}
 	err := uc.UserService.UpdateUser(&user)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+		return // Exit the function
 	}
 	ctx.JSON(http.StatusOK, gin.H{"message": "success"})
 }
 
-func (uc *UserController) DeleteUser(ctx *gin.Context) error {
+func (uc *UserController) DeleteUser(ctx *gin.Context) {
 	username := ctx.Param("name")
 	err := uc.UserService.DeleteUser(&username)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
+		return // Exit the function
 	}
 	ctx.JSON(http.StatusOK, gin.H{"message": "success"})
 }
 
 func (uc *UserController) RegisterUserRoutes(rg *gin.RouterGroup) {
 	userroute := rg.Group("/users")
-	rg.POST("/", uc.CreateUser)
-	rg.GET("/:name", uc.GetUser)
-	rg.GET("/", uc.GetAll)
-	rg.PUT("/:name", uc.UpdateUser)
-	rg.DELETE("/:name", uc.DeleteUser)
+	userroute.POST("/", uc.CreateUser)
+	userroute.GET("/:name", uc.GetUser)
+	userroute.GET("/", uc.GetAll)
+	userroute.PUT("/:name", uc.UpdateUser)
+	userroute.DELETE("/:name", uc.DeleteUser)
 }

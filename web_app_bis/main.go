@@ -7,6 +7,8 @@ import (
 
   "github.com/gin-gonic/gin"
   "go.mongodb.org/mongo-driver/mongo"
+  "go.mongodb.org/mongo-driver/mongo/options" 
+  "go.mongodb.org/mongo-driver/mongo/readpref" 
 
   "web_app_bis/controllers"
   "web_app_bis/services"
@@ -16,7 +18,7 @@ var (
 	ctx context.Context
 	server *gin.Engine
 	userservice services.UserServiceInterface
-	usercontroller controllers.UserControllerInterface
+	usercontroller controllers.UserController
 	usercollection *mongo.Collection
 	mongoclient *mongo.Client
 	err error
@@ -36,7 +38,7 @@ func init() {
 	fmt.Println("Connected to MongoDB!")
 	usercollection = mongoclient.Database("userdb").Collection("users")
 	userservice = services.NewUserService(usercollection, ctx)
-	usercontroller = controllers.NewUserController(userservice)
+	usercontroller = controllers.New(userservice)
 	server = gin.Default()
 }
 
@@ -44,6 +46,6 @@ func main() {
 	defer mongoclient.Disconnect(ctx)
 
 	basepath := server.Group("/api")
-	usercontroller.RegisterRoutes(basepath)
+	usercontroller.RegisterUserRoutes(basepath)
 	log.Fatal(server.Run(":8080"))
 }
