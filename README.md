@@ -8,10 +8,10 @@ repo for basic tutorial-based Golang study
 [web app bis tutorial](https://www.youtube.com/watch?v=vDIAwtGU9LE&ab_channel=DevProblems) (web app + Gin)
 
 ### issues
-* `func (u *UserService) CreateUser(user *models.User)` What does the (u *UserService) part mean? Likely, it specifies return type, it so?
-* `func (u *UserService) CreateUser(user *models.User)` What does * mean? It looks like a pointer...
+* (DONE) `func (u *UserService) CreateUser(user *models.User)` What does the (u *UserService) part mean? Likely, it specifies return type, it so? (`CreateUser(user *models.User)` part specifies the return type)
+* (DONE) `func (u *UserService) CreateUser(user *models.User)` What does * mean? It looks like a pointer... (yep, it's a pointer)
 * `if err := ctx.ShouldBindJSON(&user); err != nil {` What about ShouldBindJSON?
-* `query := bson.D{bson.E{Key: "name", Value: name}}` What is bson.D or bson.E? (Encode / Decode??)
+* (DONE) `query := bson.D{bson.E{Key: "name", Value: name}}` What is bson.D or bson.E? (these are two out of four basic types of BSON documents, which are the basic unit of data in MongoDB, ref: https://www.mongodb.com/docs/drivers/go/current/fundamentals/bson/)
 * add tests -> web_app_bis??
 * ```
   update := bson.D{primitive.E{Key: "$set", Value: bson.D{
@@ -23,3 +23,9 @@ repo for basic tutorial-based Golang study
     Why changging Bson.E -> primitive.E fixed erorrs??
 * (DONE) difference between `=` and `:=` in Golang? (`:=` means 'declare and assign', while `=` means 'assign')
 * (DONE) can you return empty values in Golang? (yes, you can return empty values in Golang, in fact it's quite often a prefered way of doing things - so `return nil` or just `return` and don't bother)
+
+### notes
+* golang function syntax:  
+`func functionName(parameter1 type1, parameter2 type2, parameterN typeN) returnType {
+	   //function body
+}`
