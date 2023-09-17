@@ -1,6 +1,11 @@
 # go_concepts
 repo for basic tutorial-based Golang study  
 
+### todo
+* finish `web_app_bis` tutorial (mostly done, need to check if everything works OK)
+* clean `issues` section
+* work on new task [`microservices`](./microservices/)
+
 ### based on
 [booking app tutorial](https://www.youtube.com/watch?v=yyUHQIec83I&t=3693s&ab_channel=TechWorldwithNana) (booking app + some basics)  
 [basics tutorial](https://www.youtube.com/watch?v=YS4e4q9oBaU&ab_channel=freeCodeCamp.org) (most basics)  
