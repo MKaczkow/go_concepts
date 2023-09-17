@@ -17,9 +17,15 @@ import (
 var (
 	ctx context.Context
 	server *gin.Engine
+	
 	userservice services.UserServiceInterface
 	usercontroller controllers.UserController
 	usercollection *mongo.Collection
+
+	bookservice services.BookServiceInterface
+	bookcontroller controllers.BookController
+	bookcollection *mongo.Collection
+
 	mongoclient *mongo.Client
 	err error
 )
@@ -38,7 +44,11 @@ func init() {
 	fmt.Println("Connected to MongoDB!")
 	usercollection = mongoclient.Database("userdb").Collection("users")
 	userservice = services.NewUserService(usercollection, ctx)
-	usercontroller = controllers.New(userservice)
+	usercontroller = controllers.NewUserController(userservice)
+	
+	bookservice = services.NewBookService(bookcollection, ctx)
+	bookcontroller = controllers.NewBookController(bookservice)
+	
 	server = gin.Default()
 }
 
