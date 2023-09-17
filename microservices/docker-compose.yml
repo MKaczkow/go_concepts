@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: examplepassword
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db  # Optional: persist MongoDB data locally
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api  # Specify the Dockerfile for the Go API
+    container_name: api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: mongodb://root:examplepassword@mongodb:27017
