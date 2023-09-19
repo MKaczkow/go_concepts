@@ -6,6 +6,11 @@
 [x] docker-compose works
 [x] push to dockerhub
 [] design reasonable microservices
+    - some kind of prediction service?
+    - some kind of auth service?
+    - main api
+    - main db (mongo)
+    - kinda like Twitter clone => so some graph db?
 
 ### Containers
 * database (mongoDB)
