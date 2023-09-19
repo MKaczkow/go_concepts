@@ -2,7 +2,8 @@
 
 ### TODO
 [x] docker desktop works
-[] 
+[x] basic, helloworld microservices work
+[x] docker-compose works
 
 ### Containers
 * database (mongoDB)
