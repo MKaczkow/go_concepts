@@ -24,3 +24,13 @@
 ### Dockerhub 
 * `docker login`
 * `docker push lorca19/golang-microservices:v0.2.0`
+
+### MongoDB notes
+* `createCollection` vs `createView`
+* most operations, are analog to SQL (e.g. `find`, `create`, `distinct`, `count`)
+* Go Driver provides four main types for working with BSON data:
+    - **D**: An ordered representation of a BSON document (slice)
+    - **M**: An unordered representation of a BSON document (map)
+    - **A**: An ordered representation of a BSON array
+    - **E**: A single element inside a D type
+    
