@@ -57,5 +57,6 @@ func main() {
 
 	basepath := server.Group("/api")
 	usercontroller.RegisterUserRoutes(basepath)
+	bookcontroller.RegisterBookRoutes(basepath)
 	log.Fatal(server.Run(":8080"))
 }
