@@ -1,11 +1,11 @@
 # Microservices exercise with MongoDB, Golang (Gin) and Docker
 
 ### TODO
-[x] docker desktop works
-[x] basic, helloworld microservices work
-[x] docker-compose works
-[x] push to dockerhub
-[] design reasonable microservices
+- [x] docker desktop works
+- [x] basic, helloworld microservices work
+- [x] docker-compose works
+- [x] push to dockerhub
+- [ ] design reasonable microservices
     - some kind of prediction service?
     - some kind of auth service?
     - main api
