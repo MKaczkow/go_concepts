@@ -5,16 +5,29 @@
 - [x] basic, helloworld microservices work
 - [x] docker-compose works
 - [x] push to dockerhub
-- [ ] design reasonable microservices
-    - some kind of prediction service?
-    - some kind of auth service?
-    - main api
-    - main db (mongo)
-    - kinda like Twitter clone => so some graph db?
+- [x] design reasonable microservices
+    - database
+    - database-api
+    - omdb-api
+    - recommendation-engine
+- [ ] design APIs and DB schemas
+    - recomendation-engine
+    - which data about users to store
+    - database-api (CRUD, so easy)
+    - omdb-api
 
-### Containers
-* database (mongoDB)
-* api (Golang + Gin)
+### Goals of this exercise
+* to learn and have fun :smile:
+* to make systems written in different languages work together with JSON API (or other API, but most likely JSON)
+* to setup plain and simple docker-compose for the whole system
+* to research basic recommendation engines/ algos/ models in Python (likely NLP or graph based)
+* to setup automated testing/ building/ etc. using Github Actions
+
+### Containers / microservices
+* **database** (mongoDB) - just container with mongoDB
+* **database-api** (Golang + Gin) - API to communicate with database
+* **omdb-api** (Golang + Gin) [link](https://www.omdbapi.com/) - API to communicate with OMDB
+* **recommendation-engine** (Python + FastAPI) - engine to recommend movies
 
 ### Usage
 * `docker-compose up -d`

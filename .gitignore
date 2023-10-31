@@ -17,3 +17,6 @@ vendor/
 # Data dirs
 **/data/**
 **/data/
+
+# API keys
+**/api_key

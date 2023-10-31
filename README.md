@@ -6,6 +6,7 @@ repo for basic tutorial-based Golang study
 - [ ] fix `web_app_bis` (if no JSON is provided, some routes crash)
 - [x] clean `issues` section (for now)
 - [ ] work on new task [`microservices`](./microservices/)
+- [ ] fix github actions
 
 ### based on
 [booking app tutorial](https://www.youtube.com/watch?v=yyUHQIec83I&t=3693s&ab_channel=TechWorldwithNana) (booking app + some basics)  
