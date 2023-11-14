@@ -6,7 +6,7 @@ repo for basic tutorial-based Golang study
 - [ ] fix `web_app_bis` (if no JSON is provided, some routes crash)
 - [x] clean `issues` section (for now)
 - [ ] work on new task [`microservices`](./microservices/)
-- [ ] fix github actions
+- [x] fix github actions
 - [ ] finish LP (liear programming) task
 
 ### based on
