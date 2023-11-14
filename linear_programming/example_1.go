@@ -8,7 +8,8 @@ import (
 	"gonum.org/v1/gonum/optimize/functions"
 )
 
-func main() {
+func example_1() {
+// func main() {
 	p := optimize.Problem{
 		Func: functions.ExtendedRosenbrock{}.Func,
 		Grad: functions.ExtendedRosenbrock{}.Grad,
