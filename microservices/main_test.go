@@ -1,55 +1,33 @@
-// Copyright 2020 Google LLC
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     https://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package main
 
 import (
+	"net/http"
 	"net/http/httptest"
-	"os"
 	"testing"
+
+	"github.com/gin-gonic/gin"
+	"github.com/stretchr/testify/assert"
 )
 
-func TestHandler(t *testing.T) {
-	tests := []struct {
-		label string
-		want  string
-		name  string
-	}{
-		{
-			label: "default",
-			want:  "Hello World!\n",
-			name:  "",
-		},
-		{
-			label: "override",
-			want:  "Hello Override!\n",
-			name:  "Override",
-		},
-	}
+func TestGetMovie(t *testing.T) {
+	// Create a test router with the same configuration as your main router
+	router := gin.Default()
+	router.GET("/movies", getMovie)
 
-	originalName := os.Getenv("NAME")
-	defer os.Setenv("NAME", originalName)
+	// Create a test request
+	req, err := http.NewRequest("GET", "/movies?t=Inception&y=2010&type=movie", nil)
+	assert.NoError(t, err)
 
-	for _, test := range tests {
-		os.Setenv("NAME", test.name)
+	// Create a test response recorder
+	w := httptest.NewRecorder()
 
-		req := httptest.NewRequest("GET", "/", nil)
-		rr := httptest.NewRecorder()
-		handler(rr, req)
+	// Perform the request
+	router.ServeHTTP(w, req)
 
-		if got := rr.Body.String(); got != test.want {
-			t.Errorf("%s: got %q, want %q", test.label, got, test.want)
-		}
-	}
+	// Check the status code
+	assert.Equal(t, http.StatusOK, w.Code)
+
+	// Assert the response body, you might need to adjust this based on the actual response from the OMDb API
+	expectedResponse := `{"data": "your_expected_response"}`
+	assert.JSONEq(t, expectedResponse, w.Body.String())
 }

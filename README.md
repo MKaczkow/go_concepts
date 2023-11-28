@@ -9,6 +9,12 @@ repo for basic tutorial-based Golang study
 - [x] fix github actions
 - [ ] finish LP (liear programming) task
 
+### basic usage
+* cd `app_name`
+* `go build -v ./`
+* `go test -v ./`
+* `go run main.go`
+
 ### based on
 [booking app tutorial](https://www.youtube.com/watch?v=yyUHQIec83I&t=3693s&ab_channel=TechWorldwithNana) (booking app + some basics)  
 [basics tutorial](https://www.youtube.com/watch?v=YS4e4q9oBaU&ab_channel=freeCodeCamp.org) (most basics)  

@@ -29,6 +29,15 @@
 * **omdb-api** (Golang + Gin) [link](https://www.omdbapi.com/) - API to communicate with OMDB
 * **recommendation-engine** (Python + FastAPI) - engine to recommend movies
 
+### Example OMDB API calls
+* http://www.omdbapi.com/?apikey={apikey}&t=Inception
+* http://www.omdbapi.com/?apikey={apikey}&i=tt1285016
+
+### Example internal API calls
+* http://localhost:8080/movies?t=Inception
+* http://localhost:8080/movies?i=tt1285016
+
+
 ### Usage
 * `docker-compose up -d`
 * `docker build . -t lorca19/golang-microservices:v0.2.0`
