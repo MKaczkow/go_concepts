@@ -8,6 +8,7 @@ repo for basic tutorial-based Golang study
 - [ ] work on new task [`microservices`](./microservices/)
 - [x] fix github actions
 - [ ] finish LP (liear programming) task
+- [ ] get book "Język Go. Tworzenie idiomatycznego kodu w praktyce" [example link](https://ulubionykiosk.pl/wydawnictwo/jezyk-go-tworzenie-idiomatycznego-kodu-w-praktyce?gclid=CjwKCAiAyp-sBhBSEiwAWWzTnidWyVtzQT6rU82MAzZSNY6u-Vx3KuyetmuLR5GSGNId6kPF5nr_IxoCv5AQAvD_BwE) [inny link](https://helion.pl/ksiazki/jezyk-go-tworzenie-idiomatycznego-kodu-w-praktyce-jon-bodner,jegotw.htm#format/e)
 
 ### basic usage
 * cd `app_name`
