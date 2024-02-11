@@ -2,7 +2,7 @@
 Directory for studying 'experiment', learning from papercover book "Język Go. Tworzenie idiomatycznego kodu w praktyce" (Jon Bodner) - [github link with examples](https://github.com/learning-go-book)
 
 ### todo
-- [ ] chapter 1 - environment setup
+- [x] chapter 1 - environment setup
 - [ ] chapter 2 - generic types and declarations
 - [ ] chapter 3 - complex types
 - [ ] chapter 4 - blocks, overloading and control flow
