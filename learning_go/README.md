@@ -3,7 +3,7 @@ Directory for studying 'experiment', learning from papercover book "Język Go. T
 
 ### todo
 - [x] chapter 1 - environment setup
-- [ ] chapter 2 - generic types and declarations
+- [x] chapter 2 - generic types and declarations
 - [ ] chapter 3 - complex types
 - [ ] chapter 4 - blocks, overloading and control flow
 - [ ] chapter 5 - functions
