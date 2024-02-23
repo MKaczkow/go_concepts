@@ -1,4 +1,4 @@
-# 1_environment_setup
+# 01_environment_setup
 
 * `go run` - treat program as script (compile, run and delete binary)
 * `go build` - compile program
@@ -9,3 +9,5 @@
     3. `golint`
 * `go vet` uses some fancy heuristics to detect issues, which may have been missed by compiler - not all of of are genuine problems (FP exists) [docs link](https://golang.org/cmd/vet/)
 * [golang backward compatibility blogpost](https://go.dev/blog/compat) and [golang backward compatibility doc](https://go.dev/doc/go1compat) describes promise of backward compatibility in golang made by golang team (the boring programming language), there are some interesting caveats, like problem with too-precise `time.Now` and mismatch between go and 'rest of the world' on IP addresses with leading zeros. Also compatibility is guaranteed at source level, not binary level, so recompile after version update
+* `./` - current directory
+* `...` - search down the directory tree, recursively, e.g. `go test ./...` - run tests in all subdirectories

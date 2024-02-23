@@ -2,10 +2,11 @@
 repo for basic tutorial-based Golang study  
 
 ### todo
-- [ ] init `book`
+- [ ] finish `book`
 - [ ] finish LP (liear programming) task
 - [ ] fix `web_app_bis` (if no JSON is provided, some routes crash)
 - [ ] work on new task [`microservices`](./microservices/)
+- [x] init `book`
 - [x] clean `issues` section (for now)
 - [x] fix github actions
 - [x] get book "Język Go. Tworzenie idiomatycznego kodu w praktyce" [example link](https://ulubionykiosk.pl/wydawnictwo/jezyk-go-tworzenie-idiomatycznego-kodu-w-praktyce?gclid=CjwKCAiAyp-sBhBSEiwAWWzTnidWyVtzQT6rU82MAzZSNY6u-Vx3KuyetmuLR5GSGNId6kPF5nr_IxoCv5AQAvD_BwE) [other link](https://helion.pl/ksiazki/jezyk-go-tworzenie-idiomatycznego-kodu-w-praktyce-jon-bodner,jegotw.htm#format/e)
@@ -24,6 +25,7 @@ repo for basic tutorial-based Golang study
 [web app bis tutorial](https://www.youtube.com/watch?v=vDIAwtGU9LE&ab_channel=DevProblems) (web app + Gin)
 
 ### issues
+* How should modules / packages be organized? How are they organized in real-life large projects? [docs](https://golang.org/doc/code.html#Organization)
 * (DONE) `func (u *UserService) CreateUser(user *models.User)` What does the (u *UserService) part mean? Likely, it specifies return type, it so? (`CreateUser(user *models.User)` part specifies the return type)
 * (DONE) `func (u *UserService) CreateUser(user *models.User)` What does * mean? It looks like a pointer... (yep, it's a pointer)
 * (DONE) `if err := ctx.ShouldBindJSON(&user); err != nil {...}` What about ShouldBindJSON? (the syntax means, that we first create err variable, assign value to it and only then check if function returned any errors)

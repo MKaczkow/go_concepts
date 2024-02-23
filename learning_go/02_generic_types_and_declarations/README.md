@@ -1,4 +1,4 @@
-# 2_generic_types_and_declarations
+# 02_generic_types_and_declarations
 
 * 5 types of literals in Go: 
     * integer
