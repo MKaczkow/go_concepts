@@ -26,6 +26,7 @@ repo for basic tutorial-based Golang study
 
 ### issues
 * How should modules / packages be organized? How are they organized in real-life large projects? [docs](https://golang.org/doc/code.html#Organization)
+* How specifically, does `hash maps` work in Golang? 
 * (DONE) `func (u *UserService) CreateUser(user *models.User)` What does the (u *UserService) part mean? Likely, it specifies return type, it so? (`CreateUser(user *models.User)` part specifies the return type)
 * (DONE) `func (u *UserService) CreateUser(user *models.User)` What does * mean? It looks like a pointer... (yep, it's a pointer)
 * (DONE) `if err := ctx.ShouldBindJSON(&user); err != nil {...}` What about ShouldBindJSON? (the syntax means, that we first create err variable, assign value to it and only then check if function returned any errors)

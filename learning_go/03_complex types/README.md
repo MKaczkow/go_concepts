@@ -58,4 +58,33 @@ z: [30 40 70]
 > Need to be very careful while creating slices-out-of-slices. This may cause weird issues, as it's copy-by-reference, not by value. Use `full slice expressions` (specifying *last posistion in source slice capacity to be available for child slice*) to create a new slice with the same values as the original slice.
 
 ### Maps and hash maps
-TBD
+* syntax: `map[keyType]valueType`
+* declaration with `var`:
+```go
+var nilMap map[string]int
+```
+* declaration with `make`:
+```go
+var emptyMap = make(map[string]int)
+```
+* declaration with `map literal`:
+```go
+var mapWithValues = map[string]int{"one": 1, "two": 2, "three": 3}
+```
+* works analogically to `slices`
+* maps are not comparable, so they can only be compared to `nil`
+* `comma ok` idiom:
+```go
+value, ok := mapWithValues["one"]
+```
+* enables checking if the value exists in the map (`ok` is `true` if the value exists, `false` otherwise)
+* golang doesn't have `sets`, but some features can be simulated with `maps`
+
+### Structs
+* `maps` are cool, but have some drawbacks:
+	- it's hard to create uniform APIs with them, because they don't have a fixed set of keys
+	- all values in a map **must be** of the same type
+* contary to maps, creating structs using `struct literal` and `var` keyword are equivalent (all fields will be set to their zero values, if not specified, they will be set to zero values of their types)
+* most of the time, it's better to create structs, using key names, because it's more explicit and robust (e.g. if new fields will be added to the struct, the code won't break)
+* `anonymous structs` - structs without a name, used for temporary data (no `type` keyword), e.g. for testing purposes
+* `maps` and `slices` are not comparable, so struct containing fields with these types won't be comparable as well
