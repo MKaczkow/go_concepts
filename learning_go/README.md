@@ -5,7 +5,7 @@ Directory for studying 'experiment', learning from papercover book "Język Go. T
 - [x] chapter 01 - environment setup
 - [x] chapter 02 - generic types and declarations
 - [x] chapter 03 - complex types
-- [ ] chapter 04 - blocks, overloading and control flow
+- [x] chapter 04 - blocks, overloading and control flow
 - [ ] chapter 05 - functions
 - [ ] chapter 06 - pointers
 - [ ] chapter 07 - types, methods and interfaces
