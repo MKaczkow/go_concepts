@@ -7,7 +7,7 @@ Directory for studying 'experiment', learning from papercover book "Język Go. T
 - [x] chapter 03 - complex types
 - [x] chapter 04 - blocks, overloading and control flow
 - [x] chapter 05 - functions
-- [ ] chapter 06 - pointers
+- [x] chapter 06 - pointers
 - [ ] chapter 07 - types, methods and interfaces
 - [ ] chapter 08 - errors
 - [ ] chapter 09 - modules, packages and imports

@@ -24,3 +24,14 @@ func main() {
 ### Efficiency
 * passing a pointer to a function is more efficient than passing a value, because pointer has a fixed size, while value can be large
 * but returning a pointer from a function 
+
+### Maps vs slices
+* map is a reference type, slice is a value type
+* thus, maps should be avoided as arguments, especially in large, public APIs
+* `slices` (the only practically useful linear data structure in Go) are often passed, as functions' arguments, but should not be modified inside function body
+
+### Heap vs stack
+* `heap` is used for dynamic memory allocation, and is managed by garbage collector
+* `stack` is used for static memory allocation, and is managed by programmer
+* each `goroutine` has it's own stack, all managed by `Go runtime`
+* `mechanical sympathy` is understanding how the hardware works, and how the software interacts with it, to write more efficient code
