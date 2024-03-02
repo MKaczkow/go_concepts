@@ -24,10 +24,33 @@ type TeamScores map[string]Score   // 'TeamScores' is a map type, map from strin
 * `abstract types` defines 'what is to be done' and **not** 'how to do it'
 * `concrete types` defines 'what is to be done' and 'how to do it'
 * in Golang all types are either `abstract` or `concrete`, no way of creating hybrid types (like interface with default methods in Java)
+* type declarations doesn't mean inheritance
+* no `enum` (enumarating type) in Golang, but can be simulated with `const` and `iota`
+    ```go
+    package main
+
+    import "fmt"
+
+    type Suit int
+
+    const (
+        Spades Suit = iota
+        Hearts
+        Diamonds
+        Clubs
+    )
+
+    func main() {
+        var cardSuit Suit = Spades
+        fmt.Println(cardSuit)   // 0
+    }
+    ```
+* embedded fields as a way of simulating composition
+* no `dynamic dispatch` in Go for concrete types 
 
 ### Methods
 * `methods` are functions that are associated with a type (they have `receiver`, kinda like `self` in Python)
-* 
+
 ```go
 package main
 
@@ -51,4 +74,49 @@ type Person struct {
     - if method modifies the receiver -> `pointer receiver` must be used
     - if method must handle `nil` instance -> `pointer receiver` must be used
     - if method doesn't modify the receiver -> `value receiver` can be used
-* programming with `nil` value in mind (TBD)
+* programming with `nil` value in mind
+    - expecting `nil` receiver
+    - most languages doesn't allow executing methods on `nil` receiver
+    - Golang allows it
+    - if this is `value receiver` method -> `panic`
+    - if this is `pointer receiver` method -> `nil` is passed to the method (it may work, if written 'with `nil` in mind')
+* methods are also functions (kinda like static)
+    ```go
+    type Adder struct {
+        start int
+    }
+
+    func (a Adder) AddTo(val int) int {
+        return a.start + val
+    }
+    ```
+    - normal way
+    ```go
+    myAdder := Adder{start: 10}
+    fmt.Println(myAdder.AddTo(5))   // 15
+    ```
+    - `method value`
+    ```go
+    f1 := myAdder.AddTo
+    fmt.Println(f1(5))   // 15
+    ```
+    - `method expression`
+    ```go
+    f2 := Adder.AddTo
+    fmt.Println(f2(myAdder, 15))   // 25
+    ```
+
+### Interfaces
+* the only abstract type in Golang is `interface`
+```go
+type Stringer interface {
+    String() string
+}
+```
+* no need to declare that a `concrete type` implements an `interface`, it's done implicitly
+* this combines pros of dynamic languages and static languages
+    - `duck typing` (like in Python)
+    - `interfaces` (like in Java)
+
+> [!TIP]  
+> Accept interfaces, return structs.
