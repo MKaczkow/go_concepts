@@ -118,5 +118,65 @@ type Stringer interface {
     - `duck typing` (like in Python)
     - `interfaces` (like in Java)
 
+* in Golang, we have interface, but only client function 'knows' about it 
+* thus, we can easly change the implementation of the interface (like in dynamic languages)
+* but, the compiler will check if the new implementation is compatible with the interface (like in static languages)
+```go
+
+type LogicProvider struct {}
+
+func (lp LogicProvider) Process(data string) string {
+    return "processed: " + data
+    // program login
+}
+
+type Logic interface {
+    Process(string) string
+}
+
+type Client struct {
+    L Logic
+}
+
+func (c Client) Program(data string) string {
+    // get data
+    return c.L.Process(data)
+}
+
+main() {
+    c := Client{
+        L: LogicProvider{},
+    }
+    c.Program()
+}
+```
+* interfaces can be shared
+
+> [!TIP]  
+> If there is interface in stdlib, which fits your needs, use it. You may adhere to the decorator pattern - create a factory function, which accept interface instance and return different type, implementing the interface.
+
+* interfaces can be embedded (eg. `io.ReadCloser` is an interface that embeds `io.Reader` and `io.Closer`)
+
 > [!TIP]  
 > Accept interfaces, return structs.
+
+* because of lack of generics, `interface{}` is used to represent any type
+
+### Miscellaneus
+* ... but how to check if `interface` type variable is of specific `concrete` type?
+* `type assertion` is used to extract the value from an interface
+```go
+
+type MyInt int
+
+func main() {
+    var i interface{}
+    var mine MyInt = 42
+    i = mine
+    i2 := i.(MyInt)   // this is type assertion
+    fmt.Println(is + 1)
+}
+
+```
+* `type conversions` change type, while `type assertions` extracts it
+* other way is to use `type switch`

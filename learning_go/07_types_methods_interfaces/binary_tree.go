@@ -32,7 +32,7 @@ func (it *IntTree) Contains(val int) bool {
 	}
 }
 
-func main() {
+func bckp_main() {
 	var it *IntTree
 	it = it.Insert(5)
 	it = it.Insert(3)

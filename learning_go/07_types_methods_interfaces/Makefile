@@ -13,9 +13,9 @@ vet: fmt
 .PHONY: vet
 
 build: vet
-	go build binary_tree.go
+	go build interfaces_example.go
 .PHONY: build
 
 run: vet
-	go run binary_tree.go
+	go run interfaces_example.go
 .PHONY: run
