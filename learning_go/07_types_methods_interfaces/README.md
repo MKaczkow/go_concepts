@@ -180,3 +180,32 @@ func main() {
 ```
 * `type conversions` change type, while `type assertions` extracts it
 * other way is to use `type switch`
+* `DIP` (Dependency Inversion Principle) example in Golang
+```go
+
+func LogOutpus(message string) {
+    fmt.Println(message)
+}
+
+type SimpleDataStore struct {
+    userData map[string]string
+}
+
+func (sds SimpleDataStore) UserNameForID(id string) (string, bool) {
+    name, ok := sds.userData[userID]
+    return name, ok
+}
+
+func NewSimpleDataStore() SimpleDataStore {
+    return SimpleDataStore{
+        userData: map[string]string{
+            "1": "Fred",
+            "2": "Mary",
+            "3": "Pat",
+        },
+    }
+}
+
+
+
+```
