@@ -16,3 +16,13 @@
     - version of dependencies
     - (optional) replace 
     - (optional) exclude
+* `pkg` (for actual code) and `cmd` (for executables)
+
+### Packages
+* `Capitalized` names are exported
+* `interal` package is only available to packages directly above it and it's subpackages
+
+### API
+* `alias` is different name for `type` (basically)
+
+### Imports
