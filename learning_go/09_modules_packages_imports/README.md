@@ -17,6 +17,14 @@
     - (optional) replace 
     - (optional) exclude
 * `pkg` (for actual code) and `cmd` (for executables)
+* [modules repository](https://pkg.go.dev/), kinda like `pypi`, but not really - this is just for reference, while pypi is for distribution
+* Semantic Versioning (SemVer) - `v1.2.3` (major.minor.patch)
+* sometimes `go.sum` file contains `// indirect` comment, which means there is an older module, without `go.mod` file, `go.mod` file is corrupeted, or similar reason
+* non-backward-compatible changes means, practically, new module, thus `github.com/.../v2` (or similar) is used is `go.mod` file
+* `vendoring` means copying all project dependencies to the project directory, so nothing is downloaded while compiling, thus the project is self-contained and guaranteed to work
+* `vendor` top-level directory is used for vendoring
+* [golang modules proxy server](https://proxy.golang.org/) is used for caching and security reasons
+* [Athens project](https://docs.gomods.io/) is used for caching and security reasons
 
 ### Packages
 * `Capitalized` names are exported
