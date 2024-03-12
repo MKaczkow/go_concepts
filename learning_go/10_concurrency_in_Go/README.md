@@ -50,4 +50,37 @@ v, ok := <-ch
 ```
 * use `sync.WaitGroup` to wait for all goroutines to finish and avoid panic
 
+### Select 
+* `select` statement is used to wait for multiple channels to send or receive values
+* like `switch`, but chooses random satisfied case
+* but deadlock is still possible xd
+* `for-select` loop
+```go
+for {
+    select {
+    case v := <-ch1:
+        // do something with v
+    case v := <-ch2:
+        // do something with v
+    }
+}
+```
+* `done channel pattern` ...
+```go
+for {
+    select {
+    case v := <-ch1:
+        // do something with v
+    case v := <-ch2:
+        // do something with v
+    case <-done:
+        return
+    }
+}
+```
+* ...but it's better to not use `default`
+
 ### Best practices
+* `API`s shouldn't be designed to use concurrency, because it's implementation detail, which should be hidden
+* so, *don't expose anything concurrency-related in your API* seems to be a good rule of thumb
+* avoid `goroutine leaks` 

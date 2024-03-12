@@ -13,9 +13,9 @@ vet: fmt
 .PHONY: vet
 
 build: vet
-	go build closed_channel_example.go
+	go build goprocedures_no_deadlock.go
 .PHONY: build
 
 run: vet
-	go run closed_channel_example.go
+	go run goprocedures_no_deadlock.go
 .PHONY: run

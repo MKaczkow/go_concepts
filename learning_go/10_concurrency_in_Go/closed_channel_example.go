@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func bckp_main() {
 	ch := make(chan int)
 
 	go func() {
