@@ -49,6 +49,26 @@ ch := make(chan int, 10) // buffered channel with capacity of 10
 v, ok := <-ch
 ```
 * use `sync.WaitGroup` to wait for all goroutines to finish and avoid panic
+* when to use `buffered`, when to use `unbuffered` channels?
+* `buffered` - useful when you know how many goroutines are created, want to reduce their number or reduce number of awaiting operations
+```go
+func processChannel(ch chan int) [] int {
+    const conc = 10
+    results := make(chan int, conc)
+    for i := 0; i < conc; i++ {
+        go func() {
+            v := <- ch
+            results <- process(v)
+        }()
+    }
+    var out []int
+    for i := 0; i <conc; i++ {
+        out = append(out, <-results)
+    }
+    return out
+}
+```
+* `backpressure` mechanism - basically, there is a buffered channel with *chips*, befere doing thing, goroutine tries to obtain a chip, if it succeeds, it can do the action, if it fails there is error like 'no more system resources'
 
 ### Select 
 * `select` statement is used to wait for multiple channels to send or receive values
