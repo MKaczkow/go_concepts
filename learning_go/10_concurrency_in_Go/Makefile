@@ -13,9 +13,9 @@ vet: fmt
 .PHONY: vet
 
 build: vet
-	go build goprocedures_no_deadlock.go
+	go build process_and_gather.go
 .PHONY: build
 
 run: vet
-	go run goprocedures_no_deadlock.go
+	go run process_and_gather.go
 .PHONY: run

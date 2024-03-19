@@ -48,6 +48,9 @@ ch := make(chan int, 10) // buffered channel with capacity of 10
 v, ok := <-ch
 ```
 * use `sync.WaitGroup` to wait for all goroutines to finish and avoid panic
+    * `Add` method to add number of goroutines to wait for
+    * `Done` method to signal that goroutine has finished
+    * `Wait` method to block until all goroutines have finished
 * there is also `ErrGroup`
 * when to use `buffered`, when to use `unbuffered` channels?
 * `buffered` - useful when you know how many goroutines are created, want to reduce their number or reduce number of awaiting operations
@@ -124,3 +127,21 @@ for {
 * `API`s shouldn't be designed to use concurrency, because it's implementation detail, which should be hidden
 * so, *don't expose anything concurrency-related in your API* seems to be a good rule of thumb
 * avoid `goroutine leaks` 
+* it's possible to set time limit to op using `time.After` - this is called `timeout idiom`
+```go
+func timeLimit() (int, error) {
+    var result int
+    var err error
+    done := make(chan struct{})
+    go func() {
+        result, err = longRunningOp()
+        close(done)
+    }()
+    select {
+        case <-done:
+            return result, err
+        case <-time.After(2 * time.Second):
+            return 0, errors.New("timeout")
+    }
+}
+```
