@@ -11,7 +11,7 @@ Directory for studying 'experiment', learning from papercover book "Język Go. T
 - [x] chapter 07 - types, methods and interfaces
 - [x] chapter 08 - errors
 - [x] chapter 09 - modules, packages and imports
-- [ ] chapter 10 - concurrency in Go
+- [x] chapter 10 - concurrency in Go
 - [ ] chapter 11 - standard library
 - [ ] chapter 12 - context
 - [ ] chapter 13 - testing

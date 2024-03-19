@@ -4,7 +4,6 @@
 * concurrency in Go doesn't use locks
 * it's based on `communicating sequential processes` (CSP) model [reference paper](https://dl.acm.org/doi/pdf/10.1145/359576.359585)
 * interesting book `The Art of Concurrency` by Clay Breshears
-* 
 
 ### Goroutines 
 * basic building block of concurrency in Go
@@ -49,6 +48,7 @@ ch := make(chan int, 10) // buffered channel with capacity of 10
 v, ok := <-ch
 ```
 * use `sync.WaitGroup` to wait for all goroutines to finish and avoid panic
+* there is also `ErrGroup`
 * when to use `buffered`, when to use `unbuffered` channels?
 * `buffered` - useful when you know how many goroutines are created, want to reduce their number or reduce number of awaiting operations
 ```go
@@ -69,6 +69,26 @@ func processChannel(ch chan int) [] int {
 }
 ```
 * `backpressure` mechanism - basically, there is a buffered channel with *chips*, befere doing thing, goroutine tries to obtain a chip, if it succeeds, it can do the action, if it fails there is error like 'no more system resources'
+* `sync.Once` is for lazy initialization
+```go
+
+type SlowComplicatedParser interface {
+    Parse(string) (string)
+}
+var parser SlowComplicatedParser
+var once sync.Once
+
+func Parse(dataToParse string) string {
+    once.Do(func() {
+        parser = initParser()
+    })
+    return parser.Parse(dataToParse)
+}
+
+func initParser() SlowComplicatedParser {
+    // do some heavy initialization
+}
+```
 
 ### Select 
 * `select` statement is used to wait for multiple channels to send or receive values
