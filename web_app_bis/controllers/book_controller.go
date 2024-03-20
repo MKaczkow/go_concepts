@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"web_app_bis/services"
 	"web_app_bis/models"
+	"web_app_bis/services"
 )
 
 type BookController struct {
@@ -19,13 +19,13 @@ func NewBookController(bookservice services.BookServiceInterface) BookController
 	}
 }
 
-func (uc *BookController) CreateBook(ctx *gin.Context) {
+func (bc *BookController) CreateBook(ctx *gin.Context) {
 	var book models.Book
 	if err := ctx.ShouldBindJSON(&book); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return // Exit the function
 	}
-	err := uc.BookService.CreateBook(&book)
+	err := bc.BookService.CreateBook(&book)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return // Exit the function
@@ -33,9 +33,9 @@ func (uc *BookController) CreateBook(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"message": "success"})
 }
 
-func (uc *BookController) GetBook(ctx *gin.Context) {
+func (bc *BookController) GetBook(ctx *gin.Context) {
 	booktitle := ctx.Param("title")
-	book, err := uc.BookService.GetBook(&booktitle)
+	book, err := bc.BookService.GetBook(&booktitle)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return // Exit the function
@@ -43,8 +43,8 @@ func (uc *BookController) GetBook(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, book)
 }
 
-func (uc *BookController) GetAll(ctx *gin.Context) {
-	books, err := uc.BookService.GetAll()
+func (bc *BookController) GetAllBooks(ctx *gin.Context) {
+	books, err := bc.BookService.GetAllBooks()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return // Exit the function
@@ -52,13 +52,13 @@ func (uc *BookController) GetAll(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, books)
 }
 
-func (uc *BookController) UpdateBook(ctx *gin.Context) {
+func (bc *BookController) UpdateBook(ctx *gin.Context) {
 	var book models.Book
 	if err := ctx.ShouldBindJSON(&book); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return // Exit the function
 	}
-	err := uc.BookService.UpdateBook(&book)
+	err := bc.BookService.UpdateBook(&book)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return // Exit the function
@@ -66,9 +66,9 @@ func (uc *BookController) UpdateBook(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"message": "success"})
 }
 
-func (uc *BookController) DeleteBook(ctx *gin.Context) {
+func (bc *BookController) DeleteBook(ctx *gin.Context) {
 	booktitle := ctx.Param("title")
-	err := uc.BookService.DeleteBook(&booktitle)
+	err := bc.BookService.DeleteBook(&booktitle)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return // Exit the function
@@ -76,11 +76,11 @@ func (uc *BookController) DeleteBook(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{"message": "success"})
 }
 
-func (uc *BookController) RegisterBookRoutes(rg *gin.RouterGroup) {
+func (bc *BookController) RegisterBookRoutes(rg *gin.RouterGroup) {
 	bookroute := rg.Group("/books")
-	bookroute.POST("/", uc.CreateBook)
-	bookroute.GET("/:title", uc.GetBook)
-	bookroute.GET("/", uc.GetAll)
-	bookroute.PUT("/:title", uc.UpdateBook)
-	bookroute.DELETE("/:title", uc.DeleteBook)
+	bookroute.POST("/", bc.CreateBook)
+	bookroute.GET("/:title", bc.GetBook)
+	bookroute.GET("/", bc.GetAllBooks)
+	bookroute.PUT("/:title", bc.UpdateBook)
+	bookroute.DELETE("/:title", bc.DeleteBook)
 }

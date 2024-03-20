@@ -3,14 +3,15 @@ repo for basic tutorial-based Golang study
 
 ### todo
 - [ ] finish `book`
-- [ ] finish LP (liear programming) task
-- [ ] fix `web_app_bis` (if no JSON is provided, some routes crash)
-- [ ] work on new task [`microservices`](./microservices/)
+- [ ] smth with `Hanoi tower`
+- [ ] finish LP (liear programming) task  
+- [x] fix `web_app_bis` (if no JSON is provided, some routes crash)
 - [x] init `book`
 - [x] clean `issues` section (for now)
 - [x] fix github actions
 - [x] get book "Język Go. Tworzenie idiomatycznego kodu w praktyce" [example link](https://ulubionykiosk.pl/wydawnictwo/jezyk-go-tworzenie-idiomatycznego-kodu-w-praktyce?gclid=CjwKCAiAyp-sBhBSEiwAWWzTnidWyVtzQT6rU82MAzZSNY6u-Vx3KuyetmuLR5GSGNId6kPF5nr_IxoCv5AQAvD_BwE) [other link](https://helion.pl/ksiazki/jezyk-go-tworzenie-idiomatycznego-kodu-w-praktyce-jon-bodner,jegotw.htm#format/e)
 - [x] finish `web_app_bis` tutorial (mostly done, need to check if everything works OK)
+~~ [ ] work on new task [`microservices`](./microservices/)~~
 
 ### basic usage
 * cd `app_name`

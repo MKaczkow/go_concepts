@@ -1,25 +1,25 @@
 package services
 
 import (
-  "context"
-  "errors"
+	"context"
+	"errors"
 
-  "go.mongodb.org/mongo-driver/mongo"
-  "go.mongodb.org/mongo-driver/bson"
-  "go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 
-  "web_app_bis/models"
+	"web_app_bis/models"
 )
 
 type UserService struct {
 	usercollection *mongo.Collection
-	ctx context.Context
+	ctx            context.Context
 }
 
 func NewUserService(collection *mongo.Collection, ctx context.Context) UserServiceInterface {
 	return &UserService{
 		usercollection: collection,
-		ctx: ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -28,14 +28,14 @@ func (u *UserService) CreateUser(user *models.User) error {
 	return err
 }
 
-func (u *UserService) GetUser(name *string) (*models.User, error) { 
+func (u *UserService) GetUser(name *string) (*models.User, error) {
 	var user *models.User
 	query := bson.D{bson.E{Key: "name", Value: name}}
-	err := u.usercollection.FindOne(u.ctx, query).Decode(&user) 
+	err := u.usercollection.FindOne(u.ctx, query).Decode(&user)
 	return user, err
 }
 
-func (u *UserService) GetAll() ([]*models.User, error) {
+func (u *UserService) GetAllUsers() ([]*models.User, error) {
 	var users []*models.User
 	cursor, err := u.usercollection.Find(u.ctx, bson.D{})
 	if err != nil {
@@ -62,8 +62,8 @@ func (u *UserService) GetAll() ([]*models.User, error) {
 func (u *UserService) UpdateUser(user *models.User) error {
 	filter := bson.D{primitive.E{Key: "user_name", Value: user.Name}}
 	update := bson.D{primitive.E{Key: "$set", Value: bson.D{
-		primitive.E{Key: "name", Value: user.Name}, 
-		primitive.E{Key: "age", Value: user.Age}, 
+		primitive.E{Key: "name", Value: user.Name},
+		primitive.E{Key: "age", Value: user.Age},
 		primitive.E{Key: "address", Value: user.Address},
 	}}}
 

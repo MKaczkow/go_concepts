@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"web_app_bis/services"
 	"web_app_bis/models"
+	"web_app_bis/services"
 )
 
 type UserController struct {
@@ -43,8 +43,8 @@ func (uc *UserController) GetUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, user)
 }
 
-func (uc *UserController) GetAll(ctx *gin.Context) {
-	users, err := uc.UserService.GetAll()
+func (uc *UserController) GetAllUsers(ctx *gin.Context) {
+	users, err := uc.UserService.GetAllUsers()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return // Exit the function
@@ -80,7 +80,7 @@ func (uc *UserController) RegisterUserRoutes(rg *gin.RouterGroup) {
 	userroute := rg.Group("/users")
 	userroute.POST("/", uc.CreateUser)
 	userroute.GET("/:name", uc.GetUser)
-	userroute.GET("/", uc.GetAll)
+	userroute.GET("/", uc.GetAllUsers)
 	userroute.PUT("/:name", uc.UpdateUser)
 	userroute.DELETE("/:name", uc.DeleteUser)
 }

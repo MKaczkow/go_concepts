@@ -10,6 +10,8 @@
 
 ### I/O ops
 * `io.Reader` and `io.Writer` interfaces
+* `io.EOF` error, which is not true error
+
 
 ### Time
 
