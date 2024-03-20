@@ -22,10 +22,7 @@ jobs:
         go-version: '1.20'
 
     - name: Build
-      run: echo "Mock build successful"
-
-    - name: Test
-      run: echo "Mock test successful"
+      run: cd web_app_bis && go build 
 
   mock:
     runs-on: ubuntu-latest
