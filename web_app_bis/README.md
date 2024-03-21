@@ -1,7 +1,6 @@
 # Example web app bis
 
 ### Usage
-``  
 `go install`  
 `go build`  
 `go run main.go`  
