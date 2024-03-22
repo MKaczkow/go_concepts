@@ -96,3 +96,22 @@ out, err := json.Marshal(o)
 * method modyfying some value is defined to receive pointer to value
 
 ### HTTP
+* `http.Client` is used to make HTTP requests
+* `context is for kings`
+* `http.Server` and `http.Handler` 
+* `middleware pattern` is used to add some functionality to `http.Handler` (like logging, authentication, etc.)
+
+```go
+func TerribleSecurityProvider(password strng) func(http.Handler) http.Handler {
+    return func(h http.Handler) http.Handler {
+        return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+            if r.Header.Get("X-Secret-Password") != password {
+                w.WriteHeaer(http.StatusUnauthorized)
+                w.Write(securityMsg)
+                return
+            }
+            h.ServeHTTP(w, r)
+        })
+    }
+}
+```
