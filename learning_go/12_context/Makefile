@@ -13,9 +13,9 @@ vet: fmt
 .PHONY: vet
 
 build: vet
-	go build background_ctx.go
+	go build add_value_to_ctx.go
 .PHONY: build
 
 run: vet
-	go run background_ctx.go
+	go run add_value_to_ctx.go
 .PHONY: run

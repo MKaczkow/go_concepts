@@ -10,7 +10,7 @@ func logic(ctx context.Context, s string) (string, error) {
 	return s, nil
 }
 
-func main() {
+func bckp_main() {
 	ctx := context.Background()
 	result, err := logic(ctx, "a string")
 	if err != nil {
