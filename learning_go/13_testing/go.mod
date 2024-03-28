@@ -1,3 +1,3 @@
-module main
+module testmain
 
 go 1.18

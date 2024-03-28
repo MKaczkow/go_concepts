@@ -14,6 +14,7 @@ Directory for studying 'experiment', learning from papercover book "Język Go. T
 - [x] chapter 10 - concurrency in Go
 - [x] chapter 11 - standard library
 - [x] chapter 12 - context
-- [ ] chapter 13 - testing
+- [x] chapter 13 - testing
 - [ ] chapter 14 - in dragon's realm: reflection, packages unsafe and cgo
 - [ ] chapter 15 - look into the future: parametric types in Go 
+- [ ] wrap-up (best practices from google, etc.)
