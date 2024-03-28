@@ -50,3 +50,35 @@ repo for basic tutorial-based Golang study
 `func functionName(parameter1 type1, parameter2 type2, parameterN typeN) returnType {
 	   //function body
 }`
+
+### cool resources
+* `most important basics`
+	* [Go cheatsheet](https://devhints.io/go)
+	* [Google style guide for Golang](https://google.github.io/styleguide/go/)
+	* [language specification](https://go.dev/ref/spec)
+* `pointers, performance`
+	* [stacks and pointers in Go](https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-stacks-and-pointers.html)
+	* [pointers efficiency](https://segment.com/blog/allocation-efficiency-in-high-performance-go-services/)
+* `on type parameters`
+	* [Go 1.18 reease notes](https://tip.golang.org/doc/go1.18)
+	* [2013 rejected proposal](https://go.googlesource.com/proposal/+/master/design/15292/2013-12-type-params.md)
+	* [2021 accepted proposal](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md)
+	* [summary of discussion](https://docs.google.com/document/d/1vrAy9gMpMoS3uaVphB32uVXX4pi-HnNjkMEgyAHX4N4/view#heading=h.q325c8t1k569)
+* `frameworks`
+	* [top 5 frameworks geeksforgeeks](https://www.geeksforgeeks.org/top-5-golang-frameworks-in-2020/)
+	* [web frameworks medium](https://medium.com/@livajorge7/exploring-the-best-golang-web-frameworks-a-comprehensive-guide-to-building-web-applications-with-daa3ae52b15c)
+	* [another post on cool, best, can't miss frameworks](https://www.bacancytechnology.com/blog/golang-web-frameworks)
+* `gin`
+	* [gin framework blogpost](https://www.tabnine.com/blog/golang-gin/)
+	* [gin tutorial yt](https://www.youtube.com/playlist?list=PL3eAkoh7fypr8zrkiygiY1e9osoqjoV9w)
+	* [git tutorial yt](https://www.youtube.com/watch?v=vDIAwtGU9LE&ab_channel=DevProblems)
+	* [another gin tutorial yt](https://www.youtube.com/watch?v=LOn1GUsjOF4&ab_channel=DavidAlsh)
+	* [example REST API using gin](https://github.com/restuwahyu13/go-rest-api)
+	* [another example REST API using gin](https://github.com/gothinkster/golang-gin-realworld-example-app)
+* `misc`
+	* [blogpost on bulldogjob](https://bulldogjob.pl/readme/pisz-w-jezyku-go-jak-senior)
+	* [official docker image](https://hub.docker.com/_/golang)
+	* [Athens alternative package sever](https://docs.gomods.io/)
+	* [arxiv paper on usage of 'unsafe'](https://arxiv.org/pdf/2006.09973.pdf)
+	* [effective go](https://go.dev/doc/effective_go) 
+	* [A* implementation in Go](https://gist.github.com/egonelbre/10578266)
