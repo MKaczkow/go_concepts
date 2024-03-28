@@ -15,6 +15,6 @@ Directory for studying 'experiment', learning from papercover book "Język Go. T
 - [x] chapter 11 - standard library
 - [x] chapter 12 - context
 - [x] chapter 13 - testing
-- [ ] chapter 14 - in dragon's realm: reflection, packages unsafe and cgo
+- [x] chapter 14 - in dragon's realm: reflection, packages unsafe and cgo
 - [ ] chapter 15 - look into the future: parametric types in Go 
-- [ ] wrap-up (best practices from google, etc.)
+- [ ] wrap-up (best practices from google, cool resources, proposals, etc.)

@@ -5,6 +5,11 @@
 * `unsafe` -> when you need to bypass Go's type system
 * `cgo` -> when you need to call C code from Go
 
+### Integrations
+* `reflection` -> Go code | real world
+* `unsafe` -> Go code | OS or network
+* `cgo` -> Go code | C code
+
 ### Reflection
 * just use Python XD
 * `reflect` package
@@ -48,5 +53,11 @@
 > p = unsafe.Pointer(u + offset)
 > ```
 
+* can't really trust `uintptr` to point to the same memory location for longer than single instruction
+
 
 ### Cgo
+* magic 
+* because of garbage collection, you can pass pointer to some C code, but you can't be sure if it's still there
+* `cgo` is still pretty slow, the causes are explained in [this presentation](https://speakerdeck.com/filosottile/why-cgo-is-slow-at-capitalgo-2018)
+
