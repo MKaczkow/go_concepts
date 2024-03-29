@@ -10,4 +10,4 @@
     - `slow compilers`
     - `slow execution times`
 * you need type safety (checking on compile time)
-* go `operator overloading`
+* no `operator overloading`

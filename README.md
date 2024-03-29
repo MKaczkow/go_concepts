@@ -2,8 +2,8 @@
 repo for basic tutorial-based Golang study  
 
 ### todo
-- [ ] finish `book`
 - [ ] smth with `Hanoi tower`
+- [x] finish `book`
 - [x] fix `web_app_bis` (if no JSON is provided, some routes crash)
 - [x] init `book`
 - [x] clean `issues` section (for now)
