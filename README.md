@@ -3,6 +3,7 @@ repo for basic tutorial-based Golang study
 
 ### todo
 - [ ] smth with `Hanoi tower`
+- [ ] web crawler with `colly`
 - [x] finish `book`
 - [x] fix `web_app_bis` (if no JSON is provided, some routes crash)
 - [x] init `book`
@@ -75,6 +76,10 @@ repo for basic tutorial-based Golang study
 	* [another gin tutorial yt](https://www.youtube.com/watch?v=LOn1GUsjOF4&ab_channel=DavidAlsh)
 	* [example REST API using gin](https://github.com/restuwahyu13/go-rest-api)
 	* [another example REST API using gin](https://github.com/gothinkster/golang-gin-realworld-example-app)
+* `colly`
+	* [github examples](https://github.com/gocolly/colly/tree/master/_examples)
+	* [some tutorial](https://dev.to/claudbytes/build-a-web-scraper-with-go-3jod)
+	* [save data to csv after scrapping](https://webscraping.ai/faq/colly/how-do-i-save-the-scraped-data-to-a-file-using-colly)
 * `misc`
 	* [blogpost on bulldogjob](https://bulldogjob.pl/readme/pisz-w-jezyku-go-jak-senior)
 	* [official docker image](https://hub.docker.com/_/golang)
