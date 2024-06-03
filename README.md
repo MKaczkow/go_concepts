@@ -1,9 +1,9 @@
-# go_concepts
-repo for basic tutorial-based Golang study  
+# Go Concepts
+Repo for basic tutorial-based Golang study  
 
 ### todo
-- [ ] smth with `Hanoi tower`
 - [ ] web crawler with `colly`
+- [ ] smth with `Hanoi tower`
 - [x] finish `book`
 - [x] fix `web_app_bis` (if no JSON is provided, some routes crash)
 - [x] init `book`
