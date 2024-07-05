@@ -1,9 +1,12 @@
 # Go Concepts
 Repo for basic tutorial-based Golang study  
 
+---
+
 ### todo
 - [ ] web crawler with `colly`
 - [ ] smth with `Hanoi tower`
+- [ ] do `gilded rose` kata
 - [x] finish `book`
 - [x] fix `web_app_bis` (if no JSON is provided, some routes crash)
 - [x] init `book`
@@ -87,3 +90,6 @@ Repo for basic tutorial-based Golang study
 	* [arxiv paper on usage of 'unsafe'](https://arxiv.org/pdf/2006.09973.pdf)
 	* [effective go](https://go.dev/doc/effective_go) 
 	* [A* implementation in Go](https://gist.github.com/egonelbre/10578266)
+* `gilded rose`
+	* resources in respective [README](./gilded_rose/README.md)
+	
