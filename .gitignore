@@ -1,6 +1,9 @@
 # Data
 web_crawler/data.csv
 
+# Logs
+*.log
+
 # Binaries for programs and plugins
 *.exe
 *.exe~

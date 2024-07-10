@@ -4,7 +4,6 @@
 * number of ops to solve the tower of hanoi problem is `2^n - 1`, with `n` being the number of disks
 * the problem is solved `recursively` or `iteratively`
 * jeśli chcemy przemieścić wszystkie N krążków z A na C to najpierw trzeba przemieścić N-1 krążków na B
-* 
 
 ### resources
 * [Wikipedia](https://en.wikipedia.org/wiki/Tower_of_Hanoi)
