@@ -5,54 +5,97 @@ type Item struct {
 	SellIn, Quality int
 }
 
+const (
+	AgedBrie             = "Aged Brie"
+	Sulfuras             = "Sulfuras, Hand of Ragnaros"
+	BackstagePasses      = "Backstage passes to a TAFKAL80ETC concert"
+	Conjured             = "Conjured"
+	MaxQuality           = 50
+	LegendaryItemQuality = 80
+)
+
 func UpdateQuality(items []*Item) {
-	for i := 0; i < len(items); i++ {
-
-		if items[i].Name != "Aged Brie" && items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {
-			if items[i].Quality > 0 {
-				if items[i].Name != "Sulfuras, Hand of Ragnaros" {
-					items[i].Quality = items[i].Quality - 1
-				}
-			}
-		} else {
-			if items[i].Quality < 50 {
-				items[i].Quality = items[i].Quality + 1
-				if items[i].Name == "Backstage passes to a TAFKAL80ETC concert" {
-					if items[i].SellIn < 11 {
-						if items[i].Quality < 50 {
-							items[i].Quality = items[i].Quality + 1
-						}
-					}
-					if items[i].SellIn < 6 {
-						if items[i].Quality < 50 {
-							items[i].Quality = items[i].Quality + 1
-						}
-					}
-				}
-			}
+	for _, item := range items {
+		switch item.Name {
+		case AgedBrie:
+			updateAgedBrie(item)
+		case Sulfuras:
+			// Legendary item, no need to update quality or sell-in
+			continue
+		case BackstagePasses:
+			updateBackstagePasses(item)
+		case Conjured:
+			updateConjured(item)
+		default:
+			updateNormalItem(item)
 		}
 
-		if items[i].Name != "Sulfuras, Hand of Ragnaros" {
-			items[i].SellIn = items[i].SellIn - 1
+		// Ensure quality is within bounds
+		if item.Quality > MaxQuality {
+			item.Quality = MaxQuality
+		} else if item.Quality < 0 {
+			item.Quality = 0
 		}
 
-		if items[i].SellIn < 0 {
-			if items[i].Name != "Aged Brie" {
-				if items[i].Name != "Backstage passes to a TAFKAL80ETC concert" {
-					if items[i].Quality > 0 {
-						if items[i].Name != "Sulfuras, Hand of Ragnaros" {
-							items[i].Quality = items[i].Quality - 1
-						}
-					}
-				} else {
-					items[i].Quality = items[i].Quality - items[i].Quality
-				}
-			} else {
-				if items[i].Quality < 50 {
-					items[i].Quality = items[i].Quality + 1
-				}
+		// Decrease sell-in for all items except legendary ones
+		if item.Name != Sulfuras {
+			item.SellIn--
+		}
+
+		// Adjust quality when sell-in date has passed
+		if item.SellIn < 0 {
+			handleExpiredItem(item)
+		}
+	}
+}
+
+func updateAgedBrie(item *Item) {
+	if item.Quality < MaxQuality {
+		item.Quality++
+	}
+}
+
+func updateBackstagePasses(item *Item) {
+	if item.Quality < MaxQuality {
+		item.Quality++
+		if item.SellIn < 11 {
+			if item.Quality < MaxQuality {
+				item.Quality++
+			}
+		}
+		if item.SellIn < 6 {
+			if item.Quality < MaxQuality {
+				item.Quality++
 			}
 		}
 	}
+	if item.SellIn < 0 {
+		item.Quality = 0
+	}
+}
 
+func updateConjured(item *Item) {
+	if item.Quality > 0 {
+		item.Quality -= 2
+	}
+}
+
+func updateNormalItem(item *Item) {
+	if item.Quality > 0 {
+		item.Quality--
+		if item.SellIn < 0 {
+			item.Quality--
+		}
+	}
+}
+
+func handleExpiredItem(item *Item) {
+	switch item.Name {
+	case AgedBrie:
+		updateAgedBrie(item)
+	case BackstagePasses:
+		item.Quality = 0
+	default:
+		updateNormalItem(item)
+	}
 }

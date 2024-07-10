@@ -5,8 +5,8 @@ Repo for basic tutorial-based Golang study
 
 ### todo
 - [ ] web crawler with `colly`
-- [ ] smth with `Hanoi tower`
 - [ ] do `gilded rose` kata
+- [x] smth with `Hanoi tower`
 - [x] finish `book`
 - [x] fix `web_app_bis` (if no JSON is provided, some routes crash)
 - [x] init `book`
