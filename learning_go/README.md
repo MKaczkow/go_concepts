@@ -1,3 +1,8 @@
+# Go Concepts
+Repo for basic tutorial-based Golang study  
+
+---
+
 # learning_go
 Directory for studying 'experiment', learning from papercover book "Język Go. Tworzenie idiomatycznego kodu w praktyce" (Jon Bodner) - [github link with examples](https://github.com/learning-go-book), most of the code is run in Go Playground.
 

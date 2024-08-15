@@ -1,3 +1,8 @@
+# Go Concepts
+Repo for basic tutorial-based Golang study  
+
+---
+
 # hanoi_tower
 
 ### intro

@@ -4,6 +4,10 @@ Repo for basic tutorial-based Golang study
 ---
 
 ### todo
+- [ ] monkey
+	- [ ] interpreter
+	- [ ] compiler
+	- [ ] macros
 - [ ] web crawler with `colly`
 - [ ] do `gilded rose` kata
 - [x] smth with `Hanoi tower`
