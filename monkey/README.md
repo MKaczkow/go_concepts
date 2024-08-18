@@ -24,5 +24,10 @@ Repo for basic tutorial-based Golang study
 * source code -> tokens
 * call `NextToken()` until finished (EOF??)
 
+### repl
+* `REPL` - `Read-Eval-Print Loop`
+* sometimes - 'console', 'interactive mode', etc.
+
+
 ### further (possible) exercises
 - [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
