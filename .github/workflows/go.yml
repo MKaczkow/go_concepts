@@ -1,6 +1,3 @@
-# This workflow will build a golang project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
-
 name: Go
 
 on:
@@ -10,9 +7,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-  build:
+  test:
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v3
 
@@ -21,19 +18,18 @@ jobs:
       with:
         go-version: '1.20'
 
-    - name: Build
-      run: echo "Mock build successful"
+    - name: Run tests in 'learning_go/13_testing'
+      run: |
+        cd learning_go/13_testing
+        go test ./...
 
-    - name: Test
-      run: echo "Mock test successful"
-
-  mock:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: '1.20'
-
-    - name: Mock
-      run: echo "Mocking successful"
+    - name: Run tests in 'monkey/interpreter'
+      run: |
+        cd monkey/interpreter
+        go test ./...
+    
+    - name: Run tests in 'web_app_bis'
+      run: |
+        cd web_app_bis
+        go test ./...
+    
