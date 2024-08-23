@@ -38,7 +38,18 @@ let x = 5;
 ```  
 is represented as:  
 ![monkey-let-ast](./img/monkey-interpreter-01.png)
-
+* `expression parsing` is likely the most complicated
+* nearly all parser share *assertions functions*, which are used to enforce correct order of tokens, so that they make sense, e.g.
+```go
+func (p *Parser) expectPeek(t token.TokenType) bool {
+	if p.peekTokenIs(t) {
+		p.nextToken()
+		return true
+	} else {
+		return false
+	}
+}
+```
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
 * sometimes - 'console', 'interactive mode', etc.
