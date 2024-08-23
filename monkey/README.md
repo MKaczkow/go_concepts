@@ -24,10 +24,24 @@ Repo for basic tutorial-based Golang study
 * source code -> tokens
 * call `NextToken()` until finished (EOF??)
 
+### parser
+* produces `AST` (Abstract Syntax Tree)
+* it's *abstract* because not all characters from source code go into the tree
+* `CFG` (Context Free Grammar) -> set of rules which describes how to form a correct sentence in given language
+* `BNF` (Backus-Naur Form) and `EBNF` (Extended Backus-Naur Form) are notations to represent CFG
+* you can generate parser automatically, using definitions above
+* `top-down` parsing or `bottom-up` parsing strategies exist, the one written in this exercise will be `top down operator precedence` or `Pratt parser`
+* `expression` (produces value) != `statement` (doesn't produce value)
+* for example (very basic) this piece of code:  
+```monkey
+let x = 5;
+```  
+is represented as:  
+![monkey-let-ast](./img/monkey-interpreter-01.png)
+
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
 * sometimes - 'console', 'interactive mode', etc.
-
 
 ### further (possible) exercises
 - [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
