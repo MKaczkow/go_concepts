@@ -49,7 +49,15 @@ func (p *Parser) expectPeek(t token.TokenType) bool {
 		return false
 	}
 }
-```
+```  
+* in `monkey` there are only 2 statements: `let` and `return`
+* ... but much more expressions
+	- `prefix` (e.g. `-5`)
+	- `infix` (e.g. `5 + 5`)
+	- `postfix` (e.g. `5++`)
+	- `call expression` (e.g. `add(1, 2)`)
+	- ... 
+
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
 * sometimes - 'console', 'interactive mode', etc.
