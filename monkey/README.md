@@ -57,6 +57,7 @@ func (p *Parser) expectPeek(t token.TokenType) bool {
 	- `postfix` (e.g. `5++`)
 	- `call expression` (e.g. `add(1, 2)`)
 	- ... 
+* `parseExpression` method is recursive, because expressions can be nested, which is the clou of the whole parser idea (*recursive descent parser*)
 
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
