@@ -58,6 +58,20 @@ func (p *Parser) expectPeek(t token.TokenType) bool {
 	- `call expression` (e.g. `add(1, 2)`)
 	- ... 
 * `parseExpression` method is recursive, because expressions can be nested, which is the clou of the whole parser idea (*recursive descent parser*)
+* `Top Down Operator Precedence` by V.Pratt [link](https://tdop.github.io/), but with differences:
+	* `nuds` (null denotation) -> `prefixParseFns`
+	* `leds` (left denotation) -> `infixParseFns`
+* challenge is, to nest the nodes in AST correctly, so that 
+```math
+1 + 2 + 3
+```  
+which *mathematically* is
+```math
+((1 + 2) + 3)
+```  
+is represented as: 
+![monkey-math-ast](./img/monkey-interpreter-02.png)  
+
 
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
