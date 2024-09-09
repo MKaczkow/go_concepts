@@ -69,9 +69,9 @@ which *mathematically* is
 ```math
 ((1 + 2) + 3)
 ```  
-is represented as: 
+is represented as:   
 ![monkey-math-ast](./img/monkey-interpreter-02.png)  
-
+* the higher the precedence, the deeper in the tree the node ends up
 
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
