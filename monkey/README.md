@@ -73,9 +73,20 @@ is represented as:
 ![monkey-math-ast](./img/monkey-interpreter-02.png)  
 * the higher the precedence, the deeper in the tree the node ends up
 
+### evaluator
+* `evaluator` is the part of the interpreter which takes the `AST` and produces the output
+* we use `tree-walking interpreter`, which just traverses the tree and evaluates the nodes on the flight
+* ... so, we don't use `bytecode` as an `intermediate representation (IR)`
+* bytecode is neither native `machine code` nor `assembly language code`
+* ... it' instead interpreted by `virtual machine`, which is a part of the interpreter in this case
+* `JIT (Just-In-Time)` compiler is a hybrid of `interpreter` and `compiler`, i.e. it receives `bytecode` in virtual machine, which then compiles it to machine code, but only when needed (on the fly), hence the name
+* `native types` vs `pointer` as objects representation - design choice
+* `self-evaluating expressions` are those which evaluate to themselves, e.g. `5` or `true`, thus being the easiest to implement
+
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
 * sometimes - 'console', 'interactive mode', etc.
 
 ### further (possible) exercises
 - [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
+- [ ] read through Wren language [code](https://github.com/wren-lang/wren)
