@@ -1,8 +1,8 @@
 # Go Concepts
-![Coverage](https://img.shields.io/badge/Coverage-71.4%25-brightgreen)
 Repo for basic tutorial-based Golang study  
 
-[![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monke-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monke-interpreter-ci.yml)
+[![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml)
+![Coverage](https://img.shields.io/badge/Coverage-71.4%25-brightgreen)
 
 ---
 
