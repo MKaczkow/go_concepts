@@ -7,6 +7,7 @@ Repo for basic tutorial-based Golang study
 ... programming language
 
 ### run
+* run REPL -> `go run main.go`
 * test module -> `go test ./interpreter/lexer`
 
 ### basics
@@ -82,6 +83,7 @@ is represented as:
 * `JIT (Just-In-Time)` compiler is a hybrid of `interpreter` and `compiler`, i.e. it receives `bytecode` in virtual machine, which then compiles it to machine code, but only when needed (on the fly), hence the name
 * `native types` vs `pointer` as objects representation - design choice
 * `self-evaluating expressions` are those which evaluate to themselves, e.g. `5` or `true`, thus being the easiest to implement
+* lots of expression in monkey are treated as `prefix expressions`, because they are the easiest to evaluate
 
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
@@ -90,3 +92,4 @@ is represented as:
 ### further (possible) exercises
 - [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
 - [ ] read through Wren language [code](https://github.com/wren-lang/wren)
+- [ ] CI for monkey interpreter

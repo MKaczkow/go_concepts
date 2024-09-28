@@ -1,6 +1,8 @@
 # Go Concepts
 Repo for basic tutorial-based Golang study  
 
+[![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monke-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monke-interpreter-ci.yml)
+
 ---
 
 ### todo
