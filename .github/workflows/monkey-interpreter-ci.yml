@@ -22,24 +22,30 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          cd monkey/interpreter  # Navigate to the project directory
+          cd monkey/interpreter
           go test -v -coverprofile=coverage.out ./...
           go tool cover -func=coverage.out
 
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v3
-        with:
-          name: coverage-report
-          path: monkey/interpreter/coverage.out
+      - name: Coverage Badge
+        uses: tj-actions/coverage-badge-py@v2
 
-      - name: Generate coverage badge
-        uses: tj-actions/coverage-badge-go@v2
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v16
+        id: verify-changed-files
         with:
-          files: ./monkey/interpreter/coverage.svg
+          files: coverage.svg
 
-      - name: Upload coverage badge
-        uses: actions/upload-artifact@v3
+      - name: Commit files
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add coverage.svg
+          git commit -m "CI[bot]: Updated coverage.svg"
+
+      - name: Push changes
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        uses: ad-m/github-push-action@master
         with:
-          name: coverage-badge
-          path: ./monkey/interpreter/coverage.svg
-    
+          github_token: ${{ secrets.github_token }}
+          branch: ${{ github.ref }}
