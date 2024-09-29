@@ -97,6 +97,14 @@ func evalInfixExpression(
 	switch {
 	case left.Type() == object.INTEGER_OBJ && right.Type() == object.INTEGER_OBJ:
 		return evalIntegerInfixExpression(operator, left, right)
+	// cases "==" and "!=" are compared like this, because there is only single instance of TURE and FALSE
+	// so we can compare them directly (checking for identity)
+	// this assumption does not hold for other types, because creating integer object allocates new memory
+	// so we need to compare their values (otherwise 5 == 5 would yield false)
+	case operator == "==":
+		return nativeBooltoBooleanObject(left == right)
+	case operator == "!=":
+		return nativeBooltoBooleanObject(left != right)
 	default:
 		return NULL
 	}
@@ -118,6 +126,14 @@ func evalIntegerInfixExpression(
 		return &object.Integer{Value: leftVal * rightVal}
 	case "/":
 		return &object.Integer{Value: leftVal / rightVal}
+	case "<":
+		return nativeBooltoBooleanObject(leftVal < rightVal)
+	case ">":
+		return nativeBooltoBooleanObject(leftVal > rightVal)
+	case "==":
+		return nativeBooltoBooleanObject(leftVal == rightVal)
+	case "!=":
+		return nativeBooltoBooleanObject(leftVal != rightVal)
 	default:
 		return NULL
 	}
