@@ -2,7 +2,9 @@
 Repo for basic tutorial-based Golang study  
 
 [![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml)
-![Coverage](https://img.shields.io/badge/Coverage-71.4%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-71.4%25-brightgreen)  
+[![Learning Go Testing CI](https://github.com/MKaczkow/go_concepts/actions/workflows/learning-go-testing-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/learning-go-testing-ci.yml)  
+[![Web App Bis CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml)
 
 ---
 

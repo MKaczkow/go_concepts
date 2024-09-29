@@ -1,4 +1,4 @@
-name: Go
+name: Learning Go Testing CI
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
 
     steps:
