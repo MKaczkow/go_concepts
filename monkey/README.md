@@ -84,6 +84,7 @@ is represented as:
 * `native types` vs `pointer` as objects representation - design choice
 * `self-evaluating expressions` are those which evaluate to themselves, e.g. `5` or `true`, thus being the easiest to implement
 * lots of expression in monkey are treated as `prefix expressions`, because they are the easiest to evaluate
+* conditionals are built, so that branch is evaluated when expression is `truthy`, which means not null and not false
 
 ### repl
 * `REPL` - `Read-Eval-Print Loop`

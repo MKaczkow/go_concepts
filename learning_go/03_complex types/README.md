@@ -20,6 +20,25 @@ x := make([]int, 3)
 ```go
 var x []int
 ```
+* ... also, `make` could be used to create dinamic slices (e.g. when you don't know the length of the slice)
+```go
+x := make([]int, 0, 5)
+x = append(x, 1, 2, 3, 4)
+```
+* use `%v` to print slices
+```go
+fmt.Printf("%v\n", x)
+```
+* `...` (variadic operator) is used to unpack a slice into a variadic function
+```go
+for i := 0; i < currentLength; i++ {
+	newSubset := append([]int{}, result[i]...)
+	fmt.Printf("newSubset: %v\n", newSubset)   // %v -> printing slices
+	newSubset = append(newSubset, num)
+	fmt.Printf("newSubset: %v\n", newSubset)   // %v -> printing slices
+	result = append(result, newSubset)
+}
+```
 
 ### Slice expressions
 * don't create a new slice, just a reference to the original slice

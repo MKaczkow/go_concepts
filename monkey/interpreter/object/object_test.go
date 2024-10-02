@@ -36,3 +36,14 @@ func TestNullInspect(t *testing.T) {
 		t.Errorf("Type() = %s; want NULL_OBJ", null.Type())
 	}
 }
+
+func TestReturnValueInspect(t *testing.T) {
+	rv := &ReturnValue{Value: &Integer{Value: 123}}
+	if rv.Inspect() != "123" {
+		t.Errorf("Inspect() = %s; want 123", rv.Inspect())
+	}
+
+	if rv.Type() != RETURN_VALUE_OBJ {
+		t.Errorf("Type() = %s; want RETURN_VALUE_OBJ", rv.Type())
+	}
+}
