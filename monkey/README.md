@@ -85,6 +85,7 @@ is represented as:
 * `self-evaluating expressions` are those which evaluate to themselves, e.g. `5` or `true`, thus being the easiest to implement
 * lots of expression in monkey are treated as `prefix expressions`, because they are the easiest to evaluate
 * conditionals are built, so that branch is evaluated when expression is `truthy`, which means not null and not false
+* implementing internal error-handling is kinda similar to handling return statements, in the sense, that they both stop further evaluation
 
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
@@ -93,4 +94,4 @@ is represented as:
 ### further (possible) exercises
 - [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
 - [ ] read through Wren language [code](https://github.com/wren-lang/wren)
-- [ ] CI for monkey interpreter
+- [x] CI for monkey interpreter

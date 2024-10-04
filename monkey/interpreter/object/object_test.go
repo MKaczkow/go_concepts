@@ -47,3 +47,14 @@ func TestReturnValueInspect(t *testing.T) {
 		t.Errorf("Type() = %s; want RETURN_VALUE_OBJ", rv.Type())
 	}
 }
+
+func TestErrorInspect(t *testing.T) {
+	err := &Error{Message: "error message"}
+	if err.Inspect() != "ERROR: error message" {
+		t.Errorf("Inspect() = %s; want ERROR: error message", err.Inspect())
+	}
+
+	if err.Type() != ERROR_OBJ {
+		t.Errorf("Type() = %s; want ERROR_OBJ", err.Type())
+	}
+}
