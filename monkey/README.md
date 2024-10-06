@@ -86,6 +86,7 @@ is represented as:
 * lots of expression in monkey are treated as `prefix expressions`, because they are the easiest to evaluate
 * conditionals are built, so that branch is evaluated when expression is `truthy`, which means not null and not false
 * implementing internal error-handling is kinda similar to handling return statements, in the sense, that they both stop further evaluation
+* `environment` is used to keep track of values of variables, which are stored in `hash map`
 
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
