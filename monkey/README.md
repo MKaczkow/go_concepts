@@ -88,6 +88,7 @@ is represented as:
 * implementing internal error-handling is kinda similar to handling return statements, in the sense, that they both stop further evaluation
 * `environment` is used to keep track of values of variables, which are stored in `hash map`
 * function also carry their own `environment`, which allows using `closures`
+* extendint `environment` is done by creating new `environment` with reference to the old one (weird, but alows each `function` to have its own `scope`)
 
 ### repl
 * `REPL` - `Read-Eval-Print Loop`
