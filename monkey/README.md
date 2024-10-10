@@ -94,7 +94,17 @@ is represented as:
 * `REPL` - `Read-Eval-Print Loop`
 * sometimes - 'console', 'interactive mode', etc.
 
+### compiler
+* goal is turning `source code` into `bytecode` and then use VM to execute it
+
 ### further (possible) exercises
-- [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
-- [ ] read through Wren language [code](https://github.com/wren-lang/wren)
-- [x] CI for monkey interpreter
+- [ ] interpreter
+	- [x] CI for monkey interpreter
+	- [ ] 'talk-me-through' for monkey interpreter chapter 3
+	- [ ] chapter 4
+- [ ] compiler
+	- [ ] chapter 1
+	- [ ] CI for monkey compiler
+- [ ] misc [ ] 
+	- [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
+	- [ ] read through Wren language [code](https://github.com/wren-lang/wren)
