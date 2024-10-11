@@ -6,9 +6,24 @@ Repo for basic tutorial-based Golang study
 # monkey
 ... programming language
 
-### run
+## run
 * run REPL -> `go run main.go`
 * test module -> `go test ./interpreter/lexer`
+
+## adding new type checklist
+* [ ] add new token type (in `token/token.go`) to convert stream of characters into stream of tokens
+	* [ ] define token type 
+	* [ ] add branch in `NextToken()` function, calling new function 
+	* [ ] add function to actually convert characters into tokens of given type
+* [ ] add parsing logic to convert stream of tokens into AST (Abstract Syntax Tree)
+	* [ ] define node (in `ast/ast.go`)
+	* [ ] register prefix or infix parsing function (in `parser/parser.go`, function `New()`)
+	* [ ] add parsing logic as separate function(in `parser/parser.go`)
+* [ ] add evaluation logic to convert AST into output
+	* [ ] define new type object (in `object/object.go`)
+	* [ ] add evaluation logic (in `evaluator/evaluator.go`, function `Eval()`)
+
+## notes
 
 ### basics
 * `compiler` -> parses source code and produces something (output in machine language)
