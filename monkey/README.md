@@ -109,6 +109,9 @@ is represented as:
 * `REPL` - `Read-Eval-Print Loop`
 * sometimes - 'console', 'interactive mode', etc.
 
+### built-in functions
+* design choice - should they be evalueated in top-level environment or in their own environment? (`object.Environment`)
+
 ### compiler
 * goal is turning `source code` into `bytecode` and then use VM to execute it
 
