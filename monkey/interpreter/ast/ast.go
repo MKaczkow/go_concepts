@@ -234,6 +234,28 @@ func (al *ArrayLiteral) String() string {
 	return out.String()
 }
 
+type IndexExpression struct {
+	Token token.Token // "[" token
+	Left  Expression
+	Index Expression
+	// syntactically both Left and Index are *just* expressions
+	// but semantically Index expression should produce an integer
+}
+
+func (ie *IndexExpression) expressionNode()      {}
+func (ie *IndexExpression) TokenLiteral() string { return ie.Token.Literal }
+func (ie *IndexExpression) String() string {
+	var out bytes.Buffer
+
+	out.WriteString("(")
+	out.WriteString(ie.Left.String())
+	out.WriteString("[")
+	out.WriteString(ie.Index.String())
+	out.WriteString("]")
+
+	return out.String()
+}
+
 type BlockStatement struct {
 	Token      token.Token
 	Statements []Statement

@@ -111,6 +111,7 @@ is represented as:
 
 ### built-in functions
 * design choice - should they be evalueated in top-level environment or in their own environment? (`object.Environment`)
+* `index operator` is treated like infix operator, with `someArray` as left operand and `index` as right operand, e.g. `myArray[0]` means `myArray` is left operand and `0` is right operand
 
 ### compiler
 * goal is turning `source code` into `bytecode` and then use VM to execute it
@@ -120,6 +121,7 @@ is represented as:
 	- [x] CI for monkey interpreter
 	- [ ] 'talk-me-through' for monkey interpreter chapter 3
 	- [ ] chapter 4
+	- [ ] find and fix bug in precedence parsing (or tests)
 - [ ] compiler
 	- [ ] chapter 1
 	- [ ] CI for monkey compiler

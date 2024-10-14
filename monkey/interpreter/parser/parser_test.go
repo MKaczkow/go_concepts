@@ -247,6 +247,13 @@ func TestOperatorPrecedenceParsing(t *testing.T) {
 	// FAIL
 	//
 	// temporarily fixed, but this is a #TODO: find out why this was happening
+	//
+	// (2024-10-14)
+	// another failures, something is likely wrong with precedence
+	// --- FAIL: TestOperatorPrecedenceParsing (0.00s)
+	// parser_test.go:372: expected="((a * ([1, 2, 3, 4][(b * c)])) * d)", got="((a * ([1, 2, 3, 4][(b * c)]) * d)"
+	// parser_test.go:372: expected="add((a * (b[2])), (b[1]), (2 * ([1, 2][1])))", got="add((a * (b[2]), (b[1], (2 * ([1, 2][1])) "
+	// FAIL
 	tests := []struct {
 		input    string
 		expected string
@@ -350,6 +357,14 @@ func TestOperatorPrecedenceParsing(t *testing.T) {
 		{
 			"add(a + b + c * d / f + g)",
 			"add((((a + b) + ((c * d) / f)) + g)) ",
+		},
+		{
+			"a * [1, 2, 3, 4][b * c] * d",
+			"((a * ([1, 2, 3, 4][(b * c)])) * d)",
+		},
+		{
+			"add(a * b[2], b[1], 2 * [1, 2][1])",
+			"add((a * (b[2])), (b[1]), (2 * ([1, 2][1])))",
 		},
 	}
 
@@ -528,6 +543,25 @@ func TestParsingArrayLiterals(t *testing.T) {
 	testIntegerLiteral(t, array.Elements[0], 1)
 	testInfixExpression(t, array.Elements[1], 2, "*", 2)
 	testInfixExpression(t, array.Elements[2], 3, "+", 3)
+}
+
+func TestParsingIndexExpressions(t *testing.T) {
+	input := "myArray[1 + 1]"
+	l := lexer.New(input)
+	p := New(l)
+	program := p.ParseProgram()
+	checkParserErrors(t, p)
+	stmt, ok := program.Statements[0].(*ast.ExpressionStatement)
+	indexExp, ok := stmt.Expression.(*ast.IndexExpression)
+	if !ok {
+		t.Fatalf("exp not *ast.IndexExpression. got=%T", stmt.Expression)
+	}
+	if !testIdentifier(t, indexExp.Left, "myArray") {
+		return
+	}
+	if !testInfixExpression(t, indexExp.Index, 1, "+", 1) {
+		return
+	}
 }
 
 func TestFunctionLiteralParsing(t *testing.T) {
