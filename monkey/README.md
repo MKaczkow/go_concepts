@@ -122,6 +122,7 @@ is represented as:
 	- [ ] 'talk-me-through' for monkey interpreter chapter 3
 	- [ ] chapter 4
 	- [ ] find and fix bug in precedence parsing (or tests)
+	- [ ] check for tests (are they complete?) in array built-in functions
 - [ ] compiler
 	- [ ] chapter 1
 	- [ ] CI for monkey compiler
