@@ -66,9 +66,12 @@ func New(l *lexer.Lexer) *Parser {
 	p.registerPrefix(token.FALSE, p.parseBoolean)
 	p.registerPrefix(token.LPAREN, p.parseGroupedExpression)
 	p.registerPrefix(token.IF, p.parseIfExpression)
-	p.registerPrefix(token.FUNCTION, p.parseFuncionLiteral)
+	p.registerPrefix(token.FUNCTION, p.parseFunctionLiteral)
 	p.registerPrefix(token.STRING, p.parseStringLiteral)
+	// arrays and hashes are treated similarly - opening '[' or '{'
+	// is parsed as "prefix" to expression and then the rest is parsed
 	p.registerPrefix(token.LBRACKET, p.parseArrayLiteral)
+	p.registerPrefix(token.LBRACE, p.parseHashLiteral)
 
 	// Deal with infix expressions
 	p.infixParseFns = make(map[token.TokenType]infixParseFn)
@@ -343,14 +346,14 @@ func (p *Parser) parseStringLiteral() ast.Expression { // string is expression, 
 	return &ast.StringLiteral{Token: p.curToken, Value: p.curToken.Literal}
 }
 
-func (p *Parser) parseFuncionLiteral() ast.Expression {
+func (p *Parser) parseFunctionLiteral() ast.Expression {
 	lit := &ast.FunctionLiteral{Token: p.curToken}
 
 	if !p.expectPeek(token.LPAREN) {
 		return nil
 	}
 
-	lit.Parameters = p.parseFuncionParameters()
+	lit.Parameters = p.parseFunctionParameters()
 
 	if !p.expectPeek(token.LBRACE) {
 		return nil
@@ -385,7 +388,7 @@ func (p *Parser) parseExpressionList(end token.TokenType) []ast.Expression {
 	return list
 }
 
-func (p *Parser) parseFuncionParameters() []*ast.Identifier {
+func (p *Parser) parseFunctionParameters() []*ast.Identifier {
 	identifiers := []*ast.Identifier{}
 
 	if p.peekTokenIs(token.RPAREN) {
@@ -411,6 +414,37 @@ func (p *Parser) parseFuncionParameters() []*ast.Identifier {
 	}
 
 	return identifiers
+}
+
+func (p *Parser) parseHashLiteral() ast.Expression {
+	hash := &ast.HashLiteral{Token: p.curToken}
+	hash.Pairs = make(map[ast.Expression]ast.Expression)
+
+	for !p.peekTokenIs(token.RBRACE) {
+		p.nextToken() // first element from pair - "key"
+		key := p.parseExpression(LOWEST)
+
+		if !p.expectPeek(token.COLON) {
+			return nil
+		}
+
+		p.nextToken() // second element from pair - "value"
+		value := p.parseExpression(LOWEST)
+
+		hash.Pairs[key] = value
+
+		// next token should be either a comma or a closing brace
+		// or the hash is malformed
+		if !p.peekTokenIs(token.RBRACE) && !p.expectPeek(token.COMMA) {
+			return nil
+		}
+	}
+
+	if !p.expectPeek(token.RBRACE) {
+		return nil
+	}
+
+	return hash
 }
 
 func (p *Parser) parseCallExpression(function ast.Expression) ast.Expression {

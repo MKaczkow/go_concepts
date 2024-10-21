@@ -13,7 +13,7 @@ Repo for basic tutorial-based Golang study
 ## adding new type checklist
 * [ ] add new token type (in `token/token.go`) to convert stream of characters into stream of tokens
 	* [ ] define token type 
-	* [ ] add branch in `NextToken()` function, calling new function 
+	* [ ] add branch in `NextToken()` (in `lexer/lexer.go`) function, calling new function 
 	* [ ] add function to actually convert characters into tokens of given type
 * [ ] add parsing logic to convert stream of tokens into AST (Abstract Syntax Tree)
 	* [ ] define node (in `ast/ast.go`)

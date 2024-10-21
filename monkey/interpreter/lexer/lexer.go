@@ -68,6 +68,12 @@ func (l *Lexer) NextToken() token.Token {
 		tok = newToken(token.LBRACKET, l.ch)
 	case ']':
 		tok = newToken(token.RBRACKET, l.ch)
+		// remember that this character: ' is different
+		// from this character: " in Go
+		// ' means a single character (rune)
+		// " means a string
+	case ':':
+		tok = newToken(token.COLON, l.ch)
 	case 0:
 		tok.Literal = ""
 		tok.Type = token.EOF
