@@ -62,9 +62,27 @@ Repo for basic tutorial-based Golang study
 
 ### notes
 * golang function syntax:  
-`func functionName(parameter1 type1, parameter2 type2, parameterN typeN) returnType {
+```go
+func functionName(parameter1 type1, parameter2 type2, parameterN typeN) returnType {
 	   //function body
-}`
+}
+```
+* golang comparision of objects also takes into account the actual data location in memory, so two objects with the same values, but different memory locations are not equal (example from *Writing an Interpreter in Go*):
+```go
+name1 := &object.String{Value: "name"}
+monkey := &object.String{Value: "Monkey"}
+pairs := map[object.Object]object.Object{}
+
+pairs[name1] = monkey
+fmt.Printf("pairs[name1]=%+v\n", pairs[name1])
+// => pairs[name1]=&{Value:Monkey}
+
+name2 := &object.String{Value: "name"}
+fmt.Printf("pairs[name2]=%+v\n", pairs[name2])
+// => pairs[name2]=<nil>
+fmt.Printf("(name1 == name2)=%t\n", name1 == name2)
+// => (name1 == name2)=false
+```
 
 ### cool resources
 * `most important basics`

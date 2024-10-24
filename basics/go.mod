@@ -1,3 +1,3 @@
-module basics
+module main
 
 go 1.17

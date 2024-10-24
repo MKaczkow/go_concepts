@@ -1,4 +1,4 @@
-package main
+package basics
 
 import "fmt"
 
@@ -7,10 +7,9 @@ func main() {
 	// BASIC DEMO
 
 	var a int = 42
-	var b *int = &a   // b is a pointer of type int, which points to a
+	var b *int = &a // b is a pointer of type int, which points to a
 	fmt.Println(a, b)
-	fmt.Println(&a, *b)   // & is referencing ("addres of") operator, * is dereferencing operator
-
+	fmt.Println(&a, *b) // & is referencing ("addres of") operator, * is dereferencing operator
 
 	// POINTERS ARITHMETIC
 	// a właściwie po prostu:

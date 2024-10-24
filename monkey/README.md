@@ -112,17 +112,20 @@ is represented as:
 ### built-in functions
 * design choice - should they be evalueated in top-level environment or in their own environment? (`object.Environment`)
 * `index operator` is treated like infix operator, with `someArray` as left operand and `index` as right operand, e.g. `myArray[0]` means `myArray` is left operand and `0` is right operand
+* problem with hashes keys (being treated as distinct objects) is solved in `HashKey()` method, which also preserves `O(n)` complexity and insted keeps `O(1)` complexity for accessing hash keys
+* any object implementing `Hashable` interface can be used as a key in a hash map
 
 ### compiler
 * goal is turning `source code` into `bytecode` and then use VM to execute it
 
 ### further (possible) exercises
 - [ ] interpreter
-	- [x] CI for monkey interpreter
 	- [ ] 'talk-me-through' for monkey interpreter chapter 3
-	- [ ] chapter 4
+	- [ ] 'talk-me-through' for monkey interpreter chapter 4
 	- [ ] find and fix bug in precedence parsing (or tests)
 	- [ ] check for tests (are they complete?) in array built-in functions
+	- [ ] chapter 4
+	- [x] CI for monkey interpreter
 - [ ] compiler
 	- [ ] chapter 1
 	- [ ] CI for monkey compiler
