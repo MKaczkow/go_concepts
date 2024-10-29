@@ -251,7 +251,7 @@ func (ie *IndexExpression) String() string {
 	out.WriteString(ie.Left.String())
 	out.WriteString("[")
 	out.WriteString(ie.Index.String())
-	out.WriteString("]")
+	out.WriteString("])")
 
 	return out.String()
 }
@@ -292,7 +292,7 @@ func (fl *FunctionLiteral) String() string {
 	out.WriteString(fl.TokenLiteral())
 	out.WriteString("(")
 	out.WriteString(strings.Join(params, ", "))
-	out.WriteString(") ")
+	out.WriteString(")")
 	out.WriteString(fl.Body.String())
 
 	return out.String()
@@ -317,7 +317,7 @@ func (ce *CallExpression) String() string {
 	out.WriteString(ce.Function.String())
 	out.WriteString("(")
 	out.WriteString(strings.Join(args, ", "))
-	out.WriteString(") ")
+	out.WriteString(")")
 
 	return out.String()
 }

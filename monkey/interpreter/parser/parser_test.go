@@ -237,23 +237,6 @@ func TestParsingInfixExpressions(t *testing.T) {
 }
 
 func TestOperatorPrecedenceParsing(t *testing.T) {
-	// (2024-09-13)
-	// added some " " (space) at the end of some cases, as tests kept failing with this weird:
-	//
-	// --- FAIL: TestOperatorPrecedenceParsing (0.00s)
-	// parser_test.go:356: expected="((a + add((b * c))) + d)", got="((a + add((b * c)) ) + d)"
-	// parser_test.go:356: expected="add(a, b, 1, (2 * 3), (4 + 5), add(6, (7 * 8)))", got="add(a, b, 1, (2 * 3), (4 + 5), add(6, (7 * 8)) ) "
-	// parser_test.go:356: expected="add((((a + b) + ((c * d) / f)) + g))", got="add((((a + b) + ((c * d) / f)) + g)) "
-	// FAIL
-	//
-	// temporarily fixed, but this is a #TODO: find out why this was happening
-	//
-	// (2024-10-14)
-	// another failures, something is likely wrong with precedence
-	// --- FAIL: TestOperatorPrecedenceParsing (0.00s)
-	// parser_test.go:372: expected="((a * ([1, 2, 3, 4][(b * c)])) * d)", got="((a * ([1, 2, 3, 4][(b * c)]) * d)"
-	// parser_test.go:372: expected="add((a * (b[2])), (b[1]), (2 * ([1, 2][1])))", got="add((a * (b[2]), (b[1], (2 * ([1, 2][1])) "
-	// FAIL
 	tests := []struct {
 		input    string
 		expected string
@@ -348,24 +331,24 @@ func TestOperatorPrecedenceParsing(t *testing.T) {
 		},
 		{
 			"a + add(b * c) + d",
-			"((a + add((b * c)) ) + d)",
+			"((a + add((b * c))) + d)",
 		},
 		{
 			"add(a, b, 1, 2 * 3, 4 + 5, add(6, 7 * 8))",
-			"add(a, b, 1, (2 * 3), (4 + 5), add(6, (7 * 8)) ) ",
+			"add(a, b, 1, (2 * 3), (4 + 5), add(6, (7 * 8)))",
 		},
 		{
 			"add(a + b + c * d / f + g)",
-			"add((((a + b) + ((c * d) / f)) + g)) ",
+			"add((((a + b) + ((c * d) / f)) + g))",
 		},
-		// {
-		// 	"a * [1, 2, 3, 4][b * c] * d",
-		// 	"((a * ([1, 2, 3, 4][(b * c)])) * d)",
-		// },
-		// {
-		// 	"add(a * b[2], b[1], 2 * [1, 2][1])",
-		// 	"add((a * (b[2])), (b[1]), (2 * ([1, 2][1])))",
-		// },
+		{
+			"a * [1, 2, 3, 4][b * c] * d",
+			"((a * ([1, 2, 3, 4][(b * c)])) * d)",
+		},
+		{
+			"add(a * b[2], b[1], 2 * [1, 2][1])",
+			"add((a * (b[2])), (b[1]), (2 * ([1, 2][1])))",
+		},
 	}
 
 	for _, tt := range tests {

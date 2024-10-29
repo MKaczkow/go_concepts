@@ -108,7 +108,7 @@ func TestCallExpressionString(t *testing.T) {
 		},
 	}
 
-	expected := "add(x, y) "
+	expected := "add(x, y)"
 	if ce.String() != expected {
 		t.Errorf("CallExpression.String() wrong. got=%q, want=%q", ce.String(), expected)
 	}

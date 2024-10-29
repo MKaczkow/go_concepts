@@ -20,6 +20,28 @@ func tracePrint(fs string) {
 func incIdent() { traceLevel = traceLevel + 1 }
 func decIdent() { traceLevel = traceLevel - 1 }
 
+/*
+helper functions for debugging, should be used together, along with `defer`
+example usage:
+(assume you have function `parseExpressionStatement` in `parser.go`)
+```golang
+func (p *Parser) parseExpressionStatement() *ast.ExpressionStatement {
+	stmt := &ast.ExpressionStatement{Token: p.curToken}
+	//some logic
+	return stmt
+}
+```
+just add `trace` and `untrace` to the function:
+```golang
+func (p *Parser) parseExpressionStatement() *ast.ExpressionStatement {
+	defer untrace(trace("parseExpressionStatement"))
+	stmt := &ast.ExpressionStatement{Token: p.curToken}
+	//some logic
+	return stmt
+}
+````
+*/
+
 func trace(msg string) string {
 	incIdent()
 	tracePrint("BEGIN " + msg)
