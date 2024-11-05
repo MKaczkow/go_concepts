@@ -119,16 +119,16 @@ is represented as:
 * goal is turning `source code` into `bytecode` and then use VM to execute it
 
 ### further (possible) exercises
-- [ ] interpreter
-	- [ ] 'talk-me-through' for monkey interpreter chapter 3
-	- [ ] 'talk-me-through' for monkey interpreter chapter 4
+- [ ] compiler
+	- [ ] chapter 1
+	- [x] CI for monkey compiler
+- [ ] misc [ ] 
+	- [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
+	- [ ] read through Wren language [code](https://github.com/wren-lang/wren)
+- [x] interpreter
+	- [x] 'talk-me-through' for monkey interpreter chapter 3
+	- [x] 'talk-me-through' for monkey interpreter chapter 4
 	- [x] check for tests (are they complete?) in array built-in functions
 	- [x] find and fix bug in precedence parsing (or tests)
 	- [x] chapter 4
 	- [x] CI for monkey interpreter
-- [ ] compiler
-	- [ ] chapter 1
-	- [ ] CI for monkey compiler
-- [ ] misc [ ] 
-	- [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
-	- [ ] read through Wren language [code](https://github.com/wren-lang/wren)

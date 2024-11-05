@@ -10,6 +10,7 @@ Repo for basic tutorial-based Golang study
 * TBA
 
 ## notes
+* compiler starts with code from `interpreter`
 
 ### basics
 * `compiler` -> parses source code and produces something (output in machine language)
