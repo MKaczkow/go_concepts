@@ -25,5 +25,5 @@ jobs:
       # 'swap' compiler with interpreter, for coverage (because pushing changes to repo by gh actions causes erorrs)
       - name: Run Test
         run: |
-          cd monkey/inpterpreter
+          cd monkey/interpreter
           go test ./... 
