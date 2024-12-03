@@ -1,8 +1,8 @@
-package basics
+package main
 
 import "fmt"
 
-func main() {
+func ptrs() {
 
 	// BASIC DEMO
 

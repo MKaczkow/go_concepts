@@ -9,7 +9,7 @@ type User struct {
 	Age  int
 }
 
-func main() {
+func ob_comp() {
 	user1 := User{"John", 25}
 	user2 := User{"John", 25}
 
