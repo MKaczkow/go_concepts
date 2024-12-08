@@ -1,4 +1,4 @@
-name: RegEx Engine CI
+name: Regex Engine CI
 
 on:
   push:

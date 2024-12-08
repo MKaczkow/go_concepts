@@ -3,6 +3,7 @@ Repo for basic tutorial-based Golang study
 
 [![Learning Go Testing CI](https://github.com/MKaczkow/go_concepts/actions/workflows/learning-go-testing-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/learning-go-testing-ci.yml)  
 [![Web App Bis CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml)  
+[![Regex Engine CI](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml)  
 [![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml)  
 [![Monkey Compiler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml)
 ![Coverage](https://img.shields.io/badge/Coverage-72.4%25-brightgreen)
