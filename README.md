@@ -15,6 +15,7 @@ Repo for basic tutorial-based Golang study
 	- [ ] compiler
 	- [ ] macros
 	- [x] interpreter
+- [ ] regex engine
 - [ ] web crawler with `colly`
 - [ ] do `gilded rose` kata
 - [x] smth with `Hanoi tower`
