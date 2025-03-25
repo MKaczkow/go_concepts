@@ -5,14 +5,15 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"regexp"
+	"strconv"
 
 	"github.com/gocolly/colly/v2"
 )
 
 func main() {
-
 	// Create a file to save the scraped data
-	f, err := os.Create("data.csv")
+	f, err := os.Create("places.csv")
 	if err != nil {
 		log.Fatal("Cannot create file", err)
 	}
@@ -22,31 +23,64 @@ func main() {
 	writer := csv.NewWriter(f)
 	defer writer.Flush()
 
+	// Write the CSV header
+	err = writer.Write([]string{"place_url", "found_on_page"})
+	if err != nil {
+		log.Fatal("Cannot write header to file", err)
+	}
+
+	// Read allowed domain from environment variable
+	allowedDomain := os.Getenv("ALLOWED_DOMAIN")
+	if allowedDomain == "" {
+		log.Fatal("ALLOWED_DOMAIN environment variable is required")
+	}
+
 	// Instantiate default collector
 	c := colly.NewCollector(
-		// Visit only domains: hackerspaces.org, wiki.hackerspaces.org
-		colly.AllowedDomains("hackerspaces.org", "wiki.hackerspaces.org"),
+		colly.AllowedDomains(allowedDomain),
 	)
 
+	// Regular expression to extract page number from URL
+	pageNumberRegex := regexp.MustCompile(`page=(\d+)`)
+
 	// On every a element which has href attribute call callback
-	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
+	c.OnHTML("a[href^='/pl/place/']", func(e *colly.HTMLElement) {
 		link := e.Attr("href")
-		linkText := e.Text
-		// Print link
-		fmt.Printf("Link found: %q -> %s\n", e.Text, link)
+		absoluteURL := e.Request.AbsoluteURL(link)
+
+		// Extract the page number from the URL
+		pageNumberMatch := pageNumberRegex.FindStringSubmatch(e.Request.URL.String())
+		var pageNumber int
+		if len(pageNumberMatch) > 1 {
+			pageNumber, err = strconv.Atoi(pageNumberMatch[1])
+			if err != nil {
+				log.Printf("Error converting page number: %s", err)
+				return
+			}
+		}
+
 		// Write the data to the CSV file
-		writer.Write([]string{linkText, link})
-		// Visit link found on page
-		// Only those links are visited which are in AllowedDomains
-		c.Visit(e.Request.AbsoluteURL(link))
+		err := writer.Write([]string{absoluteURL, strconv.Itoa(pageNumber)})
+		if err != nil {
+			log.Println("Cannot write to file", err)
+		}
+		fmt.Printf("Place URL found on page %d: %s\n", pageNumber, absoluteURL)
 	})
 
 	// Before making a request print "Visiting ..."
 	c.OnRequest(func(r *colly.Request) {
 		fmt.Println("Visiting", r.URL.String())
-
 	})
 
-	// Start scraping on https://hackerspaces.org
-	c.Visit("https://hackerspaces.org/")
+	// Define the range of pages to visit
+	// TODO: This is hardcoded now, but should be dynamically set,
+	// based on the number of pages available on the website
+	// and 'last visited' page number stored in a database
+	for i := 1; i <= 198; i++ {
+		url := fmt.Sprintf("https://%s/pl/places?page=%d", allowedDomain, i)
+		err := c.Visit(url)
+		if err != nil {
+			log.Printf("Error visiting page %d: %s", i, err)
+		}
+	}
 }
