@@ -3,6 +3,7 @@ Repo for basic tutorial-based Golang study
 
 [![Learning Go Testing CI](https://github.com/MKaczkow/go_concepts/actions/workflows/learning-go-testing-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/learning-go-testing-ci.yml)  
 [![Web App Bis CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml)  
+[![Web Crawler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-crawler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-crawler-ci.yml)  
 [![Regex Engine CI](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml)  
 [![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml)  
 [![Monkey Compiler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml)
@@ -18,7 +19,7 @@ Repo for basic tutorial-based Golang study
 	- [x] interpreter
 - [ ] web crawler with `colly`
   - [x] crawl all places on target website
-  - [ ] design data model (i.e. what info about the place should be stored)
+  - [x] design data model (i.e. what info about the place should be stored)
   - [ ] choose storage method (like Elasticsearch, MongoDB, etc.)
   - [ ] upgrade crawler to crawl all requested data
   - [ ] upgrade crawler to store data in chosen storage

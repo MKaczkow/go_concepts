@@ -24,4 +24,9 @@ run: vet
 	go run main.go
 .PHONY: run
 
+test: vet
+	go test -v ./...
+.PHONY: test
 
+test-coverage: vet
+	go test -cover ./...

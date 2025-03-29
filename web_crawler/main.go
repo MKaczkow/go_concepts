@@ -83,4 +83,15 @@ func main() {
 			log.Printf("Error visiting page %d: %s", i, err)
 		}
 	}
+
+	// Wait for all requests to finish
+	c.Wait()
+
+	// Close the CSV file
+	err = f.Close()
+	if err != nil {
+		log.Fatal("Cannot close file", err)
+	}
+	fmt.Println("Scraping finished. Data saved to places.csv")
+
 }
