@@ -1,4 +1,4 @@
-name: Web App Bis CI
+name: Web Crawler CI
 
 on:
   push:
