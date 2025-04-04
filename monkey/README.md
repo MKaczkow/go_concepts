@@ -118,6 +118,13 @@ is represented as:
 ### compiler
 * goal is turning `source code` into `bytecode` and then use VM to execute it
 
+### macros
+* 2 types of macros:
+    - `text-substitution`
+    - `syntactic macros` 
+* in `Monkey` there will be macros, based on Elixir macros
+* 
+
 ### further (possible) exercises
 - [ ] compiler
 	- [ ] chapter 1
@@ -132,3 +139,7 @@ is represented as:
 	- [x] find and fix bug in precedence parsing (or tests)
 	- [x] chapter 4
 	- [x] CI for monkey interpreter
+- [ ] macros
+    - [x] what are macros?
+    - [ ] add macros to monkey interpreter
+      - [ ] quote / unquote functions
