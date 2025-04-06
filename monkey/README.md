@@ -143,3 +143,6 @@ is represented as:
     - [x] what are macros?
     - [ ] add macros to monkey interpreter
       - [ ] quote / unquote functions
+      - [x] add `MACRO` keyword to lexer
+      - [ ] add `macro` function to parser
+	  - [ ] add `macro` function to evaluator
