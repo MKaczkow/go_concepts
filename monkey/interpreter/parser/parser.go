@@ -72,6 +72,8 @@ func New(l *lexer.Lexer) *Parser {
 	// is parsed as "prefix" to expression and then the rest is parsed
 	p.registerPrefix(token.LBRACKET, p.parseArrayLiteral)
 	p.registerPrefix(token.LBRACE, p.parseHashLiteral)
+	// macros are also treated as prefix expressions
+	p.registerPrefix(token.MACRO, p.parseMacroLiteral)
 
 	// Deal with infix expressions
 	p.infixParseFns = make(map[token.TokenType]infixParseFn)
@@ -446,6 +448,24 @@ func (p *Parser) parseCallExpression(function ast.Expression) ast.Expression {
 	exp := &ast.CallExpression{Token: p.curToken, Function: function}
 	exp.Arguments = p.parseExpressionList(token.RPAREN)
 	return exp
+}
+
+func (p *Parser) parseMacroLiteral() ast.Expression {
+	lit := &ast.MacroLiteral{Token: p.curToken}
+
+	if !p.expectPeek(token.LPAREN) {
+		return nil
+	}
+
+	lit.Parameters = p.parseFunctionParameters()
+
+	if !p.expectPeek(token.LBRACE) {
+		return nil
+	}
+
+	lit.Body = p.parseBlockStatement()
+
+	return lit
 }
 
 func (p *Parser) curTokenIs(t token.TokenType) bool {

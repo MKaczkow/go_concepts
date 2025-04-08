@@ -123,7 +123,7 @@ is represented as:
     - `text-substitution`
     - `syntactic macros` 
 * in `Monkey` there will be macros, based on Elixir macros
-* 
+* macros sit between `parser` and `evaluator`, i.e. they modify `AST` before it's evaluated
 
 ### further (possible) exercises
 - [ ] compiler
@@ -142,7 +142,7 @@ is represented as:
 - [ ] macros
     - [x] what are macros?
     - [ ] add macros to monkey interpreter
-      - [ ] quote / unquote functions
+      - [x] quote / unquote functions
       - [x] add `MACRO` keyword to lexer
-      - [ ] add `macro` function to parser
+      - [x] add `macro` function to parser
 	  - [ ] add `macro` function to evaluator
