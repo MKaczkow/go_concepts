@@ -124,6 +124,9 @@ is represented as:
     - `syntactic macros` 
 * in `Monkey` there will be macros, based on Elixir macros
 * macros sit between `parser` and `evaluator`, i.e. they modify `AST` before it's evaluated
+* there are 2 stages of `macro expansion`:
+    - extracting them from AST
+    - evaluating them
 
 ### further (possible) exercises
 - [ ] compiler
@@ -140,6 +143,7 @@ is represented as:
 	- [x] chapter 4
 	- [x] CI for monkey interpreter
 - [ ] macros
+    - [ ] add nested macros support to monkey interpreter
     - [x] what are macros?
     - [ ] add macros to monkey interpreter
       - [x] quote / unquote functions
