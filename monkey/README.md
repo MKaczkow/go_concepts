@@ -135,6 +135,7 @@ is represented as:
 - [ ] misc [ ] 
 	- [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
 	- [ ] read through Wren language [code](https://github.com/wren-lang/wren)
+    - [ ] add nested macros support to monkey interpreter
 - [x] interpreter
 	- [x] 'talk-me-through' for monkey interpreter chapter 3
 	- [x] 'talk-me-through' for monkey interpreter chapter 4
@@ -142,11 +143,10 @@ is represented as:
 	- [x] find and fix bug in precedence parsing (or tests)
 	- [x] chapter 4
 	- [x] CI for monkey interpreter
-- [ ] macros
-    - [ ] add nested macros support to monkey interpreter
+- [x] macros
     - [x] what are macros?
-    - [ ] add macros to monkey interpreter
+    - [x] add macros to monkey interpreter
       - [x] quote / unquote functions
       - [x] add `MACRO` keyword to lexer
       - [x] add `macro` function to parser
-	  - [ ] add `macro` function to evaluator
+	  - [x] add `macro` function to evaluator

@@ -15,7 +15,7 @@ Repo for basic tutorial-based Golang study
 - [ ] small cleanup
 - [ ] monkey
 	- [ ] compiler
-	- [ ] macros
+	- [x] macros
 	- [x] interpreter
 - [ ] web crawler with `colly`
   - [x] crawl all places on target website
