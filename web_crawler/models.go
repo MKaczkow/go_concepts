@@ -1,6 +1,8 @@
 package main
 
 type AbandonedPlace struct {
+	Name        string  `json:"name"`
+	URL         string  `json:"place_url"`
 	Details     Details `json:"details"`
 	Description string  `json:"description"`
 	Comments    Comment `json:"comments"`

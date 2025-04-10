@@ -24,6 +24,10 @@ run: vet
 	go run main.go
 .PHONY: run
 
+run-no-vet:
+	go run main.go
+.PHONY: run-no-vet
+
 test: vet
 	go test -v ./...
 .PHONY: test
