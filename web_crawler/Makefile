@@ -29,8 +29,13 @@ run-no-vet:
 .PHONY: run-no-vet
 
 test: vet
-	go test -v ./...
+	go test ./...
 .PHONY: test
+
+test-verbose: vet
+	go test -v ./...
+.PHONY: test-verbose
 
 test-coverage: vet
 	go test -cover ./...
+.PHONY: test-coverage

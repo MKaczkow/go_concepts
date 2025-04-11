@@ -8,7 +8,10 @@ import (
 	"math/rand"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
+
+	"web_crawler/models"
 
 	"github.com/gocolly/colly/v2"
 	"github.com/joho/godotenv"
@@ -86,59 +89,44 @@ func main() {
 	fmt.Printf("Selected random place: %s (found on page %s)\n", randomPlace[0], randomPlace[1])
 
 	// Initialize a PlaceDetails struct
-	abandonedPlace := AbandonedPlace{
-		Name: randomPlace[0],
-		URL:  randomPlace[1],
+	// Split URL by '/' and use the last part as the name
+	parts := strings.Split(randomPlace[0], "/")
+	placeName := ""
+	if len(parts) > 0 {
+		lastPart := parts[len(parts)-1]
+		if lastPart != "" {
+			placeName = lastPart
+		}
 	}
 
+	// Initialize a AbandonedPlace struct, extract name and URL
+	abandonedPlace := models.AbandonedPlace{
+		Name: placeName,
+		URL:  randomPlace[0],
+	}
+
+	fmt.Printf("Scraping details for place: %s\n", abandonedPlace.Name)
+	fmt.Println("Place URL:", abandonedPlace.URL)
+
 	// Set up callback for when a page is visited
-	c.OnHTML("body", func(e *colly.HTMLElement) {
+	c.OnHTML("div[itemprop='description']", func(e *colly.HTMLElement) {
 
-		// Extract basic information from the page
-		abandonedPlace.Name = e.FullText("h1")
-		abandonedPlace.Details.Category = e.FullText("dd a[title^='Zobacz inne miejsca z tej kategorii']")
-		abandonedPlace.Details.Status = e.FullText("dd span[style*='color:#ff0000']")
-		abandonedPlace.Details.Location = e.FullText("dd[title^='Kołczewo']")
-		abandonedPlace.Details.Coordinates = e.FullText("dd a[title='Zobacz na Google Maps']")
-
-		// Extract meta information
-		abandonedPlace.Description = e.FullText(".place-description")
-		abandonedPlace.Details.AddedBy = e.FullText("dd a[title$='Profil']")
-		abandonedPlace.Details.Accessibility = e.FullText(".definition-group:contains('Dostępność') dd")
-		abandonedPlace.Details.Attractiveness = e.FullText(".definition-group:contains('Atrakcyjność') dd")
-		abandonedPlace.Details.Views = e.FullText(".definition-group:contains('Wyświetlenia') dd")
-
-		// Extract rating
-		ratingText := e.FullText("dd[rel='tooltip'] span[itemprop='ratingValue']")
-		if rating, err := strconv.ParseFloat(ratingText, 64); err == nil {
-			abandonedPlace.Details.Rating = rating
+		// Extract the description
+		description := e.Text
+		if description != "" {
+			abandonedPlace.Description = strings.TrimSpace(description)
+			// fmt.Printf("Found description: %s\n", abandonedPlace.Description)
+		} else {
+			fmt.Println("No description found")
 		}
 
-		// Extract image URLs
-		// e.ForEach(".gallery img", func(_ int, el *colly.HTMLElement) {
-		// 	abandonedPlace.Images = append(abandonedPlace.Images, el.Attr("src"))
-		// })
-
-		// Extract nearby places
-		// e.ForEach("#places-nearby a", func(_ int, el *colly.HTMLElement) {
-		// 	nearbyPlace := models.NearbyPlace{
-		// 		Name:     el.FullText(".stripe span"),
-		// 		URL:      el.Attr("href"),
-		// 		Distance: el.FullText(".distance"),
-		// 	}
-		// 	abandonedPlace.NearbyPlaces = append(abandonedPlace.NearbyPlaces, nearbyPlace)
-		// })
-
-		// Extract comments
-		e.ForEach(".fos_comment_comment_show", func(_ int, el *colly.HTMLElement) {
-			comment := models.Comment{
-				Author:  el.FullText(".media-heading a"),
-				Date:    el.FullText(".media-date"),
-				Content: el.FullText(".media-comment"),
-			}
-			abandonedPlace.Comments = append(abandonedPlace.Comments, comment)
-		})
 	})
+
+	// Extract the details
+	// TBD
+
+	// Extract comments
+	// TBD
 
 	// Set up error handling
 	c.OnError(func(r *colly.Response, err error) {
@@ -146,9 +134,9 @@ func main() {
 	})
 
 	// Visit the page
-	err = c.Visit(randomPlace[1])
+	err = c.Visit(abandonedPlace.URL)
 	if err != nil {
-		log.Printf("Failed to visit %s: %v", randomPlace[1], err)
+		log.Printf("Failed to visit %s: %v", abandonedPlace.URL, err)
 	}
 
 	// Wait for scraping to finish
