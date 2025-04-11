@@ -18,7 +18,8 @@ func main() {
 	}
 
 	// Need to do it sequentially, because subsequent stages will likely depend on the previous ones
-	stages.RunStage0()
-	stages.RunStage1()
+	// stages.RunStage0()
+	// stages.RunStage1()
+	stages.RunStage2()
 
 }
