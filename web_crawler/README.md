@@ -10,11 +10,17 @@ Repo for basic tutorial-based Golang study
   - [x] get name, html
   - [x] get comments
   - [x] get description
-  - [ ] get details
+  - [x] get details
+  - [x] get hazards
+  - [x] loop
 - [ ] run different stages
   - [ ] re-organize main
   - [ ] add command parser to select different stages
 - [ ] logging instead of printing
+- [ ] upgrade / cleanup data model (hazards, details, etc.)
+- [ ] add tests
+- [ ] time full runs and specific stages and specific ops
+- [ ] maybe saving multiple files instead of one big file causes slowdown?
 
 ## notes
 

@@ -1,8 +1,10 @@
-# Data
+# Web Crawler
 web_crawler/data.csv
 web_crawler/places.csv
+web_crawler/places_copy.csv
 web_crawler/.env
 web_crawler/runs/
+web_crawler/cache/
 
 # Logs
 *.log

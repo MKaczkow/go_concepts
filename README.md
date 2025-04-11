@@ -18,11 +18,11 @@ Repo for basic tutorial-based Golang study
 	- [x] macros
 	- [x] interpreter
 - [ ] web crawler with `colly`
+  - [ ] choose storage method (like Elasticsearch, MongoDB, etc.)
+  - [ ] upgrade crawler to store data in chosen storage
   - [x] crawl all places on target website
   - [x] design data model (i.e. what info about the place should be stored)
-  - [ ] choose storage method (like Elasticsearch, MongoDB, etc.)
-  - [ ] upgrade crawler to crawl all requested data
-  - [ ] upgrade crawler to store data in chosen storage
+  - [x] upgrade crawler to crawl all requested data
 - [ ] regex engine
 - [ ] do `gilded rose` kata
 - [x] smth with `Hanoi tower`
