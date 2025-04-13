@@ -17,15 +17,15 @@ Repo for basic tutorial-based Golang study
 	- [ ] compiler
 	- [x] macros
 	- [x] interpreter
-- [ ] web crawler with `colly`
-  - [ ] mop up
+- [ ] regex engine
+- [ ] do `gilded rose` kata
+- [x] web crawler with `colly`
+  - [x] mop up
   - [x] choose storage method (like Elasticsearch, MongoDB, etc.)
   - [x] upgrade crawler to store data in chosen storage
   - [x] crawl all places on target website
   - [x] design data model (i.e. what info about the place should be stored)
   - [x] upgrade crawler to crawl all requested data
-- [ ] regex engine
-- [ ] do `gilded rose` kata
 - [x] smth with `Hanoi tower`
 - [x] finish `book`
 - [x] fix `web_app_bis` (if no JSON is provided, some routes crash)

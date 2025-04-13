@@ -5,7 +5,7 @@ Repo for basic tutorial-based Golang study
 
 # web crawler
 
-## todo
+## todo / further improvements ideas
 - [x] actual place HTML structure -> data model structure -> file 
   - [x] get name, html
   - [x] get comments
@@ -14,15 +14,16 @@ Repo for basic tutorial-based Golang study
   - [x] get hazards
   - [x] loop
 - [ ] run different stages
-  - [ ] re-organize main
+  - [x] re-organize main
   - [ ] add command parser to select different stages
 - [ ] logging instead of printing
-- [ ] upgrade / cleanup data model (hazards, details, etc.)
-- [ ] add tests
+- [ ] add (maybe?) missing field filling in data model
+- [ ] add basic tests
 - [ ] time full runs and specific stages and specific ops
 - [ ] maybe saving multiple files instead of one big file causes slowdown?
+- [x] upgrade / cleanup data model (hazards, details, etc.)
 - [x] fix 'brak głosów' issue
-- [ ] czy na pewno nie za często robi się update (tzn. N update do 1 inserta faktycznie)
+- [x] czy na pewno nie za często robi się update (tzn. N update do 1 inserta faktycznie)
 
 ## notes
 
