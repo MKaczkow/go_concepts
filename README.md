@@ -130,4 +130,7 @@ fmt.Printf("(name1 == name2)=%t\n", name1 == name2)
 	* [A* implementation in Go](https://gist.github.com/egonelbre/10578266)
 * `gilded rose`
 	* resources in respective [README](./gilded_rose/README.md)
+* `style guides`
+	* google [style guide](https://google.github.io/styleguide/go/)
+ 	* uber [style guide](https://github.com/uber-go/guide/blob/master/style.md)
 	
