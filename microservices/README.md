@@ -29,6 +29,8 @@
 * **omdb-api** (Golang + Gin) [link](https://www.omdbapi.com/) - API to communicate with OMDB
 * **recommendation-engine** (Python + FastAPI) - engine to recommend movies
 
+<!-- md-dead-link-check: off -->
+
 ### Example OMDB API calls
 * http://www.omdbapi.com/?apikey={apikey}&t=Inception
 * http://www.omdbapi.com/?apikey={apikey}&i=tt1285016
@@ -37,6 +39,7 @@
 * http://localhost:8080/movies?t=Inception
 * http://localhost:8080/movies?i=tt1285016
 
+<!-- md-dead-link-check: on -->
 
 ### Usage
 * `docker-compose up -d`

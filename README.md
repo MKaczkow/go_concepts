@@ -1,6 +1,7 @@
 # Go Concepts
 Repo for basic tutorial-based Golang study  
 
+[![Housekeeping CI](https://github.com/MKaczkow/go_concepts/actions/workflows/housekeeping-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/housekeeping-ci.yml)  
 [![Learning Go Testing CI](https://github.com/MKaczkow/go_concepts/actions/workflows/learning-go-testing-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/learning-go-testing-ci.yml)  
 [![Web App Bis CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml)  
 [![Web Crawler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-crawler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-crawler-ci.yml)  

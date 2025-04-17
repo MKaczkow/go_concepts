@@ -8,6 +8,8 @@
 ### Testing
 `go test -cover ./...`
 
+<!-- md-dead-link-check: off -->
+
 ### Routes
 (for thunder client of postman)  
 `GET` http://localhost:8080/api/users   
@@ -20,6 +22,8 @@
 `POST` http://localhost:8080/api/books  
 `PUT` http://localhost:8080/api/books/:id  
 `DELETE` http://localhost:8080/api/books/:id  
+
+<!-- md-dead-link-check: on -->
 
 ### JSON schema
 * **user**
