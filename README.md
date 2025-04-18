@@ -6,6 +6,7 @@ Repo for basic tutorial-based Golang study
 [![Web App Bis CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml)  
 [![Web Crawler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-crawler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-crawler-ci.yml)  
 [![Regex Engine CI](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml)  
+[![Gilded Rose CI](https://github.com/MKaczkow/go_concepts/actions/workflows/gilded-rose-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/gilded-rose-ci.yml)  
 [![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml)  
 [![Monkey Compiler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml)
 ![Coverage](https://img.shields.io/badge/Coverage-72.4%25-brightgreen)
@@ -13,13 +14,13 @@ Repo for basic tutorial-based Golang study
 ---
 
 ### todo
-- [ ] small cleanup
 - [ ] monkey
 	- [ ] compiler
 	- [x] macros
 	- [x] interpreter
 - [ ] regex engine
-- [ ] do `gilded rose` kata
+- [ ] small cleanup
+- [x] do `gilded rose` kata
 - [x] web crawler with `colly`
   - [x] mop up
   - [x] choose storage method (like Elasticsearch, MongoDB, etc.)

@@ -13,14 +13,14 @@ build: fmt
 .PHONY: build
 
 run: fmt
-	go run texttest_fixture.go ${ARGS}
+	go run texttest_fixture.go ${NUM_DAYS}
 .PHONY: run
 
 test: fmt
 	go test ./...
 .PHONY: test
 
-coverage: fmt
+test-coverage: fmt
 	go test ./... -coverprofile=coverage.out
 	go tool cover -html=coverage.out
-.PHONY: coverage
+.PHONY: test-coverage

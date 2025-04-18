@@ -1,0 +1,29 @@
+name: Gilded Rose CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+      
+      - name: Setup go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: 'gilded_rose/go.mod'
+      # 'swap' compiler with interpreter, for coverage (because pushing changes to repo by gh actions causes erorrs)
+      - name: Run Test
+        run: |
+          cd gilded_rose
+          go test ./... 

@@ -7,6 +7,12 @@ Repo for basic tutorial-based Golang study
 * this is a 'famous' exercise, which is supposed to be a refactoring kata
 * the task is to refactor the code in a way, that it's easier to understand and maintain
 * code has been copied from original repo
+* task: add some feature -> `conjured` item
+
+### makefile
+* `make run NUM_DAYS=21`
+* `make test`
+* `make test-coverage`
 
 ### original readme
 - Run :
@@ -35,3 +41,4 @@ go tool cover -html=coverage.out
 * [original requirements, in EN](https://github.com/emilybache/GildedRose-Refactoring-Kata/blob/main/GildedRoseRequirements.md)
 * [dev.to article about the task](https://dev.to/lomig/a-walk-through-the-gilded-rose-kata-pt-1-do-not-break-anything-23b1)
 * [another dev.to article](https://dev.to/alexandreruban/lessons-from-the-gilded-rose-refactoring-kata-pgh)
+* [pretty cool blog article](https://blog.lunarlogic.com/2015/what-ive-learned-by-doing-the-gilded-rose-kata-4-refactoring-tips/)
