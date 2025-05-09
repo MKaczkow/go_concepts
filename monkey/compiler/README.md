@@ -14,5 +14,9 @@ Repo for basic tutorial-based Golang study
 
 ### basics
 * `compiler` -> parses source code and produces something (output in machine language)
-  * TBA
 * `interpreter` -> parses source code and doesn't produce antything
+* `virtual machine` -> *machine built in software*, executing `fetch-decode-execute cycle`
+  * `stack machine` -> easier to build, but need to execute lot's of instructions
+  * `register machine` -> harder to build
+* `little endian` -> least significant byte is stored first
+* `big endian` -> most significant byte is stored first
