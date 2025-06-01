@@ -3,9 +3,11 @@ web_crawler/data.csv
 web_crawler/places.csv
 web_crawler/places_copy.csv
 web_crawler/places copy.csv
+web_crawler/places*.csv
 web_crawler/.env
 web_crawler/runs/
 web_crawler/cache/
+web_crawler/abandoned_places.places.json
 
 # Logs
 *.log

@@ -26,6 +26,15 @@ func RunStage0() {
 	// Begin scrapping
 	fmt.Println("Starting scraping stage 0 - collecting place URLs")
 
+	// If places.csv file exists rename it for future reference
+	if _, err := os.Stat("places.csv"); err == nil {
+		timestamp := time.Now().Format("2006-01-02_15-04-05")
+		newPath := fmt.Sprintf("places_%s.csv", timestamp)
+		if err := os.Rename("places.csv", newPath); err != nil {
+			log.Printf("Warning: Could not rename places.csv: %v", err)
+		}
+	}
+
 	// Create a file to save the scraped data
 	f, err := os.Create("places.csv")
 	if err != nil {
@@ -93,10 +102,24 @@ func RunStage0() {
 	})
 
 	// Define the range of pages to visit
-	// TODO: This is hardcoded now, but should be dynamically set,
+	// TODO: This is hardcoded in env now, but should be dynamically set,
 	// based on the number of pages available on the website
 	// and 'last visited' page number stored in a database
-	for i := 1; i <= 198; i++ {
+
+	// Read allowed domain from environment variable and cast to integerr
+	maxPageNumber := os.Getenv("MAX_PAGE_NUMBER")
+	if maxPageNumber == "" {
+		log.Fatal("MAX_PAGE_NUMBER environment variable is required")
+	}
+	maxPageNumberInt, err := strconv.Atoi(maxPageNumber)
+	if err != nil {
+		log.Fatalf("Error converting MAX_PAGE_NUMBER to integer: %s", err)
+	}
+	if maxPageNumberInt <= 0 {
+		log.Fatal("MAX_PAGE_NUMBER must be a positive integer")
+	}
+
+	for i := 1; i <= maxPageNumberInt; i++ {
 		url := fmt.Sprintf("https://%s/pl/places?page=%d", allowedDomain, i)
 		err := c.Visit(url)
 		if err != nil {
@@ -297,27 +320,40 @@ func RunStage1() {
 		c.OnHTML("div.row.vcenter.margin-bottom-sm-15", func(e *colly.HTMLElement) {
 			hazard := models.Hazard{}
 
+			// Extract the hazard name and ID from the img title attribute
+			imgTitle := e.ChildAttr("div.col-lg-2 img", "title")
+			if h, ok := models.HazardTypes[imgTitle]; ok {
+				hazard.ID = h.ID
+				hazard.Name = h.Name
+			} else {
+				// Handle cases where the title might not match a known hazard type
+				// For example, log a warning or set a default ID/Name
+				hazard.Name = "Nieznane"
+				hazard.ID = 7
+				log.Printf("Unknown hazard type: %s, using default ID 7 and 'Nieznane' category", imgTitle)
+			}
+
 			// Extract the description
 			hazard.Description = e.ChildText("div.col-lg-10 > span:first-child")
 
-			// Extract added by information
+			// Extract added by information and date
 			addedByText := e.ChildText("div.col-lg-10 span.text-muted.small")
 			if addedByText != "" {
-				parts := strings.Split(addedByText, "Dodał")
-				if len(parts) > 1 {
-					userTimePart := strings.TrimSpace(parts[1])
+				// Extract user by selecting the text content of the <a> tag
+				hazard.AddedBy = e.ChildText("div.col-lg-10 span.text-muted.small a.text-muted")
 
-					// Extract user - it's between the opening and closing tags
-					userStart := strings.Index(userTimePart, ">")
-					userEnd := strings.Index(userTimePart, "</a>")
-					if userStart != -1 && userEnd != -1 && userStart < userEnd {
-						hazard.AddedBy = strings.TrimSpace(userTimePart[userStart+1 : userEnd])
-					}
-
-					// Extract timestamp - it should be the last part
-					timeStart := strings.LastIndex(userTimePart, ">")
-					if timeStart != -1 && timeStart+1 < len(userTimePart) {
-						hazard.Added = strings.TrimSpace(userTimePart[timeStart+1:])
+				// Extract timestamp
+				// The timestamp is located directly after the </a> tag within the 'small' span.
+				// We can get the full text and then remove the part containing "Dodał <username>"
+				// A more robust way is to get the outerHTML of the 'small' span and parse it.
+				smallSpanHTML, err := e.DOM.Find("div.col-lg-10 span.text-muted.small").Html()
+				if err == nil {
+					// Find the index of the closing </a> tag
+					anchorEndIndex := strings.Index(smallSpanHTML, "</a>")
+					if anchorEndIndex != -1 {
+						// The timestamp starts right after "</a>"
+						// We need to trim spaces and newlines
+						hazard.Added = strings.TrimSpace(smallSpanHTML[anchorEndIndex+len("</a>"):])
 					}
 				}
 			}

@@ -54,17 +54,59 @@ func TestAbandonedPlaceSerialization(t *testing.T) {
 				Hazards: []Hazard{
 					{
 						ID:          0,
-						Name:        "",
-						Description: "Place is sometimes visited by security guards",
-						Added:       "",
-						AddedBy:     "",
+						Name:        "Wystepujace promieniowanie",
+						Description: "Obszar o podwyższonym poziomie promieniowania, wymagane dozymetry.",
+						Added:       "5 miesięcy temu",
+						AddedBy:     "Dr. Nuclear",
 					},
 					{
-						ID:          0,
-						Name:        "",
-						Description: "Place is often visited by security guards",
-						Added:       "",
-						AddedBy:     "",
+						ID:          1,
+						Name:        "Niebezpieczne materiały",
+						Description: "Znaleziono porzucone pojemniki z nieznanymi chemikaliami.",
+						Added:       "3 tygodnie temu",
+						AddedBy:     "Chemik_X",
+					},
+					{
+						ID:          2,
+						Name:        "Aktywność paranormalna",
+						Description: "Zgłaszano dziwne dźwięki i cienie, szczególnie nocą.",
+						Added:       "1 rok temu",
+						AddedBy:     "GhostHunter",
+					},
+					{
+						ID:          3,
+						Name:        "Miejsce chronione",
+						Description: "Obiekt jest monitorowany przez firmę ochroniarską; regularne patrole.",
+						Added:       "2 lata temu",
+						AddedBy:     "SecurityMaster",
+					},
+					{
+						ID:          4,
+						Name:        "Miejsce monitorowane",
+						Description: "Teren objęty monitoringiem wizyjnym, kamery rozmieszczone strategicznie.",
+						Added:       "6 miesięcy temu",
+						AddedBy:     "CCTV_Watcher",
+					},
+					{
+						ID:          5,
+						Name:        "Wysokie ryzyko upadku z wysokości",
+						Description: "Brak barierek ochronnych na wielu piętrach, uszkodzone schody.",
+						Added:       "8 miesięcy temu",
+						AddedBy:     "HighFlyer",
+					},
+					{
+						ID:          6,
+						Name:        "Wysokie ryzyko zawalenia",
+						Description: "Widoczne pęknięcia konstrukcji i ubytki w dachu, szczególnie w sektorze C.",
+						Added:       "1 miesiąc temu",
+						AddedBy:     "Builder_Bob",
+					},
+					{
+						ID:          7,
+						Name:        "Nieznane",
+						Description: "Zauważono nietypowe zjawiska, ale przyczyna jest jeszcze nieustalona.",
+						Added:       "4 miesiące temu",
+						AddedBy:     "Mystery_User",
 					},
 				},
 			},
@@ -111,17 +153,59 @@ func TestAbandonedPlaceSerialization(t *testing.T) {
 				"hazards": [
 					{
 					"id": 0,
-					"name": "",
-					"description": "Place is sometimes visited by security guards",
-					"added": "",
-					"added_by": ""
+					"name": "Wystepujace promieniowanie",
+					"description": "Obszar o podwyższonym poziomie promieniowania, wymagane dozymetry.",
+					"added": "5 miesięcy temu",
+					"added_by": "Dr. Nuclear"
 					},
 					{
-					"id": 0,
-					"name": "",
-					"description": "Place is often visited by security guards",
-					"added": "",
-					"added_by": ""
+					"id": 1,
+					"name": "Niebezpieczne materiały",
+					"description": "Znaleziono porzucone pojemniki z nieznanymi chemikaliami.",
+					"added": "3 tygodnie temu",
+					"added_by": "Chemik_X"
+					},
+					{
+					"id": 2,
+					"name": "Aktywność paranormalna",
+					"description": "Zgłaszano dziwne dźwięki i cienie, szczególnie nocą.",
+					"added": "1 rok temu",
+					"added_by": "GhostHunter"
+					},
+					{
+					"id": 3,
+					"name": "Miejsce chronione",
+					"description": "Obiekt jest monitorowany przez firmę ochroniarską; regularne patrole.",
+					"added": "2 lata temu",
+					"added_by": "SecurityMaster"
+					},
+					{
+					"id": 4,
+					"name": "Miejsce monitorowane",
+					"description": "Teren objęty monitoringiem wizyjnym, kamery rozmieszczone strategicznie.",
+					"added": "6 miesięcy temu",
+					"added_by": "CCTV_Watcher"
+					},
+					{
+					"id": 5,
+					"name": "Wysokie ryzyko upadku z wysokości",
+					"description": "Brak barierek ochronnych na wielu piętrach, uszkodzone schody.",
+					"added": "8 miesięcy temu",
+					"added_by": "HighFlyer"
+					},
+					{
+					"id": 6,
+					"name": "Wysokie ryzyko zawalenia",
+					"description": "Widoczne pęknięcia konstrukcji i ubytki w dachu, szczególnie w sektorze C.",
+					"added": "1 miesiąc temu",
+					"added_by": "Builder_Bob"
+					},
+					{
+					"id": 7,
+					"name": "Nieznane",
+					"description": "Zauważono nietypowe zjawiska, ale przyczyna jest jeszcze nieustalona.",
+					"added": "4 miesiące temu",
+					"added_by": "Mystery_User"
 					}
 				]
 			}`,
@@ -329,17 +413,59 @@ func TestAbandonedPlaceDeserialization(t *testing.T) {
 				"hazards": [
 					{
 					"id": 0,
-					"name": "",
-					"description": "Place is sometimes visited by security guards",
-					"added": "",
-					"added_by": ""
+					"name": "Wystepujace promieniowanie",
+					"description": "Obszar o podwyższonym poziomie promieniowania, wymagane dozymetry.",
+					"added": "5 miesięcy temu",
+					"added_by": "Dr. Nuclear"
 					},
 					{
-					"id": 0,
-					"name": "",
-					"description": "Place is often visited by security guards",
-					"added": "",
-					"added_by": ""
+					"id": 1,
+					"name": "Niebezpieczne materiały",
+					"description": "Znaleziono porzucone pojemniki z nieznanymi chemikaliami.",
+					"added": "3 tygodnie temu",
+					"added_by": "Chemik_X"
+					},
+					{
+					"id": 2,
+					"name": "Aktywność paranormalna",
+					"description": "Zgłaszano dziwne dźwięki i cienie, szczególnie nocą.",
+					"added": "1 rok temu",
+					"added_by": "GhostHunter"
+					},
+					{
+					"id": 3,
+					"name": "Miejsce chronione",
+					"description": "Obiekt jest monitorowany przez firmę ochroniarską; regularne patrole.",
+					"added": "2 lata temu",
+					"added_by": "SecurityMaster"
+					},
+					{
+					"id": 4,
+					"name": "Miejsce monitorowane",
+					"description": "Teren objęty monitoringiem wizyjnym, kamery rozmieszczone strategicznie.",
+					"added": "6 miesięcy temu",
+					"added_by": "CCTV_Watcher"
+					},
+					{
+					"id": 5,
+					"name": "Wysokie ryzyko upadku z wysokości",
+					"description": "Brak barierek ochronnych na wielu piętrach, uszkodzone schody.",
+					"added": "8 miesięcy temu",
+					"added_by": "HighFlyer"
+					},
+					{
+					"id": 6,
+					"name": "Wysokie ryzyko zawalenia",
+					"description": "Widoczne pęknięcia konstrukcji i ubytki w dachu, szczególnie w sektorze C.",
+					"added": "1 miesiąc temu",
+					"added_by": "Builder_Bob"
+					},
+					{
+					"id": 7,
+					"name": "Nieznane",
+					"description": "Zauważono nietypowe zjawiska, ale przyczyna jest jeszcze nieustalona.",
+					"added": "4 miesiące temu",
+					"added_by": "Mystery_User"
 					}
 				]
 			}`,
@@ -386,17 +512,59 @@ func TestAbandonedPlaceDeserialization(t *testing.T) {
 				Hazards: []Hazard{
 					{
 						ID:          0,
-						Name:        "",
-						Description: "Place is sometimes visited by security guards",
-						Added:       "",
-						AddedBy:     "",
+						Name:        "Wystepujace promieniowanie",
+						Description: "Obszar o podwyższonym poziomie promieniowania, wymagane dozymetry.",
+						Added:       "5 miesięcy temu",
+						AddedBy:     "Dr. Nuclear",
 					},
 					{
-						ID:          0,
-						Name:        "",
-						Description: "Place is often visited by security guards",
-						Added:       "",
-						AddedBy:     "",
+						ID:          1,
+						Name:        "Niebezpieczne materiały",
+						Description: "Znaleziono porzucone pojemniki z nieznanymi chemikaliami.",
+						Added:       "3 tygodnie temu",
+						AddedBy:     "Chemik_X",
+					},
+					{
+						ID:          2,
+						Name:        "Aktywność paranormalna",
+						Description: "Zgłaszano dziwne dźwięki i cienie, szczególnie nocą.",
+						Added:       "1 rok temu",
+						AddedBy:     "GhostHunter",
+					},
+					{
+						ID:          3,
+						Name:        "Miejsce chronione",
+						Description: "Obiekt jest monitorowany przez firmę ochroniarską; regularne patrole.",
+						Added:       "2 lata temu",
+						AddedBy:     "SecurityMaster",
+					},
+					{
+						ID:          4,
+						Name:        "Miejsce monitorowane",
+						Description: "Teren objęty monitoringiem wizyjnym, kamery rozmieszczone strategicznie.",
+						Added:       "6 miesięcy temu",
+						AddedBy:     "CCTV_Watcher",
+					},
+					{
+						ID:          5,
+						Name:        "Wysokie ryzyko upadku z wysokości",
+						Description: "Brak barierek ochronnych na wielu piętrach, uszkodzone schody.",
+						Added:       "8 miesięcy temu",
+						AddedBy:     "HighFlyer",
+					},
+					{
+						ID:          6,
+						Name:        "Wysokie ryzyko zawalenia",
+						Description: "Widoczne pęknięcia konstrukcji i ubytki w dachu, szczególnie w sektorze C.",
+						Added:       "1 miesiąc temu",
+						AddedBy:     "Builder_Bob",
+					},
+					{
+						ID:          7,
+						Name:        "Nieznane",
+						Description: "Zauważono nietypowe zjawiska, ale przyczyna jest jeszcze nieustalona.",
+						Added:       "4 miesiące temu",
+						AddedBy:     "Mystery_User",
 					},
 				},
 			},

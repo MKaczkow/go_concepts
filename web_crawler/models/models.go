@@ -46,7 +46,6 @@ type Category struct {
 	Name string
 }
 
-// TODO: var or const?
 var (
 	Railway             = Category{0, "Kolejowe"}
 	Other               = Category{1, "Inne"}
@@ -70,13 +69,14 @@ type Hazard struct {
 	AddedBy     string `json:"added_by"`
 }
 
-// TODO: var or const?
-// var (
-// 	Radiation          = Hazard{0, "Wystepujace promieniowanie"}
-// 	DangerousMaterials = Hazard{1, "Niebezpieczne materiały"}
-// 	ParanormalActivity = Hazard{2, "Aktywność paranormalna"}
-// 	SiteGuarded        = Hazard{3, "Miejsce chronione"}
-// 	SiteMonitored      = Hazard{4, "Miejsce monitorowane"}
-// 	RiskOfFalling      = Hazard{5, "Wysokie ryzyko upadku z wysokości"}
-// 	RiskOfCollapse     = Hazard{6, "Wysokie ryzyko zawalenia"}
-// )
+// Define the hazard types as constants or a map for easy lookup
+var HazardTypes = map[string]Hazard{
+	"Wystepujace promieniowanie":        {ID: 0, Name: "Wystepujace promieniowanie"},
+	"Niebezpieczne materiały":           {ID: 1, Name: "Niebezpieczne materiały"},
+	"Aktywność paranormalna":            {ID: 2, Name: "Aktywność paranormalna"},
+	"Miejsce chronione":                 {ID: 3, Name: "Miejsce chronione"},
+	"Miejsce monitorowane":              {ID: 4, Name: "Miejsce monitorowane"},
+	"Wysokie ryzyko upadku z wysokości": {ID: 5, Name: "Wysokie ryzyko upadku z wysokości"},
+	"Wysokie ryzyko zawalenia":          {ID: 6, Name: "Wysokie ryzyko zawalenia"},
+	"Nieznane":                          {ID: 7, Name: "Nieznane"},
+}

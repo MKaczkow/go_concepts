@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"web_crawler/stages"
 
 	"github.com/joho/godotenv"
 )
@@ -29,6 +30,6 @@ func main() {
 
 	// Need to do it sequentially, because subsequent stages will likely depend on the previous ones
 	// stages.RunStage0()
-	// stages.RunStage1()
+	stages.RunStage1()
 	// stages.RunStage2()
 }

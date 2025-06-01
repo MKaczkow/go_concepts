@@ -18,6 +18,8 @@ Repo for basic tutorial-based Golang study
   - [x] add command parser to select different stages (drop - just comment out the stage you don't want to run)
 - [ ] logging instead of printing
 - [ ] add (maybe?) missing field filling in data model
+  - [x] hazards
+  - [ ] place itself
 - [ ] time full runs and specific stages and specific ops
 - [ ] maybe saving multiple files instead of one big file causes slowdown?
 - [x] add basic tests
@@ -26,5 +28,6 @@ Repo for basic tutorial-based Golang study
 - [x] czy na pewno nie za często robi się update (tzn. N update do 1 inserta faktycznie)
 
 ## notes
+* run relevant mongodb container first (port and address matching .env file)
 
 ### basics
