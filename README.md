@@ -9,7 +9,7 @@ Repo for basic tutorial-based Golang study
 [![Gilded Rose CI](https://github.com/MKaczkow/go_concepts/actions/workflows/gilded-rose-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/gilded-rose-ci.yml)  
 [![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml)  
 [![Monkey Compiler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml)
-![Coverage](https://img.shields.io/badge/Coverage-72.1%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-74.0%25-brightgreen)
 
 ---
 
