@@ -12,6 +12,8 @@ type Opcode byte
 
 const (
 	OpConstant Opcode = iota
+	OpAdd
+	OpPop
 )
 
 type Definition struct {
@@ -21,6 +23,10 @@ type Definition struct {
 
 var definitions = map[Opcode]*Definition{
 	OpConstant: {"OpConstant", []int{2}},
+	OpAdd:      {"OpAdd", []int{}},
+	// 'OpPop' needs to be used after every expression, as they don't store value, only return it.
+	// That's the whole point of the 'expression vs statement' thing.
+	OpPop: {"OpPop", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
@@ -108,6 +114,8 @@ func (ins Instructions) fmtInstruction(def *Definition, operands []int) string {
 			len(operands), operandCount)
 	}
 	switch operandCount {
+	case 0:
+		return def.Name
 	case 1:
 		return fmt.Sprintf("%s %d", def.Name, operands[0])
 	}
