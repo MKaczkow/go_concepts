@@ -14,9 +14,11 @@ import (
 	"time"
 
 	"web_crawler/models"
+	"web_crawler/utils"
 
 	"github.com/gocolly/colly/v2"
 	"github.com/joho/godotenv"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
@@ -161,7 +163,7 @@ func RunStage1() {
 		colly.AllowedDomains(allowedDomain),
 		colly.Async(true),
 		colly.MaxDepth(1),
-		colly.UserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"),
+		colly.UserAgent(utils.GetRandomUserAgent()),
 		colly.CacheDir("./cache"),
 	)
 
@@ -428,7 +430,7 @@ func RunStage2() {
 		colly.AllowedDomains(allowedDomain),
 		colly.Async(true),
 		colly.MaxDepth(1),
-		colly.UserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"),
+		colly.UserAgent(utils.GetRandomUserAgent()),
 		colly.CacheDir("./cache"),
 	)
 
@@ -680,4 +682,176 @@ func RunStage2() {
 	}
 
 	fmt.Println("Scraping stage 2 finished. Data saved to database")
+}
+
+func RunStage3() {
+
+	fmt.Println("Starting scraping stage 3 - collecting users details")
+
+	// Load environment variables from .env file
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	// Read allowed domain from environment variable
+	allowedDomain := os.Getenv("ALLOWED_DOMAIN")
+	if allowedDomain == "" {
+		log.Fatal("ALLOWED_DOMAIN environment variable is required")
+	}
+
+	// Initialize MongoDB connection
+	uri := os.Getenv("MONGODB_URI")
+	if uri == "" {
+		uri = "mongodb://localhost:27017"
+	}
+
+	// Connect to MongoDB
+	client, err := mongo.Connect(options.Client().ApplyURI(uri))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Check the connection
+	err = client.Ping(context.TODO(), nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Connected to MongoDB!")
+
+	// Instantiate default collector
+	c := colly.NewCollector(
+		colly.AllowedDomains(allowedDomain),
+		colly.Async(true),
+		colly.MaxDepth(1),
+		colly.UserAgent(utils.GetRandomUserAgent()),
+		colly.CacheDir("./cache"),
+	)
+
+	// Extract user details
+	c.OnHTML("div.tab-pane.profile", func(e *colly.HTMLElement) {
+		user := models.User{
+			ScrapeDate: time.Now().Format("2006-01-02 15:04:05"),
+		}
+		// Get username from the username dd element
+		user.Username = strings.TrimSpace(e.ChildText("dl dd"))
+
+		// Get join date and last login
+		e.ForEach("dl dd", func(i int, dd *colly.HTMLElement) {
+			switch i {
+			case 1:
+				user.JoinedDate = strings.TrimSpace(dd.Attr("title"))
+			case 2:
+				user.LastLogin = strings.TrimSpace(dd.Attr("title"))
+			}
+		})
+
+		// Get stats
+		// user.VisitedPlaces = len(e.DOM.ParentsUntil("~").Find("#visited-places .category-container").Nodes)
+		// user.AddedPlaces = len(e.DOM.ParentsUntil("~").Find("#added-places .category-container").Nodes)
+		// user.AddedPictures = len(e.DOM.ParentsUntil("~").Find("#added-pictures .category-container").Nodes)
+		user.CommentsCount = len(e.DOM.ParentsUntil("~").Find("#added-comments li").Nodes)
+		user.ChangesCount = len(e.DOM.ParentsUntil("~").Find("#added-changes li").Nodes)
+
+		// Save user to MongoDB
+		collection := client.Database("abandoned_places").Collection("users")
+
+		// Check if user exists
+		cursor, err := collection.Find(context.TODO(), map[string]string{"username": user.Username})
+		if err != nil {
+			log.Printf("Error checking for existing user: %v", err)
+			return
+		}
+
+		count := 0
+		if cursor.Next(context.TODO()) {
+			count++
+		}
+		cursor.Close(context.TODO())
+
+		if count > 0 {
+			_, err = collection.ReplaceOne(
+				context.TODO(),
+				map[string]string{"username": user.Username},
+				user,
+			)
+			if err != nil {
+				log.Printf("Failed to update user in MongoDB: %v", err)
+			} else {
+				fmt.Printf("Updated user in MongoDB: %s\n", user.Username)
+			}
+		} else {
+			_, err = collection.InsertOne(context.TODO(), user)
+			if err != nil {
+				log.Printf("Failed to insert user into MongoDB: %v", err)
+			} else {
+				fmt.Printf("Inserted user into MongoDB: %s\n", user.Username)
+			}
+		}
+	})
+
+	// Error handling
+	c.OnError(func(r *colly.Response, err error) {
+		log.Printf("Error scraping %s: %s", r.Request.URL, err)
+	})
+
+	// Query MongoDB for the highest user ID seen so far
+	collection := client.Database("abandoned_places").Collection("users")
+	lastUserDoc := bson.D{}
+	opts := options.FindOne().SetSort(bson.D{{Key: "userid", Value: -1}})
+	err = collection.FindOne(context.TODO(), bson.D{}, opts).Decode(&lastUserDoc)
+
+	// Assuming lastUserDoc is from MongoDB
+	startID := 1
+	if err == nil && len(lastUserDoc) > 0 {
+		for _, elem := range lastUserDoc {
+			if elem.Key == "userid" {
+				if userID, ok := elem.Value.(int64); ok {
+					startID = int(userID) + 1
+					break
+				}
+			}
+		}
+	}
+
+	// Read MAX_USER_PAGE_NUMBER from environment variable
+	maxUserPageNumber := os.Getenv("MAX_USER_PAGE_NUMBER")
+	if maxUserPageNumber == "" {
+		log.Fatal("MAX_USER_PAGE_NUMBER environment variable is required")
+	}
+	maxUserPageNumberInt, err := strconv.Atoi(maxUserPageNumber)
+	if err != nil {
+		log.Fatalf("Error converting MAX_USER_PAGE_NUMBER to integer: %s", err)
+	}
+	if maxUserPageNumberInt <= 0 {
+		log.Fatal("MAX_USER_PAGE_NUMBER must be a positive integer")
+	}
+
+	// Visit user profiles sequentially up to MAX_USER_PAGE_NUMBER
+	maxFailures := 10
+	consecutiveFailures := 0
+
+	for i := startID; i <= maxUserPageNumberInt && consecutiveFailures < maxFailures; i++ {
+		userURL := fmt.Sprintf("https://%s/pl/profile/show/%d", allowedDomain, i)
+		err = c.Visit(userURL)
+		if err != nil {
+			consecutiveFailures++
+			log.Printf("Failed to visit user %d: %v", i, err)
+		} else {
+			consecutiveFailures = 0
+		}
+	}
+
+	// Wait for scraping to finish
+	c.Wait()
+
+	// Close MongoDB connection
+	err = client.Disconnect(context.TODO())
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Scraping stage 3 finished. Data saved to database")
+
 }

@@ -14,7 +14,7 @@ Repo for basic tutorial-based Golang study
 ---
 
 ### todo
-- [ ] dubious shadowing
+- [x] dubious shadowing
 - [ ] monkey
 	- [ ] compiler
 	- [x] macros

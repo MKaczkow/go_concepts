@@ -26,8 +26,14 @@ Repo for basic tutorial-based Golang study
 - [x] upgrade / cleanup data model (hazards, details, etc.)
 - [x] fix 'brak głosów' issue
 - [x] czy na pewno nie za często robi się update (tzn. N update do 1 inserta faktycznie)
+- [x] new stage (3)
+- [ ] fix stage 3 to actually save data in mongo and have proper names
+- [x] change user-agent (colly?)
 
 ## notes
 * run relevant mongodb container first (port and address matching .env file)
 
 ### basics
+* run mongo container (via docker desktop - win goes brrr)
+* run mongo compass and connect to `localhost:49153` (sanity check)
+* crawl

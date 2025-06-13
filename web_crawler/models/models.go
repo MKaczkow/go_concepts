@@ -28,6 +28,22 @@ type Details struct {
 	Views          int         `json:"views"`
 }
 
+// UserProfile represents the overall structure of a user's profile page.
+type User struct {
+	Username         string `json:"username"`
+	JoinedDate       string `json:"joined_date"` // Use time.Time for actual parsing
+	LastLogin        string `json:"last_login"`  // Use time.Time for actual parsing
+	LastLoginTooltip string `json:"last_login_tooltip"`
+	AvatarURL        string `json:"avatar_url"`
+	// TODO: maybe later to create cross-reference with places
+	// VisitedPlaces     []PlaceSummary `json:"visited_places"`
+	// AddedPlaces       []PlaceSummary `json:"added_places"`
+	// Comments     []Comment `json:"comments"`
+	CommentsCount int    `json:"comments_count"`
+	ChangesCount  int    `json:"changes_count"` // Count of changes made
+	ScrapeDate    string `json:"scrape_date"`   // Date when the profile was scraped
+}
+
 type Coordinates struct {
 	Latitude  float64 `json:"latitude"`
 	Longitude float64 `json:"longitude"`
