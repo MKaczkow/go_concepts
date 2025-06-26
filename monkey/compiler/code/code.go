@@ -12,8 +12,24 @@ type Opcode byte
 
 const (
 	OpConstant Opcode = iota
-	OpAdd
 	OpPop
+	// Monkey supports 8 infix operations,
+	// with 4 of them being used for arithmetic: + , - , * , /
+	OpAdd
+	OpSub
+	OpMul
+	OpDiv
+	// Boolean literals should cause VM to load boolean values on to the stack,
+	// instead of evaluating to boolean values, as in 'evaluator'
+	OpTrue
+	OpFalse
+	// Now, for the comparison operators, we only actually need 3 opcodes to support all of them
+	OpEqual
+	OpNotEqual
+	OpGreaterThan
+	// Prefix expressions are even simpler
+	OpMinus
+	OpBang
 )
 
 type Definition struct {
@@ -23,10 +39,22 @@ type Definition struct {
 
 var definitions = map[Opcode]*Definition{
 	OpConstant: {"OpConstant", []int{2}},
-	OpAdd:      {"OpAdd", []int{}},
 	// 'OpPop' needs to be used after every expression, as they don't store value, only return it.
 	// That's the whole point of the 'expression vs statement' thing.
 	OpPop: {"OpPop", []int{}},
+	// Monkey supports 8 infix operations,
+	// with 4 of them being used for arithmetic: + , - , * , /
+	OpAdd:         {"OpAdd", []int{}},
+	OpSub:         {"OpSub", []int{}},
+	OpMul:         {"OpMul", []int{}},
+	OpDiv:         {"OpDiv", []int{}},
+	OpTrue:        {"OpTrue", []int{}},
+	OpFalse:       {"OpFalse", []int{}},
+	OpEqual:       {"OpEqual", []int{}},
+	OpNotEqual:    {"OpNotEqual", []int{}},
+	OpGreaterThan: {"OpGreaterThan", []int{}},
+	OpMinus:       {"OpMinus", []int{}},
+	OpBang:        {"OpBang", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
