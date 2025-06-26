@@ -30,6 +30,10 @@ const (
 	// Prefix expressions are even simpler
 	OpMinus
 	OpBang
+	// Jump opcodes are basically a way to control the flow of execution,
+	// so they are in fact conditionals
+	OpJumpNotTruthy
+	OpJump
 )
 
 type Definition struct {
@@ -44,17 +48,19 @@ var definitions = map[Opcode]*Definition{
 	OpPop: {"OpPop", []int{}},
 	// Monkey supports 8 infix operations,
 	// with 4 of them being used for arithmetic: + , - , * , /
-	OpAdd:         {"OpAdd", []int{}},
-	OpSub:         {"OpSub", []int{}},
-	OpMul:         {"OpMul", []int{}},
-	OpDiv:         {"OpDiv", []int{}},
-	OpTrue:        {"OpTrue", []int{}},
-	OpFalse:       {"OpFalse", []int{}},
-	OpEqual:       {"OpEqual", []int{}},
-	OpNotEqual:    {"OpNotEqual", []int{}},
-	OpGreaterThan: {"OpGreaterThan", []int{}},
-	OpMinus:       {"OpMinus", []int{}},
-	OpBang:        {"OpBang", []int{}},
+	OpAdd:           {"OpAdd", []int{}},
+	OpSub:           {"OpSub", []int{}},
+	OpMul:           {"OpMul", []int{}},
+	OpDiv:           {"OpDiv", []int{}},
+	OpTrue:          {"OpTrue", []int{}},
+	OpFalse:         {"OpFalse", []int{}},
+	OpEqual:         {"OpEqual", []int{}},
+	OpNotEqual:      {"OpNotEqual", []int{}},
+	OpGreaterThan:   {"OpGreaterThan", []int{}},
+	OpMinus:         {"OpMinus", []int{}},
+	OpBang:          {"OpBang", []int{}},
+	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
+	OpJump:          {"OpJump", []int{2}},
 }
 
 func Lookup(op byte) (*Definition, error) {
