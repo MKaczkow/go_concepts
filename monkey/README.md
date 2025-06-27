@@ -130,7 +130,16 @@ is represented as:
 
 ### further (possible) exercises
 - [ ] compiler
-	- [ ] chapter 1
+	- [x] chapter 1
+	- [x] chapter 2
+	- [x] chapter 3
+	- [ ] chapter 4
+	- [ ] chapter 5
+	- [ ] chapter 6
+	- [ ] chapter 7
+	- [ ] chapter 8
+	- [ ] chapter 9
+	- [ ] chapter 10
 	- [x] CI for monkey compiler
 - [ ] misc [ ] 
 	- [ ] fully support Unicode in Monkey (as of now, it's only ASCII)

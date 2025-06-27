@@ -132,7 +132,7 @@ func (c *Compiler) Compile(node ast.Node) error {
 			return err
 		}
 
-		// TODO: bogus value for now, fix later
+		// bogus value for now, will be replaced later (back-patching)
 		jumpNotTruthyPos := c.emit(code.OpJumpNotTruthy, 9999)
 
 		err = c.Compile(node.Consequence)
@@ -144,9 +144,28 @@ func (c *Compiler) Compile(node ast.Node) error {
 			c.removeLastPop()
 		}
 
-		afterConsequencePos := len(c.instructions)
-		// this is 'back-patching', prettry commonly used in simple compilers, like this one
-		c.changeOperand(jumpNotTruthyPos, afterConsequencePos)
+		if node.Alternative == nil {
+			afterConsequencePos := len(c.instructions)
+			// this is 'back-patching', prettry commonly used in simple compilers, like this one
+			c.changeOperand(jumpNotTruthyPos, afterConsequencePos)
+		} else {
+			jumpPos := c.emit(code.OpJump, 9999)
+
+			afterConsequencePos := len(c.instructions)
+			c.changeOperand(jumpNotTruthyPos, afterConsequencePos)
+
+			err := c.Compile(node.Alternative)
+			if err != nil {
+				return err
+			}
+
+			if c.lastInstructionIsPop() {
+				c.removeLastPop()
+			}
+
+			afterAlternativePos := len(c.instructions)
+			c.changeOperand(jumpPos, afterAlternativePos)
+		}
 
 	case *ast.BlockStatement:
 		for _, s := range node.Statements {
@@ -207,7 +226,7 @@ func (c *Compiler) removeLastPop() {
 
 func (c *Compiler) replaceInstruction(pos int, newInstruction []byte) {
 	for i := 0; i < len(newInstruction); i++ {
-		c.instructions[pos+1] = newInstruction[i]
+		c.instructions[pos+i] = newInstruction[i]
 	}
 }
 
