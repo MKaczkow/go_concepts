@@ -34,6 +34,10 @@ const (
 	// so they are in fact conditionals
 	OpJumpNotTruthy
 	OpJump
+	OpNull
+	// Binding-related opcodes
+	OpGetGlobal
+	OpSetGlobal
 )
 
 type Definition struct {
@@ -59,8 +63,12 @@ var definitions = map[Opcode]*Definition{
 	OpGreaterThan:   {"OpGreaterThan", []int{}},
 	OpMinus:         {"OpMinus", []int{}},
 	OpBang:          {"OpBang", []int{}},
-	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
 	OpJump:          {"OpJump", []int{2}},
+	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
+	OpNull:          {"OpNull", []int{}},
+	// Both have single 2-byte operand to hold the unique number of global binding
+	OpGetGlobal: {"OpGetGlobal", []int{2}},
+	OpSetGlobal: {"OpSetGlobal", []int{2}},
 }
 
 func Lookup(op byte) (*Definition, error) {

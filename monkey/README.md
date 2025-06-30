@@ -133,14 +133,15 @@ is represented as:
 	- [x] chapter 1
 	- [x] chapter 2
 	- [x] chapter 3
-	- [ ] chapter 4
-	- [ ] chapter 5
+	- [x] chapter 4 (conditionals, expressions)
+	- [ ] chapter 5 (bindings - `let` and `=`)
 	- [ ] chapter 6
 	- [ ] chapter 7
 	- [ ] chapter 8
 	- [ ] chapter 9
 	- [ ] chapter 10
 	- [x] CI for monkey compiler
+	- [ ] stack visualization (probably some simple function in `vm.go` file)
 - [ ] misc [ ] 
 	- [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
 	- [ ] read through Wren language [code](https://github.com/wren-lang/wren)

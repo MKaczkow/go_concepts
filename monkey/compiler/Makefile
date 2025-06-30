@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := run
+.DEFAULT_GOAL := build
 
 run:
 	go run main.go
@@ -11,3 +11,7 @@ test-verbose:
 test:
 	go test ./...
 .PHONY: test
+
+build:
+	go build -o monkey
+.PHONY: build

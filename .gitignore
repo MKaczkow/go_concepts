@@ -9,6 +9,12 @@ web_crawler/runs/
 web_crawler/cache/
 web_crawler/abandoned_places.places.json
 
+# Web App Bis
+web_app_bis/web_app_bis
+
+# Monkey Compiler
+monkey/compiler/monkey
+
 # Logs
 *.log
 
@@ -34,6 +40,3 @@ vendor/
 
 # API keys
 **/api_key
-
-# Custom
-web_app_bis/web_app_bis
