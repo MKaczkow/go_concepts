@@ -8,6 +8,7 @@ import (
 )
 
 const StackSize = 2048
+const GlobalsSize = 65536
 
 type VM struct {
 	// Which parts of VM do we need?
@@ -16,6 +17,7 @@ type VM struct {
 	// * constants
 	constants    []object.Object
 	instructions code.Instructions
+	globals      []object.Object
 	stack        []object.Object
 	// Always points to the next value, so top of stack is stack[sp-1]
 	sp int
@@ -29,9 +31,16 @@ func New(bytecode *compiler.Bytecode) *VM {
 	return &VM{
 		constants:    bytecode.Constants,
 		instructions: bytecode.Instructions,
+		globals:      make([]object.Object, GlobalsSize),
 		stack:        make([]object.Object, StackSize),
 		sp:           0,
 	}
+}
+
+func NewWithGlobalsStore(bytecode *compiler.Bytecode, s []object.Object) *VM {
+	vm := New(bytecode)
+	vm.globals = s
+	return vm
 }
 
 func (vm *VM) Run() error {
@@ -98,6 +107,21 @@ func (vm *VM) Run() error {
 		// so we need to check for *null* any time value produced by an expression is used.
 		case code.OpNull:
 			err := vm.push(Null)
+			if err != nil {
+				return err
+			}
+
+		case code.OpSetGlobal:
+			globalIndex := code.ReadUint16(vm.instructions[ip+1:])
+			ip += 2
+			// 'take top value from stack and put it into globals'
+			vm.globals[globalIndex] = vm.pop()
+
+		case code.OpGetGlobal:
+			globalIndex := code.ReadUint16(vm.instructions[ip+1:])
+			ip += 2
+			// 'take value from globals and put it into top of stack'
+			err := vm.push(vm.globals[globalIndex])
 			if err != nil {
 				return err
 			}

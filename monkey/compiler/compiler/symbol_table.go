@@ -34,10 +34,14 @@ func NewSymbolTable() *SymbolTable {
 	return &SymbolTable{store: s}
 }
 
-func (st *SymbolTable) Define(name string) Symbol {
-	return Symbol{}
+func (s *SymbolTable) Define(name string) Symbol {
+	symbol := Symbol{Name: name, Scope: GlobalScope, Index: s.numDefinitions}
+	s.store[name] = symbol
+	s.numDefinitions++
+	return symbol
 }
 
-func (st *SymbolTable) Resolve(name string) (Symbol, bool) {
-	return Symbol{}, false
+func (s *SymbolTable) Resolve(name string) (Symbol, bool) {
+	obj, ok := s.store[name]
+	return obj, ok
 }

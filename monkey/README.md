@@ -134,7 +134,7 @@ is represented as:
 	- [x] chapter 2
 	- [x] chapter 3
 	- [x] chapter 4 (conditionals, expressions)
-	- [ ] chapter 5 (bindings - `let` and `=`)
+	- [x] chapter 5 (bindings - `let` and `=`)
 	- [ ] chapter 6
 	- [ ] chapter 7
 	- [ ] chapter 8
@@ -143,6 +143,7 @@ is represented as:
 	- [x] CI for monkey compiler
 	- [ ] stack visualization (probably some simple function in `vm.go` file)
 - [ ] misc [ ] 
+    - [ ] add graceful shutdown to REPL (like `exit` command or `Ctrl+C`)
 	- [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
 	- [ ] read through Wren language [code](https://github.com/wren-lang/wren)
     - [ ] add nested macros support to monkey interpreter
