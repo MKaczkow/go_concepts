@@ -11,6 +11,8 @@ Repo for basic tutorial-based Golang study
 * test module -> `go test ./interpreter/lexer`
 
 ## adding new type checklist
+
+### for interpreter
 * [ ] add new token type (in `token/token.go`) to convert stream of characters into stream of tokens
 	* [ ] define token type 
 	* [ ] add branch in `NextToken()` (in `lexer/lexer.go`) function, calling new function 
@@ -22,6 +24,11 @@ Repo for basic tutorial-based Golang study
 * [ ] add evaluation logic to convert AST into output
 	* [ ] define new type object (in `object/object.go`)
 	* [ ] add evaluation logic (in `evaluator/evaluator.go`, function `Eval()`)
+
+### for compiler
+* [ ] reuse token type from `token.go`
+* [ ] add case-branch in `compiler.go` (`Compile` method)
+* [ ] add case-branch in `vm.go` (`Run` method)
 
 ## notes
 
@@ -135,7 +142,7 @@ is represented as:
 	- [x] chapter 3
 	- [x] chapter 4 (conditionals, expressions)
 	- [x] chapter 5 (bindings - `let` and `=`)
-	- [ ] chapter 6
+	- [ ] chapter 6 (3 more data types - arrays, strings, hashes)
 	- [ ] chapter 7
 	- [ ] chapter 8
 	- [ ] chapter 9

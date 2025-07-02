@@ -38,6 +38,8 @@ const (
 	// Binding-related opcodes
 	OpGetGlobal
 	OpSetGlobal
+	// Composite types
+	OpArray
 )
 
 type Definition struct {
@@ -69,6 +71,7 @@ var definitions = map[Opcode]*Definition{
 	// Both have single 2-byte operand to hold the unique number of global binding
 	OpGetGlobal: {"OpGetGlobal", []int{2}},
 	OpSetGlobal: {"OpSetGlobal", []int{2}},
+	OpArray:     {"OpArray", []int{2}},
 }
 
 func Lookup(op byte) (*Definition, error) {
