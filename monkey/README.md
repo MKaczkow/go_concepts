@@ -142,8 +142,8 @@ is represented as:
 	- [x] chapter 3
 	- [x] chapter 4 (conditionals, expressions)
 	- [x] chapter 5 (bindings - `let` and `=`)
-	- [ ] chapter 6 (3 more data types - arrays, strings, hashes)
-	- [ ] chapter 7
+	- [x] chapter 6 (3 more data types - arrays, strings, hashes)
+	- [ ] chapter 7 (functions)
 	- [ ] chapter 8
 	- [ ] chapter 9
 	- [ ] chapter 10

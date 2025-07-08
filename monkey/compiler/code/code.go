@@ -41,6 +41,11 @@ const (
 	// Composite types
 	OpArray
 	OpHash
+	OpIndex
+	// Functions
+	OpCall
+	OpReturnValue // explicit return
+	OpReturn      // implicit return - tell VM to return 'nil' - design decision
 )
 
 type Definition struct {
@@ -70,10 +75,14 @@ var definitions = map[Opcode]*Definition{
 	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
 	OpNull:          {"OpNull", []int{}},
 	// Both have single 2-byte operand to hold the unique number of global binding
-	OpGetGlobal: {"OpGetGlobal", []int{2}},
-	OpSetGlobal: {"OpSetGlobal", []int{2}},
-	OpArray:     {"OpArray", []int{2}},
-	OpHash:      {"OpHash", []int{2}},
+	OpGetGlobal:   {"OpGetGlobal", []int{2}},
+	OpSetGlobal:   {"OpSetGlobal", []int{2}},
+	OpArray:       {"OpArray", []int{2}},
+	OpHash:        {"OpHash", []int{2}},
+	OpIndex:       {"OpIndex", []int{}},
+	OpCall:        {"OpCall", []int{}},
+	OpReturnValue: {"OpReturnValue", []int{}},
+	OpReturn:      {"OpReturn", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {
