@@ -3,9 +3,12 @@ name: Monkey Interpreter CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'monkey/interpreter/**'
   pull_request:
     branches: [ "main" ]
-
+    paths:
+      - 'monkey/interpreter/**'
 jobs:
   test:
     name: Test and Coverage

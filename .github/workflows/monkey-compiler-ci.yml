@@ -3,8 +3,12 @@ name: Monkey Compiler CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'monkey/compiler/**'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'monkey/compiler/**'
 
 jobs:
   test:

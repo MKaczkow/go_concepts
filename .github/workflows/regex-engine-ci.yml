@@ -3,8 +3,12 @@ name: Regex Engine CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'regex_engine/**'    
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'regex_engine/**'
 
 jobs:
   test:

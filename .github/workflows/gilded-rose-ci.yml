@@ -3,8 +3,12 @@ name: Gilded Rose CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'gilded_rose/**'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'gilded_rose/**'
 
 jobs:
   test:

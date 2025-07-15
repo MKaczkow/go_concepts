@@ -3,8 +3,12 @@ name: Web App Bis CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'web_app_bis/**'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'web_app_bis/**'
 
 jobs:
   test:

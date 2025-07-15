@@ -3,8 +3,12 @@ name: Web Crawler CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'web_crawler/**'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'web_crawler/**'
 
 jobs:
   test:

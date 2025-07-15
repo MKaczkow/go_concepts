@@ -3,8 +3,12 @@ name: Learning Go Testing CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'learning_go/**'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'learning_go/**'
 
 jobs:
   test:
@@ -17,7 +21,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
-        go-version: '1.18'
+        go-version-file: 'gilded_rose/go.mod'
 
     - name: Run tests in 'learning_go/13_testing'
       run: |

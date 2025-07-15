@@ -21,6 +21,7 @@ Repo for basic tutorial-based Golang study
 	- [x] interpreter
 - [ ] regex engine
 - [ ] small cleanup
+- [x] only trigger CI pipeline when changes occur in given directory
 - [x] do `gilded rose` kata
 - [x] web crawler with `colly`
   - [x] mop up

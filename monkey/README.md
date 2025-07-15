@@ -149,7 +149,11 @@ is represented as:
 	- [ ] chapter 10
 	- [x] CI for monkey compiler
 	- [ ] stack visualization (probably some simple function in `vm.go` file)
-- [ ] misc [ ] 
+- [ ] misc
+    - [ ] add CLI tool (with powerful name, like 'chimp' or 'kong') to trigger compilation (no REPL)
+    - [ ] enable compiling from files (like .monkey or smth)
+    - [ ] enable multi-files compilation
+    - [ ] add stack visualization tool / script
     - [ ] add graceful shutdown to REPL (like `exit` command or `Ctrl+C`)
 	- [ ] fully support Unicode in Monkey (as of now, it's only ASCII)
 	- [ ] read through Wren language [code](https://github.com/wren-lang/wren)
