@@ -356,9 +356,9 @@ func TestCompilerScopes(t *testing.T) {
 			len(compiler.scopes[compiler.scopeIndex].instructions))
 	}
 	last := compiler.scopes[compiler.scopeIndex].lastInstruction
-	if last.Opcode != code.OpSub {
+	if last.OpCode != code.OpSub {
 		t.Errorf("lastInstruction.Opcode wrong. got=%d, want=%d",
-			last.Opcode, code.OpSub)
+			last.OpCode, code.OpSub)
 	}
 	compiler.leaveScope()
 	if compiler.scopeIndex != 0 {
@@ -371,37 +371,14 @@ func TestCompilerScopes(t *testing.T) {
 			len(compiler.scopes[compiler.scopeIndex].instructions))
 	}
 	last = compiler.scopes[compiler.scopeIndex].lastInstruction
-	if last.Opcode != code.OpAdd {
+	if last.OpCode != code.OpAdd {
 		t.Errorf("lastInstruction.Opcode wrong. got=%d, want=%d",
-			last.Opcode, code.OpAdd)
+			last.OpCode, code.OpAdd)
 	}
 	previous := compiler.scopes[compiler.scopeIndex].previousInstruction
-	if previous.Opcode != code.OpMul {
+	if previous.OpCode != code.OpMul {
 		t.Errorf("previousInstruction.Opcode wrong. got=%d, want=%d",
-			previous.Opcode, code.OpMul)
-	}
-}
-
-func runCompilerTests(t *testing.T, tests []compilerTestCase) {
-
-	t.Helper()
-
-	for _, tt := range tests {
-		program := parse(tt.input)
-		compiler := New()
-		err := compiler.Compile(program)
-		if err != nil {
-			t.Fatalf("compiler error: %s", err)
-		}
-		bytecode := compiler.Bytecode()
-		err = testInstructions(tt.expectedInstructions, bytecode.Instructions)
-		if err != nil {
-			t.Fatalf("testInstructions failed: %s", err)
-		}
-		err = testConstants(t, tt.expectedConstants, bytecode.Constants)
-		if err != nil {
-			t.Fatalf("testConstants failed: %s", err)
-		}
+			previous.OpCode, code.OpMul)
 	}
 }
 
@@ -503,6 +480,82 @@ func TestFunctions(t *testing.T) {
 				code.Make(code.OpPop),
 			},
 		},
+		{
+			input: `fn() { 1; 2 }`,
+			expectedConstants: []interface{}{
+				1,
+				2,
+				[]code.Instructions{
+					code.Make(code.OpConstant, 0),
+					code.Make(code.OpPop),
+					code.Make(code.OpConstant, 1),
+					code.Make(code.OpReturnValue),
+				},
+			},
+			expectedInstructions: []code.Instructions{
+				code.Make(code.OpConstant, 2),
+				code.Make(code.OpPop),
+			},
+		},
+	}
+	runCompilerTests(t, tests)
+}
+
+func TestFunctionsWithoutReturnValue(t *testing.T) {
+	tests := []compilerTestCase{
+		{
+			input: `fn() { }`,
+			expectedConstants: []interface{}{
+				[]code.Instructions{
+					code.Make(code.OpReturn),
+				},
+			},
+			expectedInstructions: []code.Instructions{
+				code.Make(code.OpConstant, 0),
+				code.Make(code.OpPop),
+			},
+		},
+	}
+	runCompilerTests(t, tests)
+}
+
+func TestFunctionCalls(t *testing.T) {
+	tests := []compilerTestCase{
+		{
+			input: `fn() { 24 }();`,
+			expectedConstants: []interface{}{
+				24,
+				[]code.Instructions{
+					code.Make(code.OpConstant, 0), // The literal "24"
+					code.Make(code.OpReturnValue),
+				},
+			},
+			expectedInstructions: []code.Instructions{
+				code.Make(code.OpConstant, 1), // The compiled function
+				code.Make(code.OpCall),
+				code.Make(code.OpPop),
+			},
+		},
+		{
+			input: `
+let noArg = fn() { 24 };
+noArg();
+`,
+			expectedConstants: []interface{}{
+				24,
+				[]code.Instructions{
+					code.Make(code.OpConstant, 0), // The literal "24"
+					code.Make(code.OpReturnValue),
+				},
+			},
+			expectedInstructions: []code.Instructions{
+				code.Make(code.OpConstant, 1), // The compiled function
+				code.Make(code.OpSetGlobal, 0),
+				code.Make(code.OpGetGlobal, 0),
+				code.Make(code.OpCall),
+				code.Make(code.OpPop),
+			},
+		},
 	}
 	runCompilerTests(t, tests)
 }
@@ -511,6 +564,29 @@ func parse(input string) *ast.Program {
 	l := lexer.New(input)
 	p := parser.New(l)
 	return p.ParseProgram()
+}
+
+func runCompilerTests(t *testing.T, tests []compilerTestCase) {
+
+	t.Helper()
+
+	for _, tt := range tests {
+		program := parse(tt.input)
+		compiler := New()
+		err := compiler.Compile(program)
+		if err != nil {
+			t.Fatalf("compiler error: %s", err)
+		}
+		bytecode := compiler.Bytecode()
+		err = testInstructions(tt.expectedInstructions, bytecode.Instructions)
+		if err != nil {
+			t.Fatalf("testInstructions failed: %s", err)
+		}
+		err = testConstants(t, tt.expectedConstants, bytecode.Constants)
+		if err != nil {
+			t.Fatalf("testConstants failed: %s", err)
+		}
+	}
 }
 
 func testInstructions(

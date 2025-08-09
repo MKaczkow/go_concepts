@@ -29,3 +29,4 @@ Repo for basic tutorial-based Golang study
 * no need for new opcode for `function literals` => they are represented as `object.CompiledFunction`
 * ... but we do need new opcode for function call => to tell VM *execute the function on the top of the stack* (`calling convention`) => but how to tell VM *this is the end of function, return*
 * `stack of compilation scopes`
+* `frame` (or `call frame` / `stack frame`) is the name for data structure that holds execution-relevant information
