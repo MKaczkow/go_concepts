@@ -38,6 +38,8 @@ const (
 	// Binding-related opcodes
 	OpGetGlobal
 	OpSetGlobal
+	OpGetLocal
+	OpSetLocal
 	// Composite types
 	OpArray
 	OpHash
@@ -75,8 +77,12 @@ var definitions = map[Opcode]*Definition{
 	OpJumpNotTruthy: {"OpJumpNotTruthy", []int{2}},
 	OpNull:          {"OpNull", []int{}},
 	// Both have single 2-byte operand to hold the unique number of global binding
-	OpGetGlobal:   {"OpGetGlobal", []int{2}},
-	OpSetGlobal:   {"OpSetGlobal", []int{2}},
+	OpGetGlobal: {"OpGetGlobal", []int{2}},
+	OpSetGlobal: {"OpSetGlobal", []int{2}},
+	// Note: both have 1-byte operand to hold the unique number of local binding,
+	// which means we are limited to 256 local variables per function
+	OpGetLocal:    {"OpGetLocal", []int{1}},
+	OpSetLocal:    {"OpSetLocal", []int{1}},
 	OpArray:       {"OpArray", []int{2}},
 	OpHash:        {"OpHash", []int{2}},
 	OpIndex:       {"OpIndex", []int{}},
@@ -113,6 +119,8 @@ func Make(op Opcode, operands ...int) []byte {
 	for i, o := range operands {
 		width := def.OperandWidths[i]
 		switch width {
+		case 1:
+			instruction[offset] = byte(o)
 		case 2:
 			binary.BigEndian.PutUint16(instruction[offset:], uint16(o))
 		}
