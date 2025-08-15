@@ -144,8 +144,9 @@ is represented as:
 	- [x] chapter 5 (bindings - `let` and `=`)
 	- [x] chapter 6 (3 more data types - arrays, strings, hashes)
 	- [ ] chapter 7 (functions)
-    	- [ ] allocate space for local bindings on the stack (i.e. *increase vm.sp* without pushing anything)
-    	- [ ] implement `OpSetLocal` and `OpGetLocal` instruction in the VM
+    	- [x] allocate space for local bindings on the stack (i.e. *increase vm.sp* without pushing anything)
+    	- [x] implement `OpSetLocal` and `OpGetLocal` instruction in the VM
+    	- [ ] `arguments` are actually very similar to local bindings, only difference being - they are created implicitly by the compiler and VM
 	- [ ] chapter 8
 	- [ ] chapter 9
 	- [ ] chapter 10

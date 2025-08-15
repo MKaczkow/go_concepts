@@ -201,6 +201,7 @@ func (vm *VM) Run() error {
 			}
 
 		case code.OpCall:
+			vm.currentFrame().ip += 1 // TODO: change this when arguments are implemented
 			fn, ok := vm.stack[vm.sp-1].(*object.CompiledFunction)
 			if !ok {
 				return fmt.Errorf("calling non-function")
