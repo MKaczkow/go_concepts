@@ -1,6 +1,8 @@
 package object
 
-import "fmt"
+import (
+	"fmt"
+)
 
 var Builtins = []struct {
 	Name    string
@@ -25,15 +27,89 @@ var Builtins = []struct {
 		},
 	},
 	{
-		"puts",
-		&Builtin{
-			Fn: func(args ...Object) Object {
-				for _, arg := range args {
-					fmt.Println(arg.Inspect())
-				}
+		"first",
+		&Builtin{Fn: func(args ...Object) Object {
+			if len(args) != 1 {
+				return newError("wrong number of arguments. got=%d, want=1", len(args))
+			}
+			if args[0].Type() != ARRAY_OBJ {
+				return newError("argument to `first` must be ARRAY, got %s", args[0].Type())
+			}
+			arr := args[0].(*Array)
+			if len(arr.Elements) > 0 {
+				return arr.Elements[0]
+			}
+			return nil
+		},
+		},
+	},
+	{
+		"last",
+		&Builtin{Fn: func(args ...Object) Object {
+			if len(args) != 1 {
+				return newError("wrong number of arguments. got=%d, want=1", len(args))
+			}
+			if args[0].Type() != ARRAY_OBJ {
+				return newError("argument to `first` must be ARRAY, got %s", args[0].Type())
+			}
+			arr := args[0].(*Array)
+			length := len(arr.Elements)
+			if len(arr.Elements) > 0 {
+				return arr.Elements[length-1]
+			}
+			return nil
+		},
+		},
+	},
+	{
+		"rest",
+		&Builtin{Fn: func(args ...Object) Object {
+			if len(args) != 1 {
+				return newError("wrong number of arguments. got=%d, want=1", len(args))
+			}
+			if args[0].Type() != ARRAY_OBJ {
+				return newError("argument to `first` must be ARRAY, got %s", args[0].Type())
+			}
+			arr := args[0].(*Array)
+			length := len(arr.Elements)
+			if length > 0 {
+				newElements := make([]Object, length-1, length-1)
+				copy(newElements, arr.Elements[1:length])
+				return &Array{Elements: newElements}
+			}
+			return nil
+		},
+		},
+	},
+	{
+		"push",
+		&Builtin{Fn: func(args ...Object) Object {
+			if len(args) != 1 {
+				return newError("wrong number of arguments. got=%d, want=1", len(args))
+			}
+			if args[0].Type() != ARRAY_OBJ {
+				return newError("argument to `first` must be ARRAY, got %s", args[0].Type())
+			}
+			arr := args[0].(*Array)
+			length := len(arr.Elements)
 
-				return nil
-			},
+			newElements := make([]Object, length+1, length+1)
+			copy(newElements, arr.Elements)
+			newElements[length] = args[1]
+
+			return &Array{Elements: newElements}
+		},
+		},
+	},
+	{
+		"puts",
+		&Builtin{Fn: func(args ...Object) Object {
+			for _, arg := range args {
+				fmt.Println(arg.Inspect())
+			}
+
+			return nil
+		},
 		},
 	},
 }

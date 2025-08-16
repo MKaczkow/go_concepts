@@ -148,7 +148,8 @@ is represented as:
     	- [x] implement `OpSetLocal` and `OpGetLocal` instruction in the VM
     	- [x] `arguments` are actually very similar to local bindings, only difference being - they are created implicitly by the compiler and VM
 	- [ ] chapter 8
-    	- [ ] move builtins to `object` package, which is the *right thing to do* design-wise
+    	- [x] move builtins to `object` package, which is the *right thing to do* design-wise
+    	- [ ] add separate scope for built-in functions, as they are neither global nor local scope
 	- [ ] chapter 9
 	- [ ] chapter 10
 	- [x] CI for monkey compiler
