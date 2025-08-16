@@ -147,14 +147,14 @@ is represented as:
     	- [x] allocate space for local bindings on the stack (i.e. *increase vm.sp* without pushing anything)
     	- [x] implement `OpSetLocal` and `OpGetLocal` instruction in the VM
     	- [x] `arguments` are actually very similar to local bindings, only difference being - they are created implicitly by the compiler and VM
-	- [ ] chapter 8
+	- [x] chapter 8
     	- [x] move builtins to `object` package, which is the *right thing to do* design-wise
-    	- [ ] add separate scope for built-in functions, as they are neither global nor local scope
+    	- [x] add separate scope for built-in functions, as they are neither global nor local scope
 	- [ ] chapter 9
 	- [ ] chapter 10
 	- [x] CI for monkey compiler
-	- [ ] stack visualization (probably some simple function in `vm.go` file)
 - [ ] misc
+	- [ ] add stack visualization to compiler (probably some simple function in `vm.go` file)
     - [ ] add CLI tool (with powerful name, like 'chimp' or 'kong') to trigger compilation (no REPL)
     - [ ] enable compiling from files (like .monkey or smth)
     - [ ] enable multi-files compilation
