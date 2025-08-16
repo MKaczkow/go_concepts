@@ -143,11 +143,12 @@ is represented as:
 	- [x] chapter 4 (conditionals, expressions)
 	- [x] chapter 5 (bindings - `let` and `=`)
 	- [x] chapter 6 (3 more data types - arrays, strings, hashes)
-	- [ ] chapter 7 (functions)
+	- [x] chapter 7 (functions)
     	- [x] allocate space for local bindings on the stack (i.e. *increase vm.sp* without pushing anything)
     	- [x] implement `OpSetLocal` and `OpGetLocal` instruction in the VM
-    	- [ ] `arguments` are actually very similar to local bindings, only difference being - they are created implicitly by the compiler and VM
+    	- [x] `arguments` are actually very similar to local bindings, only difference being - they are created implicitly by the compiler and VM
 	- [ ] chapter 8
+    	- [ ] move builtins to `object` package, which is the *right thing to do* design-wise
 	- [ ] chapter 9
 	- [ ] chapter 10
 	- [x] CI for monkey compiler

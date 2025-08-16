@@ -201,14 +201,13 @@ func (vm *VM) Run() error {
 			}
 
 		case code.OpCall:
-			vm.currentFrame().ip += 1 // TODO: change this when arguments are implemented
-			fn, ok := vm.stack[vm.sp-1].(*object.CompiledFunction)
-			if !ok {
-				return fmt.Errorf("calling non-function")
+			numArgs := code.ReadUint8(ins[ip+1:])
+			vm.currentFrame().ip += 1
+
+			err := vm.callFunction(int(numArgs))
+			if err != nil {
+				return err
 			}
-			frame := NewFrame(fn, vm.sp)
-			vm.pushFrame(frame)
-			vm.sp = frame.basePointer + fn.NumLocals
 
 		case code.OpReturnValue:
 			returnValue := vm.pop()
@@ -444,6 +443,43 @@ func (vm *VM) buildHash(startindex, endIndex int) (object.Object, error) {
 	return &object.Hash{Pairs: hashedPairs}, nil
 }
 
+func (vm *VM) currentFrame() *Frame {
+	return vm.frames[vm.framesIndex-1]
+}
+
+func (vm *VM) pushFrame(f *Frame) {
+	vm.frames[vm.framesIndex] = f
+	vm.framesIndex++
+}
+
+func (vm *VM) popFrame() *Frame {
+	vm.framesIndex--
+	return vm.frames[vm.framesIndex]
+}
+
+func (vm *VM) callFunction(numArgs int) error {
+
+	// Performs type assertion to ensure we 'hit' the function on the stack
+	// x.(T) means 'try to convert x to type T' and returns 'comma ok' idiom
+	// '-1' is because the stack pointer point to the slot where next element will be pushed,
+	// no the topmost element of the stack.
+	fn, ok := vm.stack[vm.sp-1-numArgs].(*object.CompiledFunction)
+	if !ok {
+		return fmt.Errorf("calling non-function")
+	}
+
+	if numArgs != fn.NumParameters {
+		return fmt.Errorf("wrong number of arguments: want=%d, got=%d", fn.NumParameters, numArgs)
+	}
+
+	frame := NewFrame(fn, vm.sp-numArgs)
+	vm.pushFrame(frame)
+
+	vm.sp = frame.basePointer + fn.NumLocals
+
+	return nil
+}
+
 func nativeBoolToBooleanObject(input bool) *object.Boolean {
 	if input {
 		return True
@@ -463,18 +499,4 @@ func isTruthy(obj object.Object) bool {
 	default:
 		return true
 	}
-}
-
-func (vm *VM) currentFrame() *Frame {
-	return vm.frames[vm.framesIndex-1]
-}
-
-func (vm *VM) pushFrame(f *Frame) {
-	vm.frames[vm.framesIndex] = f
-	vm.framesIndex++
-}
-
-func (vm *VM) popFrame() *Frame {
-	vm.framesIndex--
-	return vm.frames[vm.framesIndex]
 }

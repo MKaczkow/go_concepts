@@ -183,7 +183,8 @@ type CompiledFunction struct {
 	Instructions code.Instructions
 	// Allows for deciding 'how much space to reserve on the stack for locals'
 	// in the 'function stack', aka 'hole in the stack'
-	NumLocals int
+	NumLocals     int
+	NumParameters int
 }
 
 func (cf *CompiledFunction) Type() ObjectType { return COMPILED_FUNCTION_OBJ }
