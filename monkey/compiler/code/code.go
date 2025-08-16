@@ -50,6 +50,7 @@ const (
 	OpReturn      // implicit return - tell VM to return 'nil' - design decision
 	OpGetBuiltin
 	OpClosure // Sends "message in to the future"
+	OpGetFree
 )
 
 type Definition struct {
@@ -93,6 +94,7 @@ var definitions = map[Opcode]*Definition{
 	OpReturn:      {"OpReturn", []int{}},
 	OpGetBuiltin:  {"OpGetBuiltin", []int{1}},
 	OpClosure:     {"OpClosure", []int{2, 1}}, // 2 operands are: constant index and num of free variables
+	OpGetFree:     {"OpGetFree", []int{1}},
 }
 
 func Lookup(op byte) (*Definition, error) {
