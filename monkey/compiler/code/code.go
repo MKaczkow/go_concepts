@@ -51,6 +51,7 @@ const (
 	OpGetBuiltin
 	OpClosure // Sends "message in to the future"
 	OpGetFree
+	OpCurrentClosure
 )
 
 type Definition struct {
@@ -84,17 +85,18 @@ var definitions = map[Opcode]*Definition{
 	OpSetGlobal: {"OpSetGlobal", []int{2}},
 	// Note: both have 1-byte operand to hold the unique number of local binding,
 	// which means we are limited to 256 local variables per function
-	OpGetLocal:    {"OpGetLocal", []int{1}},
-	OpSetLocal:    {"OpSetLocal", []int{1}},
-	OpArray:       {"OpArray", []int{2}},
-	OpHash:        {"OpHash", []int{2}},
-	OpIndex:       {"OpIndex", []int{}},
-	OpCall:        {"OpCall", []int{1}},
-	OpReturnValue: {"OpReturnValue", []int{}},
-	OpReturn:      {"OpReturn", []int{}},
-	OpGetBuiltin:  {"OpGetBuiltin", []int{1}},
-	OpClosure:     {"OpClosure", []int{2, 1}}, // 2 operands are: constant index and num of free variables
-	OpGetFree:     {"OpGetFree", []int{1}},
+	OpGetLocal:       {"OpGetLocal", []int{1}},
+	OpSetLocal:       {"OpSetLocal", []int{1}},
+	OpArray:          {"OpArray", []int{2}},
+	OpHash:           {"OpHash", []int{2}},
+	OpIndex:          {"OpIndex", []int{}},
+	OpCall:           {"OpCall", []int{1}},
+	OpReturnValue:    {"OpReturnValue", []int{}},
+	OpReturn:         {"OpReturn", []int{}},
+	OpGetBuiltin:     {"OpGetBuiltin", []int{1}},
+	OpClosure:        {"OpClosure", []int{2, 1}}, // 2 operands are: constant index and num of free variables
+	OpGetFree:        {"OpGetFree", []int{1}},
+	OpCurrentClosure: {"OpCurrentClosure", []int{}},
 }
 
 func Lookup(op byte) (*Definition, error) {

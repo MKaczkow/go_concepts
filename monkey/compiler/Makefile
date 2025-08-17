@@ -15,3 +15,10 @@ test:
 build:
 	go build -o monkey
 .PHONY: build
+
+bench:
+	go build -o fibonacci ./benchmark
+	./fibonacci -engine=eval
+	./fibonacci -engine=vm
+	rm fibonacci
+.PHONY: bench
