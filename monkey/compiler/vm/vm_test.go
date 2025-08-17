@@ -243,50 +243,51 @@ func TestCallingFunctionsWithBindings(t *testing.T) {
 	tests := []vmTestCase{
 		{
 			input: `
-let one = fn() { let one = 1; one };
-one();
-`,
+		let one = fn() { let one = 1; one };
+		one();
+		`,
 			expected: 1,
 		},
 		{
 			input: `
-let oneAndTwo = fn() { let one = 1; let two = 2; one + two; };
-oneAndTwo();
-`,
+		let oneAndTwo = fn() { let one = 1; let two = 2; one + two; };
+		oneAndTwo();
+		`,
 			expected: 3,
 		},
 		{
 			input: `
-let oneAndTwo = fn() { let one = 1; let two = 2; one + two; };
-let threeAndFour = fn() { let three = 3; let four = 4; three + four; };
-oneAndTwo() + threeAndFour();
-`,
+		let oneAndTwo = fn() { let one = 1; let two = 2; one + two; };
+		let threeAndFour = fn() { let three = 3; let four = 4; three + four; };
+		oneAndTwo() + threeAndFour();
+		`,
 			expected: 10,
 		},
 		{
 			input: `
-let firstFoobar = fn() { let foobar = 50; foobar; };
-let secondFoobar = fn() { let foobar = 100; foobar; };
-firstFoobar() + secondFoobar();
-`,
+		let firstFoobar = fn() { let foobar = 50; foobar; };
+		let secondFoobar = fn() { let foobar = 100; foobar; };
+		firstFoobar() + secondFoobar();
+		`,
 			expected: 150,
 		},
-		{ // TODO: check if this is correct (after each function def. there should be ';' or not?)
+		{
 			input: `
-let globalSeed = 50;
-let minusOne = fn() {
-	let num = 1;
-	globalSeed - num;
-};
-let minusTwo = fn() {
-	let num = 2;
-	globalSeed - num;
-};
-minusOne() + minusTwo();
-`,
+		let globalSeed = 50;
+		let minusOne = fn() {
+			let num = 1;
+			globalSeed - num;
+		}
+		let minusTwo = fn() {
+			let num = 2;
+			globalSeed - num;
+		}
+		minusOne() + minusTwo();
+		`,
 			expected: 97,
 		},
 	}
+
 	runVmTests(t, tests)
 }
 

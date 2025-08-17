@@ -168,7 +168,7 @@ func (p *Parser) parseLetStatement() *ast.LetStatement {
 		fl.Name = stmt.Name.Value
 	}
 
-	for !p.curTokenIs(token.SEMICOLON) {
+	for p.peekTokenIs(token.SEMICOLON) {
 		p.nextToken()
 	}
 
