@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := run
+.DEFAULT_GOAL := vet 
 
 fmt:
 	go fmt ./...
@@ -16,6 +16,10 @@ build: vet
 	go build main.go
 .PHONY: build
 
-run: vet
-	go run main.go
-.PHONY: run
+run-udp: vet
+	go run listeners/udp/main.go
+.PHONY: run-udp
+
+run-tcp: vet
+	go run listeners/tcp/main.go
+.PHONY: run-tcp
