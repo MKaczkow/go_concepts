@@ -8,4 +8,14 @@ layout:
 - go.kubebuilder.io/v4
 projectName: custom-ec2-operator
 repo: github.com/mkaczkow/go_concepts
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: some.domain
+  group: compute
+  kind: EC2Instance
+  path: github.com/mkaczkow/go_concepts/api/v1alpha1
+  version: v1alpha1
 version: "3"
