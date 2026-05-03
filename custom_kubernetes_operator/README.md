@@ -5,6 +5,9 @@ Repo for basic tutorial-based Golang study
 
 ### todo
 - [ ] maybe this should be a separate repo
+- [ ] mini-docs / 'tutorial for tutorial' to speed up starting and preparing stuff after break
+- [x] move CI into project-level CI
+- [ ] fix CI (Go version stuff)
 
 ### custom kubernetes operator
 * `Controller` - loop that forevewer and observes state of some resource
@@ -16,11 +19,19 @@ Repo for basic tutorial-based Golang study
 
 #### kubebuilder
 * `Spec` and `Status` are really important, they basically define what the resource will be showing and doing
-* whatever we see on kubernetes resources is defined in `TypeMeta`
+* whatever we see on kubernetes resources is defined in `TypeMeta`, for example `Kind`
 * ... there is also an object metadata, in `ObjectMeta`
 
+#### controller-runtime
+* ... this is also important, don't know why yet
+
 #### commands
-* `kubectl cluster create --config cluster.yaml`
+* `k3d version` (sanity check)
+* `k3d cluster create --config cluster.yaml`
+* `kubectl cluster-info` (verify creation)
+* `k3d cluster delete --all`
 
 #### reference
 * [freecodecamp](https://www.freecodecamp.org/news/build-your-own-kubernetes-operators-with-go-and-kubebuilder/)
+* [act - useful for testing CI (github)](https://github.com/nektos/act)
+* [act - useful for testing CI (docs)](https://nektosact.com/)

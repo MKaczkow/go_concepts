@@ -1,8 +1,14 @@
-name: E2E Tests
+name: Kubernetes Operator E2E Tests
 
 on:
   push:
+    branches: [ "main" ]
+    paths:
+      - 'custom_kubernetes_operator/**'
   pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'custom_kubernetes_operator/**'
 
 jobs:
   test-e2e:
@@ -15,7 +21,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
-          go-version-file: go.mod
+          go-version-file: 'custom_kubernetes_operator/custom-ec2-operator/go.mod'
 
       - name: Install the latest version of kind
         run: |
@@ -28,5 +34,6 @@ jobs:
 
       - name: Running Test e2e
         run: |
+          cd custom_kubernetes_operator/custom-ec2-operator
           go mod tidy
           make test-e2e
