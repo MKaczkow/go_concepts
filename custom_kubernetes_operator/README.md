@@ -10,12 +10,14 @@ Repo for basic tutorial-based Golang study
 - [ ] fix CI (Go version stuff)
 
 ### custom kubernetes operator
-* `Controller` - loop that forevewer and observes state of some resource
+* `Controller` - loop that runs forever and observes state of some resource
 * `Idempotence` - controller should be idempotent, meaning that after running it 1 up to N times, the result should be the same
-* `Reconcile` - loop is going to eventually match the desired state via the process of reconciliation (implementing this logic is important)
+* `Reconcile` - loop is going to eventually match the desired state via the process of reconciliation; implementing this logic is v. important, actual business logic goes there, implementing `Reconciler` interface
 * ... so Kubernetes is `eventually consistent`
 * `k3d` is used as local Kubernetes cluster
 * `kubebuilder` is used as a operator-building framework
+* ... actually it uses `controller-runtime` under the hood
+* ... and another options is using `Operator SDK`
 * entry points (`cmd/main.go`) exposes some useful stuff, like metrics
 
 #### kubebuilder

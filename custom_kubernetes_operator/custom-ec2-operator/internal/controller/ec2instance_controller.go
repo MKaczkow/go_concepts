@@ -18,6 +18,7 @@ package controller
 
 import (
 	"context"
+	"fmt"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -50,6 +51,10 @@ func (r *EC2InstanceReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 	_ = logf.FromContext(ctx)
 
 	// TODO(user): your logic here
+	ec2Instance := &computev1alpha1.EC2Instance{}
+	r.Get(ctx, req.NamespacedName, ec2Instance)
+	fmt.Printf("Reconciling EC2Instance: %s/%s\n", ec2Instance.Namespace, ec2Instance.Name)
+	// TODO: nanana business logic
 
 	return ctrl.Result{}, nil
 }
