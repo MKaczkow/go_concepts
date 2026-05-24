@@ -39,6 +39,7 @@ type EC2InstanceSpec struct {
 	Tags              map[string]string `json:"tags,omitempty"`
 	Storage           StorageConfig     `json:"storage"`
 	AdditionalStorage []StorageConfig   `json:"additionalStorage,omitempty"`
+	InstanceName      string            `json:"instanceName"`
 }
 
 type StorageConfig struct {

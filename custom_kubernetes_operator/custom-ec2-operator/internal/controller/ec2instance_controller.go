@@ -18,7 +18,6 @@ package controller
 
 import (
 	"context"
-	"fmt"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -48,14 +47,14 @@ type EC2InstanceReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.23.3/pkg/reconcile
 func (r *EC2InstanceReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = logf.FromContext(ctx)
-
-	// TODO(user): your logic here
+	log := logf.FromContext(ctx)
 	ec2Instance := &computev1alpha1.EC2Instance{}
 	r.Get(ctx, req.NamespacedName, ec2Instance)
-	fmt.Printf("Reconciling EC2Instance: %s/%s\n", ec2Instance.Namespace, ec2Instance.Name)
-	// TODO: nanana business logic
+	log.Info("Reconciling EC2Instance: %s/%s\n", ec2Instance.Namespace, ec2Instance.Name)
 
+	// Exiting reonciller needs to tell:
+	// 1. If there was an error (in lieu with Go's 'comma, ok' style)
+	// 2. Is there a need to re-run the renconciliation
 	return ctrl.Result{}, nil
 }
 
