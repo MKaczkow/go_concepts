@@ -1,0 +1,33 @@
+name: Kubernetes Operator Lint
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'custom_kubernetes_operator/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'custom_kubernetes_operator/**'
+
+jobs:
+  lint:
+    name: Run on Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the code
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: 'custom_kubernetes_operator/custom-ec2-operator/go.mod'
+
+      - name: Check linter configuration
+        run: |
+          cd custom_kubernetes_operator/custom-ec2-operator
+          make lint-config
+      - name: Run linter
+        run: |
+          cd custom_kubernetes_operator/custom-ec2-operator
+          make lint
