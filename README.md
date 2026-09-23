@@ -7,9 +7,12 @@ Repo for basic tutorial-based Golang study
 [![Web Crawler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-crawler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-crawler-ci.yml)  
 [![Regex Engine CI](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml)  
 [![Gilded Rose CI](https://github.com/MKaczkow/go_concepts/actions/workflows/gilded-rose-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/gilded-rose-ci.yml)  
+[![Kubernetes Operator Lint](https://github.com/MKaczkow/go_concepts/actions/workflows/kubernetes-operator-lint.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/kubernetes-operator-lint.yml)  
+[![Kubernetes Operator Tests](https://github.com/MKaczkow/go_concepts/actions/workflows/kubernetes-operator-test.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/kubernetes-operator-test.yml)  
+[![Kubernetes Operator E2E Tests](https://github.com/MKaczkow/go_concepts/actions/workflows/kubernetes-operator-test-e2e.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/kubernetes-operator-test-e2e.yml)  
 [![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml)  
-[![Monkey Compiler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml)
-![Coverage](https://img.shields.io/badge/Coverage-78.3%25-brightgreen)
+[![Monkey Compiler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml)  
+![Monkey Compiler Coverage](https://img.shields.io/badge/Coverage-78.3%25-brightgreen)
 
 ---
 
