@@ -3,12 +3,18 @@ package hnsw
 import (
 	"math"
 	"math/rand"
+	"slices"
 )
 
 // assignLevel draws a random level using the exponential distribution from
 // the HNSW paper, normalized by levelMult (mL).
+//
+// Uses 1-rng.Float64() rather than rng.Float64() as the input to Log: the
+// range of 1-rng.Float64() is (0, 1], excluding 0, so -math.Log(...) can
+// never produce +Inf (which rng.Float64() returning exactly 0 would cause,
+// astronomically rarely).
 func assignLevel(rng *rand.Rand, levelMult float64) int {
-	return int(math.Floor(-math.Log(rng.Float64()) * levelMult))
+	return int(math.Floor(-math.Log(1-rng.Float64()) * levelMult))
 }
 
 // insert adds vector to the graph, wiring it into every layer from its
@@ -19,7 +25,7 @@ func (idx *Index[T]) insert(vector []T) uint64 {
 	idx.nextID++
 
 	level := assignLevel(idx.rng, idx.cfg.LevelMult)
-	n := newNode(id, vector, level)
+	n := newNode(id, slices.Clone(vector), level)
 	idx.nodes[id] = n
 
 	if len(idx.nodes) == 1 {

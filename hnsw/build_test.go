@@ -40,6 +40,25 @@ func TestInsertFirstNode(t *testing.T) {
 	}
 }
 
+func TestInsertClonesVector(t *testing.T) {
+	idx := New[float64](EuclideanDistance[float64], DefaultConfig())
+
+	buf := []float64{1, 2, 3}
+	id := idx.insert(buf)
+
+	buf[0] = 999
+	buf[1] = 999
+	buf[2] = 999
+
+	stored := idx.nodes[id].vector
+	want := []float64{1, 2, 3}
+	for i := range want {
+		if stored[i] != want[i] {
+			t.Errorf("stored vector[%d] = %v, want %v (mutating caller's buffer after Insert affected stored vector)", i, stored[i], want[i])
+		}
+	}
+}
+
 func TestInsertWiresNeighbors(t *testing.T) {
 	cfg := DefaultConfig()
 	cfg.M = 2

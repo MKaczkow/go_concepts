@@ -32,7 +32,35 @@ func DefaultConfig() Config {
 	}
 }
 
+// normalizeConfig returns cfg with any zero-valued field replaced by the
+// corresponding field from DefaultConfig(). This protects against a
+// caller-constructed Config (e.g. a struct literal that omits a field, or
+// a zero-value Config{}) silently producing a broken or panicking index.
+func normalizeConfig(cfg Config) Config {
+	def := DefaultConfig()
+	if cfg.M == 0 {
+		cfg.M = def.M
+	}
+	if cfg.MMax0 == 0 {
+		cfg.MMax0 = def.MMax0
+	}
+	if cfg.EfConstruction == 0 {
+		cfg.EfConstruction = def.EfConstruction
+	}
+	if cfg.EfSearch == 0 {
+		cfg.EfSearch = def.EfSearch
+	}
+	if cfg.LevelMult == 0 {
+		cfg.LevelMult = def.LevelMult
+	}
+	return cfg
+}
+
 // EuclideanDistance is a ready-to-use DistanceFunc for L2 distance.
+//
+// As with any DistanceFunc, a and b must have the same length; a and all
+// other vectors passed to the same Index must also share that length.
+// Mismatched lengths cause a panic (index out of range), not an error.
 func EuclideanDistance[T Numeric](a, b []T) float64 {
 	var sum float64
 	for i := range a {

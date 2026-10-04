@@ -8,6 +8,7 @@ Repo for basic tutorial-based Golang study
 [![Regex Engine CI](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml)  
 [![HNSW CI](https://github.com/MKaczkow/go_concepts/actions/workflows/hnsw-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/hnsw-ci.yml)  
 [![Gilded Rose CI](https://github.com/MKaczkow/go_concepts/actions/workflows/gilded-rose-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/gilded-rose-ci.yml)  
+[![Hierarchical Navigable Small Worlds CI](https://github.com/MKaczkow/go_concepts/actions/workflows/hnsw-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/hnsw-ci.yml)  
 [![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml)  
 [![Monkey Compiler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml)
 ![Coverage](https://img.shields.io/badge/Coverage-78.3%25-brightgreen)

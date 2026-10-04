@@ -3,6 +3,7 @@ package hnsw
 import (
 	"math"
 	"sort"
+	"sync"
 	"testing"
 )
 
@@ -78,4 +79,86 @@ func TestInsertAndSearchRecall(t *testing.T) {
 			t.Errorf("got[%d].Distance = %v, want %v", i, got[i].Distance, want[i].Distance)
 		}
 	}
+}
+
+func TestSearchNonPositiveK(t *testing.T) {
+	idx := New[float64](EuclideanDistance[float64], DefaultConfig())
+	idx.Insert([]float64{1, 2})
+
+	if got := idx.Search([]float64{1, 2}, 0); got != nil {
+		t.Errorf("Search(k=0) = %v, want nil", got)
+	}
+	if got := idx.Search([]float64{1, 2}, -5); got != nil {
+		t.Errorf("Search(k=-5) = %v, want nil", got)
+	}
+}
+
+// TestFloat32Index is a compile-time + basic-behavior check that the
+// float32 half of the Numeric constraint works, not a full recall test.
+func TestFloat32Index(t *testing.T) {
+	idx := New[float32](EuclideanDistance[float32], DefaultConfig())
+
+	vectors := [][]float32{
+		{0, 0},
+		{1, 1},
+		{2, 2},
+		{3, 3},
+		{10, 10},
+	}
+	for _, v := range vectors {
+		idx.Insert(v)
+	}
+
+	got := idx.Search([]float32{0.5, 0.5}, 2)
+	if len(got) == 0 {
+		t.Fatal("Search() returned no results, want non-empty")
+	}
+	for _, r := range got {
+		if r.Distance < 0 {
+			t.Errorf("result distance = %v, want >= 0", r.Distance)
+		}
+	}
+}
+
+// TestConcurrentInsertAndSearch exercises Insert and Search running
+// concurrently under the race detector. It makes no assertion stronger
+// than "doesn't panic / doesn't race" — concurrent inserts make exact
+// search results nondeterministic by design.
+func TestConcurrentInsertAndSearch(t *testing.T) {
+	idx := New[float64](EuclideanDistance[float64], DefaultConfig())
+
+	// Seed with a few points so Search has something to work with from
+	// the start.
+	for i := 0; i < 5; i++ {
+		idx.Insert([]float64{float64(i), float64(i)})
+	}
+
+	const (
+		numInserters    = 4
+		numSearchers    = 4
+		opsPerGoroutine = 25
+	)
+
+	var wg sync.WaitGroup
+	wg.Add(numInserters + numSearchers)
+
+	for g := 0; g < numInserters; g++ {
+		go func(g int) {
+			defer wg.Done()
+			for i := 0; i < opsPerGoroutine; i++ {
+				idx.Insert([]float64{float64(g*100 + i), float64(i)})
+			}
+		}(g)
+	}
+
+	for g := 0; g < numSearchers; g++ {
+		go func(g int) {
+			defer wg.Done()
+			for i := 0; i < opsPerGoroutine; i++ {
+				idx.Search([]float64{float64(i), float64(g)}, 3)
+			}
+		}(g)
+	}
+
+	wg.Wait()
 }

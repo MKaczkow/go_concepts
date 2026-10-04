@@ -110,14 +110,14 @@ func greedySearch[T Numeric](
 	return curr
 }
 
-// selectNeighbors picks up to max candidates with the smallest distance,
+// selectNeighbors picks up to limit candidates with the smallest distance,
 // returning their IDs sorted by ascending distance.
-func selectNeighbors(candidates []candidate, max int) []uint64 {
+func selectNeighbors(candidates []candidate, limit int) []uint64 {
 	sorted := make([]candidate, len(candidates))
 	copy(sorted, candidates)
 	sort.Slice(sorted, func(i, j int) bool { return sorted[i].distance < sorted[j].distance })
-	if len(sorted) > max {
-		sorted = sorted[:max]
+	if len(sorted) > limit {
+		sorted = sorted[:limit]
 	}
 	ids := make([]uint64, len(sorted))
 	for i, c := range sorted {

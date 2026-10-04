@@ -58,7 +58,7 @@ func Load[T Numeric](r io.Reader, dist DistanceFunc[T]) (*Index[T], error) {
 
 	idx := &Index[T]{
 		dist:       dist,
-		cfg:        snap.Cfg,
+		cfg:        normalizeConfig(snap.Cfg),
 		nodes:      make(map[uint64]*node[T], len(snap.Nodes)),
 		entryPoint: snap.EntryPoint,
 		topLevel:   snap.TopLevel,
@@ -67,6 +67,21 @@ func Load[T Numeric](r io.Reader, dist DistanceFunc[T]) (*Index[T], error) {
 	}
 	for _, sn := range snap.Nodes {
 		idx.nodes[sn.ID] = &node[T]{id: sn.ID, vector: sn.Vector, neighbors: sn.Neighbors}
+	}
+
+	if len(snap.Nodes) > 0 {
+		if _, ok := idx.nodes[snap.EntryPoint]; !ok {
+			return nil, fmt.Errorf("hnsw: invalid snapshot: entry point does not refer to a node in the snapshot")
+		}
+	}
+	for _, n := range idx.nodes {
+		for _, neighbors := range n.neighbors {
+			for _, nid := range neighbors {
+				if _, ok := idx.nodes[nid]; !ok {
+					return nil, fmt.Errorf("hnsw: invalid snapshot: neighbor list references a node not in the snapshot")
+				}
+			}
+		}
 	}
 
 	return idx, nil

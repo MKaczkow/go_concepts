@@ -27,6 +27,47 @@ func TestDefaultConfig(t *testing.T) {
 	}
 }
 
+func TestNormalizeConfig(t *testing.T) {
+	t.Run("partially zero config filled from defaults", func(t *testing.T) {
+		def := DefaultConfig()
+		partial := Config{M: 4}
+
+		got := normalizeConfig(partial)
+
+		if got.M != 4 {
+			t.Errorf("M = %d, want 4 (caller's explicit value preserved)", got.M)
+		}
+		if got.MMax0 != def.MMax0 {
+			t.Errorf("MMax0 = %d, want default %d", got.MMax0, def.MMax0)
+		}
+		if got.EfConstruction != def.EfConstruction {
+			t.Errorf("EfConstruction = %d, want default %d", got.EfConstruction, def.EfConstruction)
+		}
+		if got.EfSearch != def.EfSearch {
+			t.Errorf("EfSearch = %d, want default %d", got.EfSearch, def.EfSearch)
+		}
+		if got.LevelMult != def.LevelMult {
+			t.Errorf("LevelMult = %v, want default %v", got.LevelMult, def.LevelMult)
+		}
+	})
+
+	t.Run("fully specified custom config passes through unchanged", func(t *testing.T) {
+		custom := Config{
+			M:              8,
+			MMax0:          64,
+			EfConstruction: 100,
+			EfSearch:       10,
+			LevelMult:      0.5,
+		}
+
+		got := normalizeConfig(custom)
+
+		if got != custom {
+			t.Errorf("normalizeConfig(%+v) = %+v, want unchanged", custom, got)
+		}
+	})
+}
+
 func TestEuclideanDistance(t *testing.T) {
 	tests := []struct {
 		name string
