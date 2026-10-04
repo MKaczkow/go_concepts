@@ -6,7 +6,9 @@ Repo for basic tutorial-based Golang study
 [![Web App Bis CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-app-bis-ci.yml)  
 [![Web Crawler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/web-crawler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/web-crawler-ci.yml)  
 [![Regex Engine CI](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/regex-engine-ci.yml)  
+[![HNSW CI](https://github.com/MKaczkow/go_concepts/actions/workflows/hnsw-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/hnsw-ci.yml)  
 [![Gilded Rose CI](https://github.com/MKaczkow/go_concepts/actions/workflows/gilded-rose-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/gilded-rose-ci.yml)  
+[![Hierarchical Navigable Small Worlds CI](https://github.com/MKaczkow/go_concepts/actions/workflows/hnsw-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/hnsw-ci.yml)  
 [![Monkey Interpreter CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-interpreter-ci.yml)  
 [![Monkey Compiler CI](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml/badge.svg)](https://github.com/MKaczkow/go_concepts/actions/workflows/monkey-compiler-ci.yml)
 ![Coverage](https://img.shields.io/badge/Coverage-78.3%25-brightgreen)
@@ -39,6 +41,7 @@ Repo for basic tutorial-based Golang study
 - [x] fix github actions
 - [x] get book "Język Go. Tworzenie idiomatycznego kodu w praktyce" [example link](https://ulubionykiosk.pl/wydawnictwo/jezyk-go-tworzenie-idiomatycznego-kodu-w-praktyce?gclid=CjwKCAiAyp-sBhBSEiwAWWzTnidWyVtzQT6rU82MAzZSNY6u-Vx3KuyetmuLR5GSGNId6kPF5nr_IxoCv5AQAvD_BwE) [other link](https://helion.pl/ksiazki/jezyk-go-tworzenie-idiomatycznego-kodu-w-praktyce-jon-bodner,jegotw.htm#format/e)
 - [x] finish `web_app_bis` tutorial (mostly done, need to check if everything works OK)  
+- [x] HNSW (Hierarchical Navigable Small World) vector index from scratch
 
 ### basic usage
 * cd `app_name`
