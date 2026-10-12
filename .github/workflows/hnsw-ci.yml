@@ -1,0 +1,29 @@
+name: HNSW CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'hnsw/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'hnsw/**'
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.25'
+
+    - name: Run tests in 'hnsw' directory
+      run: |
+        cd hnsw
+        go test ./...
