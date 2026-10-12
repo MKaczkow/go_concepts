@@ -1164,9 +1164,10 @@ git commit -m "feat(hnsw): add gob-based Save/Load persistence"
 - Consumes: nothing new (documentation/CI only).
 - Produces: nothing consumed by later tasks (final task).
 
-- [ ] **Step 1: Write `hnsw/README.md`**
-
 ```markdown
+- [ ] **Step 1: Write `hnsw/README.md`**
+```
+
 # HNSW
 
 From-scratch Go implementation of Hierarchical Navigable Small World (HNSW)
