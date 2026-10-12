@@ -21,7 +21,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
-        go-version-file: 'gilded_rose/go.mod'
+        go-version-file: 'learning_go/13_testing/go.mod'
 
     - name: Run tests in 'learning_go/13_testing'
       run: |
