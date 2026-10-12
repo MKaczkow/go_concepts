@@ -1183,7 +1183,7 @@ results := idx.Search([]float64{1, 2, 3}, 5)
 
 ## Design
 
-See [`docs/superpowers/specs/2026-10-04-hnsw-design.md`](../docs/superpowers/specs/2026-10-04-hnsw-design.md)
+See [`docs/superpowers/specs/2026-10-04-hnsw-design.md`](/docs/superpowers/specs/2026-10-04-hnsw-design.md)
 for the interface design and algorithm walkthrough.
 
 ## Reference
