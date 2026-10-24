@@ -1,0 +1,4 @@
+endpoints:
+  - name: example
+    upstream:
+      url: 80
